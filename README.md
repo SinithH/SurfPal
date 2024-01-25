@@ -1,1 +1,3 @@
 # SurfPal
+
+client setup instructions

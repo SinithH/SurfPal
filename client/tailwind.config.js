@@ -2,7 +2,13 @@
 export default {
   content: ['./entrypoints/**/*.{html,tsx}', './components/**/*.tsx'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: { 
+        "kanit": ['Kanit', 'sans-serif'] 
+    }
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio')
+  ],
 };

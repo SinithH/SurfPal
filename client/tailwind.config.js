@@ -5,7 +5,10 @@ export default {
     extend: {
       fontFamily: { 
         "kanit": ['Kanit', 'sans-serif'] 
-    }
+      },
+      colors: {
+        primary: '#9E00E8',
+      }
     },
   },
   plugins: [

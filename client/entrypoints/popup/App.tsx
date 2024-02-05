@@ -6,6 +6,10 @@ import ImageRecognition from './components/ImageRecognition/ImageRecognition';
 import Navigation from './components/Navigation/Navigation';
 import MyAccount from './components/MyAccount/MyAccount';
 import homeIcon from '../../assets/icons/home-icon.svg';
+import Footer from './components/shared/Footer';
+import ModuleNames from './constants/Modules';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<string | null>(null);
@@ -47,10 +51,9 @@ const App: React.FC = () => {
         renderCurrentScreen()
       )}
       {!isMainMenu && (
-        <button onClick={handleBackClick} className="p-2 m-2 rounded">
-          <img src={homeIcon} alt="User" />
-        </button>
+        <Footer handleBackClick={handleBackClick} isSummery={currentScreen == 'Summarization'}/>
       )}
+      <ToastContainer position='top-center' />
     </div>
   );
 };

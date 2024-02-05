@@ -1,6 +1,8 @@
 import React from "react";
 import homeIcon from '@/assets/icons/home-icon.svg';
 import textToSpeechIcon from '@/assets/icons/test-to-speech-icon.svg';
+import { faRotate } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface FooterProps {
     handleBackClick: () => void;
@@ -23,8 +25,9 @@ const Footer: React.FC<FooterProps> = ({handleBackClick, isSummery}) => {
                     <button className="m-4 w-7 h-7 rounded">
                         <img src={textToSpeechIcon} alt="User" />
                     </button>
-                    <button className="m-4 p-2 h-7 flex items-center rounded-lg bg-primary text-white">
+                    <button className="m-4 p-2 h-7 inline-flex gap-3 items-center rounded-lg bg-primary text-white">
                         <span>Regenerate</span>
+                        <FontAwesomeIcon icon={faRotate} />
                     </button>
                 </div>) }
             </div>

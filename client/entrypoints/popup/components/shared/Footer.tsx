@@ -17,15 +17,16 @@ const Footer: React.FC<FooterProps> = ({handleBackClick, isSummery}) => {
       <>
         <div className="fixed bottom-0 w-full">
             <hr className="mx-4"/>
-            <div className="inline-flex">
-                <button onClick={handleBackClick} className="m-4 w-7 h-7 rounded">
+            <div className="inline-flex p-4 gap-12">
+                <button onClick={handleBackClick} className="w-7 h-7 rounded">
                     <img src={homeIcon} alt="User" />
                 </button>
-                {isSummery && (<div className="inline-flex">
-                    <button className="m-4 w-7 h-7 rounded">
+                {isSummery && (
+                <div className="inline-flex gap-12">
+                    <button className="w-7 h-7 rounded">
                         <img src={textToSpeechIcon} alt="User" />
                     </button>
-                    <button className="m-4 p-2 h-7 inline-flex gap-3 items-center rounded-lg bg-primary text-white">
+                    <button className="p-2 h-7 inline-flex gap-3 items-center rounded-lg bg-primary text-white">
                         <span>Regenerate</span>
                         <FontAwesomeIcon icon={faRotate} />
                     </button>

@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface HeaderProps {
     heading: string,
-    handleCopyClick: () => void,
-    isSummery: boolean
+    handleCopyClick?: () => void,
+    isSummery?: boolean
 }
 
 const Header: React.FC<HeaderProps> = ({heading, handleCopyClick, isSummery}) => {

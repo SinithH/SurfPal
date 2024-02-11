@@ -1,5 +1,5 @@
 {
-    "sourceFile": "entrypoints/popup/components/Summarization/Summarization.tsx",
+    "sourceFile": "entrypoints/sidepanel/components/Summarization/Summarization.tsx",
     "activeCommit": 0,
     "commits": [
         {

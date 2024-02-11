@@ -1,0 +1,78 @@
+{
+    "sourceFile": "entrypoints/popup/style.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 15,
+            "patches": [
+                {
+                    "date": 1707029481321,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1707029943091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,16 +25,10 @@\n a:hover {\n   color: #535bf2;\n }\n \n-body {\n-  margin: 0;\n-  display: flex;\n-  place-items: center;\n-  min-width: 320px;\n-  min-height: 100vh;\n-}\n \n+\n h1 {\n   font-size: 3.2em;\n   line-height: 1.1;\n }\n"
+                },
+                {
+                    "date": 1707029953238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,16 @@\n a:hover {\n   color: #535bf2;\n }\n \n+body {\n+  margin: 0;\n+  display: flex;\n+  place-items: center;\n+  min-width: 320px;\n+  min-height: 100vh;\n+}\n \n-\n h1 {\n   font-size: 3.2em;\n   line-height: 1.1;\n }\n"
+                },
+                {
+                    "date": 1707029962372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,10 +29,8 @@\n body {\n   margin: 0;\n   display: flex;\n   place-items: center;\n-  min-width: 320px;\n-  min-height: 100vh;\n }\n \n h1 {\n   font-size: 3.2em;\n"
+                },
+                {
+                    "date": 1707029972811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,8 +29,10 @@\n body {\n   margin: 0;\n   display: flex;\n   place-items: center;\n+  min-width: 640px;\n+  min-height: 100vh;\n }\n \n h1 {\n   font-size: 3.2em;\n"
+                },
+                {
+                    "date": 1707029980013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n body {\n   margin: 0;\n   display: flex;\n   place-items: center;\n-  min-width: 640px;\n+  min-width: 320px;\n   min-height: 100vh;\n }\n \n h1 {\n"
+                },
+                {
+                    "date": 1707031470706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,23 +1,9 @@\n @import 'tailwindcss/base';\n @import 'tailwindcss/components';\n @import 'tailwindcss/utilities';\n-:root {\n-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;\n-  line-height: 1.5;\n-  font-weight: 400;\n \n-  color-scheme: light dark;\n-  color: rgba(255, 255, 255, 0.87);\n-  background-color: #242424;\n \n-  font-synthesis: none;\n-  text-rendering: optimizeLegibility;\n-  -webkit-font-smoothing: antialiased;\n-  -moz-osx-font-smoothing: grayscale;\n-  -webkit-text-size-adjust: 100%;\n-}\n-\n a {\n   font-weight: 500;\n   color: #646cff;\n   text-decoration: inherit;\n"
+                },
+                {
+                    "date": 1707031478339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,23 @@\n @import 'tailwindcss/base';\n @import 'tailwindcss/components';\n @import 'tailwindcss/utilities';\n+:root {\n+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;\n+  line-height: 1.5;\n+  font-weight: 400;\n \n+  color-scheme: light dark;\n+  color: rgba(255, 255, 255, 0.87);\n+  background-color: #242424;\n \n+  font-synthesis: none;\n+  text-rendering: optimizeLegibility;\n+  -webkit-font-smoothing: antialiased;\n+  -moz-osx-font-smoothing: grayscale;\n+  -webkit-text-size-adjust: 100%;\n+}\n+\n a {\n   font-weight: 500;\n   color: #646cff;\n   text-decoration: inherit;\n"
+                },
+                {
+                    "date": 1707031486864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,16 +25,10 @@\n a:hover {\n   color: #535bf2;\n }\n \n-body {\n-  margin: 0;\n-  display: flex;\n-  place-items: center;\n-  min-width: 320px;\n-  min-height: 100vh;\n-}\n \n+\n h1 {\n   font-size: 3.2em;\n   line-height: 1.1;\n }\n"
+                },
+                {
+                    "date": 1707032162066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,16 @@\n a:hover {\n   color: #535bf2;\n }\n \n+body {\n+  margin: 0;\n+  display: flex;\n+  place-items: center;\n+  min-width: 380px;\n+  min-height: 100vh;\n+}\n \n-\n h1 {\n   font-size: 3.2em;\n   line-height: 1.1;\n }\n"
+                },
+                {
+                    "date": 1707032181550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n body {\n   margin: 0;\n   display: flex;\n   place-items: center;\n-  min-width: 380px;\n+  min-width: 440px;\n   min-height: 100vh;\n }\n \n h1 {\n"
+                },
+                {
+                    "date": 1707055279432,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,11 @@\n @import 'tailwindcss/base';\n @import 'tailwindcss/components';\n @import 'tailwindcss/utilities';\n+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');\n+\n :root {\n-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;\n+  font-family: Kanit;\n   line-height: 1.5;\n   font-weight: 400;\n \n   color-scheme: light dark;\n"
+                },
+                {
+                    "date": 1707055498456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n @import 'tailwindcss/utilities';\n @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');\n \n :root {\n-  font-family: Kanit;\n+  font-family: 'Kanit', sans-serif;\n   line-height: 1.5;\n   font-weight: 400;\n \n   color-scheme: light dark;\n"
+                },
+                {
+                    "date": 1707055518965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,9 @@\n   color: #535bf2;\n }\n \n body {\n+  font-family: 'Kanit', sans-serif;\n   margin: 0;\n   display: flex;\n   place-items: center;\n   min-width: 440px;\n"
+                },
+                {
+                    "date": 1707055531305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \n :root {\n   font-family: 'Kanit', sans-serif;\n   line-height: 1.5;\n-  font-weight: 400;\n+  font-weight: 300;\n \n   color-scheme: light dark;\n   color: rgba(255, 255, 255, 0.87);\n   background-color: #242424;\n"
+                },
+                {
+                    "date": 1707055628840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,8 @@\n \n :root {\n   font-family: 'Kanit', sans-serif;\n   line-height: 1.5;\n-  font-weight: 400;\n \n   color-scheme: light dark;\n   color: rgba(255, 255, 255, 0.87);\n   background-color: #242424;\n"
+                }
+            ],
+            "date": 1707029481321,
+            "name": "Commit-0",
+            "content": "@import 'tailwindcss/base';\n@import 'tailwindcss/components';\n@import 'tailwindcss/utilities';\n:root {\n  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;\n  line-height: 1.5;\n  font-weight: 400;\n\n  color-scheme: light dark;\n  color: rgba(255, 255, 255, 0.87);\n  background-color: #242424;\n\n  font-synthesis: none;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-text-size-adjust: 100%;\n}\n\na {\n  font-weight: 500;\n  color: #646cff;\n  text-decoration: inherit;\n}\na:hover {\n  color: #535bf2;\n}\n\nbody {\n  margin: 0;\n  display: flex;\n  place-items: center;\n  min-width: 320px;\n  min-height: 100vh;\n}\n\nh1 {\n  font-size: 3.2em;\n  line-height: 1.1;\n}\n\nbutton {\n  border-radius: 8px;\n  border: 1px solid transparent;\n  padding: 0.6em 1.2em;\n  font-size: 1em;\n  font-weight: 500;\n  font-family: inherit;\n  background-color: #1a1a1a;\n  cursor: pointer;\n  transition: border-color 0.25s;\n}\nbutton:hover {\n  border-color: #646cff;\n}\nbutton:focus,\nbutton:focus-visible {\n  outline: 4px auto -webkit-focus-ring-color;\n}\n\n@media (prefers-color-scheme: light) {\n  :root {\n    color: #213547;\n    background-color: #ffffff;\n  }\n  a:hover {\n    color: #747bff;\n  }\n  button {\n    background-color: #f9f9f9;\n  }\n}\n"
+        }
+    ]
+}

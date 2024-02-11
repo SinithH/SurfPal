@@ -1,38 +1,61 @@
-import { useState } from 'react';
-import reactLogo from '@/assets/react.svg';
-import wxtLogo from '/wxt.svg';
-import './App.css';
+// App.tsx
+import React, { useState } from 'react';
+import MainMenu from './components/MainMenu/MainMenu';
+import Summarization from './components/Summarization/Summarization';
+import ImageRecognition from './components/ImageRecognition/ImageRecognition';
+import Navigation from './components/Navigation/Navigation';
+import MyAccount from './components/MyAccount/MyAccount';
+import homeIcon from '../../assets/icons/home-icon.svg';
+import Footer from './components/shared/Footer';
+import ModuleNames from './constants/Modules';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
-  const [count, setCount] = useState(0);
+const App: React.FC = () => {
+  const [currentScreen, setCurrentScreen] = useState<string | null>(null);
+  const [previousScreen, setPreviousScreen] = useState<string | null>(null);
+
+  const handleOptionClick = (option: string) => {
+    setPreviousScreen(currentScreen);
+    setCurrentScreen(option);
+  };
+
+  const handleBackClick = () => {
+    setCurrentScreen(previousScreen);
+    setPreviousScreen(null);
+  };
+
+  const isMainMenu = currentScreen === null;
+
+  function renderCurrentScreen() {
+    switch (currentScreen) {
+      case 'Summarization':
+        return <Summarization />;
+      case 'ImageRecognition':
+        return <ImageRecognition />;
+      case 'Navigation':
+        return <Navigation />;
+      case 'MyAccount':
+        return <MyAccount />;
+      default:
+        return null;
+    }
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://wxt.dev" target="_blank">
-          <img src={wxtLogo} className="logo" alt="WXT logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>WXT + React</h1>
-      <h1 className="text-4xl font-bold underline">
-    Hello world!
-  </h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the WXT and React logos to learn more
-      </p>
-    </>
+    <div>
+      
+      {isMainMenu ? (
+        <MainMenu onOptionClick={handleOptionClick} />
+      ) : (
+        renderCurrentScreen()
+      )}
+      {!isMainMenu && (
+        <Footer handleBackClick={handleBackClick} isSummery={currentScreen == 'Summarization'}/>
+      )}
+      <ToastContainer position='top-center' />
+    </div>
   );
-}
+};
 
 export default App;

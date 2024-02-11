@@ -5,7 +5,6 @@ import ModuleNames from '../../constants/Modules';
 import clipboardCopy from 'clipboard-copy';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Footer from '../shared/Footer';
 
 const Summarization: React.FC = () => {
 
@@ -26,8 +25,8 @@ const Summarization: React.FC = () => {
         <p className='font-kanit w-full'>
           { summery }
         </p>
-      </div> 
-      <Footer/>
+      </div>
+      
     </div>
   );
 };

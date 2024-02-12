@@ -1,38 +1,27 @@
-import { useState } from 'react';
-import reactLogo from '@/assets/react.svg';
-import wxtLogo from '/wxt.svg';
-import './App.css';
+// App.tsx
+import React from 'react';
+import MainMenu from './components/MainMenu/MainMenu';
+import Summarization from './components/Summarization/Summarization';
+import ImageRecognition from './components/ImageRecognition/ImageRecognition';
+import Navigation from './components/Navigation/Navigation';
+import MyAccount from './components/MyAccount/MyAccount';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Routes, Route, Outlet } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+const App: React.FC = () => {
   return (
-    <>
       <div>
-        <a href="https://wxt.dev" target="_blank">
-          <img src={wxtLogo} className="logo" alt="WXT logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <Routes>
+          <Route path="/" element={<MainMenu />} />
+          <Route path="/summarization" element={<Summarization />} />
+          <Route path="/image-recognition" element={<ImageRecognition />} />
+          <Route path="/navigation" element={<Navigation />} />
+          <Route path="/my-account" element={<MyAccount />} />
+        </Routes>
+      <Outlet />
       </div>
-      <h1>WXT + React</h1>
-      <h1 className="text-4xl font-bold underline">
-    Hello world!
-  </h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the WXT and React logos to learn more
-      </p>
-    </>
   );
-}
+};
 
 export default App;

@@ -15,15 +15,8 @@
     "postinstall": "wxt prepare"
   },
   "dependencies": {
-    "@fontsource/kanit": "^5.0.18",
-    "@fortawesome/free-regular-svg-icons": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@tailwindcss/aspect-ratio": "^0.4.2",
-    "clipboard-copy": "^4.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-toastify": "^10.0.4"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.46",

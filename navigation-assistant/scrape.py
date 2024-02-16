@@ -18,7 +18,7 @@ def remove_unwanted_tags(html_content, unwanted_tags=["script", "style"]):
     return str(soup)
 
 
-def extract_tags(html_content, tags: list[str]):
+def extract_tags(html_content):
     """
     This takes in HTML content and a list of tags, and returns a string
     containing the text content of all elements with those tags, along with their href attribute if the
@@ -26,24 +26,25 @@ def extract_tags(html_content, tags: list[str]):
     """
     soup = BeautifulSoup(html_content, 'html.parser')
     text_parts = []
+    elements = []
+    if soup.nav:
+        elements = soup.nav.find_all('a')
+        print('nav element found')
+    elif soup.header: 
+        elements = soup.header
+        print('header element found')
+    else:
+        elements = soup.find_all('a')
+        print('nav or header doesn\'t found')
+    for element in elements:
+        href = element.get('href')
+        if href:
+            text_parts.append(f"{element.get_text()}: '{href}'")
 
-    for tag in tags:
-        elements = soup.find_all(tag)
-        for element in elements:
-            # If the tag is a link (a tag), append its href as well
-            if tag == "a":
-                href = element.get('href')
-                if href:
-                    text_parts.append(f"{element.get_text()} ({href})")
-                else:
-                    text_parts.append(element.get_text())
-            else:
-                text_parts.append(element.get_text())
-
-    return ' '.join(text_parts)
+    return '\n'.join(text_parts)
 
 
-def remove_unessesary_lines(content):
+def remove_unnecessary_lines(content):
     # Split content into lines
     lines = content.split("\n")
 
@@ -64,12 +65,7 @@ def remove_unessesary_lines(content):
     return cleaned_content
 
 
-async def ascrape_playwright(url, tags: list[str] = ["h1", "h2", "h3", "span"]) -> str:
-    """
-    An asynchronous Python function that uses Playwright to scrape
-    content from a given URL, extracting specified HTML tags and removing unwanted tags and unnecessary
-    lines.
-    """
+async def ascrape_playwright(url) -> str:
     print("Started scraping...")
     results = ""
     async with async_playwright() as p:
@@ -80,8 +76,10 @@ async def ascrape_playwright(url, tags: list[str] = ["h1", "h2", "h3", "span"]) 
 
             page_source = await page.content()
 
-            results = remove_unessesary_lines(extract_tags(remove_unwanted_tags(
-                page_source), tags))
+            # results = remove_unnecessary_lines(extract_tags(remove_unwanted_tags(
+            #     page_source)))
+            results = extract_tags(remove_unwanted_tags(
+                page_source))
             print("Content scraped")
         except Exception as e:
             results = f"Error: {e}"

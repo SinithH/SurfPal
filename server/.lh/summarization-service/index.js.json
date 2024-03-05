@@ -1,0 +1,18 @@
+{
+    "sourceFile": "summarization-service/index.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1709643830178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1709643830178,
+            "name": "Commit-0",
+            "content": "const express = require('express');\nconst { VertexAI } = require('@google-cloud/vertexai');\n\nconst app = express();\n\n// Initialize VertexAI with your Cloud project and location\nconst vertex_ai = new VertexAI({ project: 'your-project-id', location: 'your-location' });\nconst model = 'your-model-id'; // Specify your model ID\n\n// Instantiate the model\nconst generativeModel = vertex_ai.preview.getGenerativeModel({\n    model: model,\n    generation_config: {\n        \"max_output_tokens\": 2048,\n        \"temperature\": 0.4,\n        \"top_p\": 1,\n        \"top_k\": 32\n    },\n    safety_settings: [\n        { \"category\": \"HARM_CATEGORY_HATE_SPEECH\", \"threshold\": \"BLOCK_MEDIUM_AND_ABOVE\" },\n        { \"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\", \"threshold\": \"BLOCK_MEDIUM_AND_ABOVE\" },\n        { \"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\", \"threshold\": \"BLOCK_MEDIUM_AND_ABOVE\" },\n        { \"category\": \"HARM_CATEGORY_HARASSMENT\", \"threshold\": \"BLOCK_MEDIUM_AND_ABOVE\" }\n    ]\n});\n\n// Route for generating content\napp.get('/generate-content', async (req, res) => {\n    try {\n        const reqData = {\n            contents: [{ role: 'user', parts: [] }],\n        };\n\n        const streamingResp = await generativeModel.generateContentStream(reqData);\n        const generatedContent = [];\n\n        for await (const item of streamingResp.stream) {\n            generatedContent.push(item);\n        }\n\n        const aggregatedResponse = await streamingResp.response;\n        res.json({ generatedContent, aggregatedResponse });\n    } catch (error) {\n        console.error('Error:', error);\n        res.status(500).json({ error: 'Internal Server Error' });\n    }\n});\n\n// Start the server\nconst PORT = process.env.PORT || 3000;\napp.listen(PORT, () => {\n    console.log(`Server is running on port ${PORT}`);\n});\n"
+        }
+    ]
+}

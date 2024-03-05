@@ -1,0 +1,54 @@
+{
+    "sourceFile": "entrypoints/content.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1709649423615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1709650309703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n-\n export default defineContentScript({\n-\n-  matches: ['*//*.*.*/*'],\n-  main() {\n-    alert('Hello, World! This is a content script running on the current webpage.');\n-  },\n-});\n\\ No newline at end of file\n+    // Set manifest options\n+    matches: ['*://google.com/*'],\n+  \n+    main(ctx) {\n+      // Executed when content script is loaded\n+      alert(\"Content script is running\")\n+    },\n+  });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1709650421012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,7 @@\n   \n     main(ctx) {\n       // Executed when content script is loaded\n       alert(\"Content script is running\")\n+      console.log(\"content script\")\n     },\n   });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1709650865890,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,12 @@\n+import browser from 'webextension-polyfill';\n+\n export default defineContentScript({\n     // Set manifest options\n-    matches: ['*://google.com/*'],\n-  \n+    matches: [\"https://*\"],\n     main(ctx) {\n       // Executed when content script is loaded\n       alert(\"Content script is running\")\n       console.log(\"content script\")\n+\n     },\n   });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1709651166529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,3 @@\n import browser from 'webextension-polyfill';\n \n-export default defineContentScript({\n-    // Set manifest options\n-    matches: [\"https://*\"],\n-    main(ctx) {\n-      // Executed when content script is loaded\n-      alert(\"Content script is running\")\n-      console.log(\"content script\")\n-\n-    },\n-  });\n\\ No newline at end of file\n+alert(\"Hello World\")\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1709651491358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,9 @@\n import browser from 'webextension-polyfill';\n \n-alert(\"Hello World\")\n\\ No newline at end of file\n+export default defineContentScript({\n+    matches:[\"https://*/*\"],\n+    main(){\n+        console.log(\"Hello\")\n+        alert(\"New\");\n+    }\n+})\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1709651836176,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import browser from 'webextension-polyfill';\n \n export default defineContentScript({\n-    matches:[\"https://*/*\"],\n-    main(){\n-        console.log(\"Hello\")\n-        alert(\"New\");\n-    }\n+    matches: ['*://*/*'],\n+    async main(ctx) {\n+        console.log(document.baseURI);\n+    },\n })\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1709651958872,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n \n export default defineContentScript({\n     matches: ['*://*/*'],\n     async main(ctx) {\n-        console.log(document.baseURI);\n+        console.log(\"Hello\");\n     },\n })\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1709652102229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,26 @@\n import browser from 'webextension-polyfill';\n+// Function to extract text content from DOM\n+function extractTextFromDOM(node: Node): string {\n+    let text = '';\n+    if (node.nodeType === Node.TEXT_NODE) {\n+      text += (node as Text).textContent?.trim() + ' ';\n+    } else if (node.nodeType === Node.ELEMENT_NODE) {\n+      for (let childNode of (node as Element).childNodes) {\n+        text += extractTextFromDOM(childNode);\n+      }\n+    }\n+    return text;\n+  }\n+  \n+  // Extract text content from the entire document\n+  const textContent: string = extractTextFromDOM(document.body);\n+  \n \n export default defineContentScript({\n     matches: ['*://*/*'],\n     async main(ctx) {\n         console.log(\"Hello\");\n+          // Send text content to the background script\n+        browser.runtime.sendMessage({ textContent });\n     },\n })\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1709652544000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n export default defineContentScript({\n     matches: ['*://*/*'],\n     async main(ctx) {\n         console.log(\"Hello\");\n+        alert(\"Hello\")\n           // Send text content to the background script\n         browser.runtime.sendMessage({ textContent });\n     },\n })\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1709649423615,
+            "name": "Commit-0",
+            "content": "\nexport default defineContentScript({\n\n  matches: ['*//*.*.*/*'],\n  main() {\n    alert('Hello, World! This is a content script running on the current webpage.');\n  },\n});"
+        }
+    ]
+}

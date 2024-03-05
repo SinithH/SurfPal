@@ -1,0 +1,22 @@
+{
+    "sourceFile": "content.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1709648862526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1709648953986,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,32 @@\n-// Import browser namespace from webextension-polyfill\n-import browser from 'webextension-polyfill';\n+// // Import browser namespace from webextension-polyfill\n+// import browser from 'webextension-polyfill';\n \n-// Function to extract text content from DOM\n-function extractTextFromDOM(node) {\n-  let text = '';\n-  if (node.nodeType === Node.TEXT_NODE) {\n-    text += node.textContent?.trim() + ' ';\n-  } else if (node.nodeType === Node.ELEMENT_NODE) {\n-    for (let childNode of node.childNodes) {\n-      text += extractTextFromDOM(childNode);\n-    }\n-  }\n-  return text;\n+// // Function to extract text content from DOM\n+// function extractTextFromDOM(node) {\n+//   let text = '';\n+//   if (node.nodeType === Node.TEXT_NODE) {\n+//     text += node.textContent?.trim() + ' ';\n+//   } else if (node.nodeType === Node.ELEMENT_NODE) {\n+//     for (let childNode of node.childNodes) {\n+//       text += extractTextFromDOM(childNode);\n+//     }\n+//   }\n+//   return text;\n+// }\n+\n+// // Extract text content from the entire document\n+// const textContent = extractTextFromDOM(document.body);\n+\n+// // Send text content to the background script\n+// browser.runtime.sendMessage({ textContent });\n+\n+// content.ts\n+\n+// Function to display a \"Hello, World!\" message\n+function displayHelloWorld() {\n+  alert('Hello, World! This is a content script running on the current webpage.');\n }\n \n-// Extract text content from the entire document\n-const textContent = extractTextFromDOM(document.body);\n+// Call the function to display the message\n+displayHelloWorld();\n \n-// Send text content to the background script\n-browser.runtime.sendMessage({ textContent });\n"
+                }
+            ],
+            "date": 1709648862526,
+            "name": "Commit-0",
+            "content": "// Import browser namespace from webextension-polyfill\nimport browser from 'webextension-polyfill';\n\n// Function to extract text content from DOM\nfunction extractTextFromDOM(node) {\n  let text = '';\n  if (node.nodeType === Node.TEXT_NODE) {\n    text += node.textContent?.trim() + ' ';\n  } else if (node.nodeType === Node.ELEMENT_NODE) {\n    for (let childNode of node.childNodes) {\n      text += extractTextFromDOM(childNode);\n    }\n  }\n  return text;\n}\n\n// Extract text content from the entire document\nconst textContent = extractTextFromDOM(document.body);\n\n// Send text content to the background script\nbrowser.runtime.sendMessage({ textContent });\n"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "sourceFile": "entrypoints/background.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1709648125090,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1709648174291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,15 @@\n+import browser from 'webextension-polyfill';\n+\n // Listen for messages from the content script\n-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {\n+browser.runtime.onMessage.addListener((message, sender, sendResponse) => {\n   // Process the text content\n   console.log('Text content:', message.textContent);\n   // You can further process or send the text content to your backend server here\n });\n \n \n \n+\n export default defineBackground(() => {\n   console.log('Hello background!', { id: browser.runtime.id });\n });\n"
+                },
+                {
+                    "date": 1709648648009,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,20 @@\n import browser from 'webextension-polyfill';\n \n // Listen for messages from the content script\n-browser.runtime.onMessage.addListener((message, sender, sendResponse) => {\n+function getDom(){\n+  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {\n   // Process the text content\n   console.log('Text content:', message.textContent);\n   // You can further process or send the text content to your backend server here\n });\n \n+}\n \n \n \n+\n export default defineBackground(() => {\n+  getDom()\n   console.log('Hello background!', { id: browser.runtime.id });\n+\n });\n"
+                },
+                {
+                    "date": 1709649752552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,20 +1,25 @@\n import browser from 'webextension-polyfill';\n \n-// Listen for messages from the content script\n-function getDom(){\n-  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {\n-  // Process the text content\n-  console.log('Text content:', message.textContent);\n-  // You can further process or send the text content to your backend server here\n-});\n \n+// Function to extract text content from DOM\n+function extractTextFromDOM(node: Node): string {\n+  let text = '';\n+  if (node.nodeType === Node.TEXT_NODE) {\n+    text += (node as Text).textContent?.trim() + ' ';\n+  } else if (node.nodeType === Node.ELEMENT_NODE) {\n+    for (let childNode of (node as Element).childNodes) {\n+      text += extractTextFromDOM(childNode);\n+    }\n+  }\n+  return text;\n }\n \n \n \n \n+\n export default defineBackground(() => {\n-  getDom()\n+  console.log(extractTextFromDOM(document.body))\n   console.log('Hello background!', { id: browser.runtime.id });\n \n });\n"
+                },
+                {
+                    "date": 1709651273994,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,25 +1,6 @@\n import browser from 'webextension-polyfill';\n \n-\n-// Function to extract text content from DOM\n-function extractTextFromDOM(node: Node): string {\n-  let text = '';\n-  if (node.nodeType === Node.TEXT_NODE) {\n-    text += (node as Text).textContent?.trim() + ' ';\n-  } else if (node.nodeType === Node.ELEMENT_NODE) {\n-    for (let childNode of (node as Element).childNodes) {\n-      text += extractTextFromDOM(childNode);\n-    }\n-  }\n-  return text;\n-}\n-\n-\n-\n-\n-\n export default defineBackground(() => {\n-  console.log(extractTextFromDOM(document.body))\n   console.log('Hello background!', { id: browser.runtime.id });\n \n });\n"
+                },
+                {
+                    "date": 1709652136691,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,13 @@\n import browser from 'webextension-polyfill';\n \n export default defineBackground(() => {\n   console.log('Hello background!', { id: browser.runtime.id });\n+  // Listen for messages from the content script\n+  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {\n+    // Process the text content\n+    console.log('Text content:', message.textContent);\n+    // You can further process or send the text content to your backend server here\n+  });\n \n+\n });\n"
+                }
+            ],
+            "date": 1709648125089,
+            "name": "Commit-0",
+            "content": "// Listen for messages from the content script\nchrome.runtime.onMessage.addListener((message, sender, sendResponse) => {\n  // Process the text content\n  console.log('Text content:', message.textContent);\n  // You can further process or send the text content to your backend server here\n});\n\n\n\nexport default defineBackground(() => {\n  console.log('Hello background!', { id: browser.runtime.id });\n});\n"
+        }
+    ]
+}

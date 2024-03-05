@@ -1,5 +1,5 @@
 {
-    "sourceFile": "entrypoints/popup/components/Navigation/Navigation.tsx",
+    "sourceFile": "entrypoints/sidepanel/components/Navigation/Navigation.tsx",
     "activeCommit": 0,
     "commits": [
         {

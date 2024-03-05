@@ -1,5 +1,5 @@
 {
-    "sourceFile": "entrypoints/popup/components/ImageRecognition/ImageRecognition.tsx",
+    "sourceFile": "entrypoints/sidepanel/components/ImageRecognition/ImageRecognition.tsx",
     "activeCommit": 0,
     "commits": [
         {

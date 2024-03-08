@@ -1,5 +1,5 @@
 {
-    "sourceFile": "entrypoints/popup/App.tsx",
+    "sourceFile": "entrypoints/sidepanel/App.tsx",
     "activeCommit": 0,
     "commits": [
         {
@@ -27,11 +27,11 @@
                 },
                 {
                     "date": 1707029238298,
-                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { useState } from 'react';\n import reactLogo from '@/assets/react.svg';\n import wxtLogo from '/wxt.svg';\n import './App.css';\n-import MainMenu from '/components/MainMenu';\n+import MainMenu from '@/entrypoints/popup/components/MainMenu/MainMenu.tsx';\n \n function App() {\n   const [count, setCount] = useState(0);\n \n"
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { useState } from 'react';\n import reactLogo from '@/assets/react.svg';\n import wxtLogo from '/wxt.svg';\n import './App.css';\n-import MainMenu from '/components/MainMenu';\n+import MainMenu from '@/entrypoints/sidepanel/components/MainMenu/MainMenu.tsx';\n \n function App() {\n   const [count, setCount] = useState(0);\n \n"
                 },
                 {
                     "date": 1707029365043,
-                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { useState } from 'react';\n import reactLogo from '@/assets/react.svg';\n import wxtLogo from '/wxt.svg';\n import './App.css';\n-import MainMenu from '@/entrypoints/popup/components/MainMenu/MainMenu.tsx';\n+import MainMenu from './components/MainMenu/MainMenu.tsx';\n \n function App() {\n   const [count, setCount] = useState(0);\n \n"
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { useState } from 'react';\n import reactLogo from '@/assets/react.svg';\n import wxtLogo from '/wxt.svg';\n import './App.css';\n-import MainMenu from '@/entrypoints/sidepanel/components/MainMenu/MainMenu.tsx';\n+import MainMenu from './components/MainMenu/MainMenu.tsx';\n \n function App() {\n   const [count, setCount] = useState(0);\n \n"
                 },
                 {
                     "date": 1707029505429,

@@ -1,5 +1,5 @@
 {
-    "sourceFile": "entrypoints/popup/components/MyAccount/MyAccount.tsx",
+    "sourceFile": "entrypoints/sidepanel/components/MyAccount/MyAccount.tsx",
     "activeCommit": 0,
     "commits": [
         {

@@ -12,7 +12,7 @@ node_modules
 stats.html
 .wxt
 web-ext.config.ts
-.env.local
+/.env.local
 
 # Editor directories and files
 .vscode/*

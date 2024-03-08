@@ -12,8 +12,7 @@ function extractTextFromDOM(node: Node): string {
     return text;
   }
   
-  // Extract text content from the entire document
-  const textContent: string = extractTextFromDOM(document.body);
+
   
 
 export default defineContentScript({
@@ -21,7 +20,11 @@ export default defineContentScript({
     async main(ctx) {
         console.log("Hello");
         alert("Hello")
+          // Extract text content from the entire document
+        const textContent: string = extractTextFromDOM(document.body);
           // Send text content to the background script
         browser.runtime.sendMessage({ textContent });
+        browser.storage.sync.set({ textContent });
+        browser.storage.local.set({textContent})
     },
 })

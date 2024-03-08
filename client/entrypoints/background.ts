@@ -6,6 +6,8 @@ export default defineBackground(() => {
   browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Process the text content
     console.log('Text content:', message.textContent);
+
+    localStorage.setItem("textContent", message.textContent)
     // You can further process or send the text content to your backend server here
   });
 

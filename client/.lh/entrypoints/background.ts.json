@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 5,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1709648125090,
@@ -28,6 +28,18 @@
                 {
                     "date": 1709652136691,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,13 @@\n import browser from 'webextension-polyfill';\n \n export default defineBackground(() => {\n   console.log('Hello background!', { id: browser.runtime.id });\n+  // Listen for messages from the content script\n+  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {\n+    // Process the text content\n+    console.log('Text content:', message.textContent);\n+    // You can further process or send the text content to your backend server here\n+  });\n \n+\n });\n"
+                },
+                {
+                    "date": 1709796931155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,10 @@\n   // Listen for messages from the content script\n   browser.runtime.onMessage.addListener((message, sender, sendResponse) => {\n     // Process the text content\n     console.log('Text content:', message.textContent);\n+    \n+    localStorage.setItem(\"textContent\", message.textContent)\n     // You can further process or send the text content to your backend server here\n   });\n \n \n"
+                },
+                {
+                    "date": 1709798836930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,14 @@\n import browser from 'webextension-polyfill';\n \n export default defineBackground(() => {\n+  localStorage.setItem(\"hello\", 'Hello World')\n   console.log('Hello background!', { id: browser.runtime.id });\n   // Listen for messages from the content script\n   browser.runtime.onMessage.addListener((message, sender, sendResponse) => {\n     // Process the text content\n     console.log('Text content:', message.textContent);\n-    \n+\n     localStorage.setItem(\"textContent\", message.textContent)\n     // You can further process or send the text content to your backend server here\n   });\n \n"
+                },
+                {
+                    "date": 1709799431673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n import browser from 'webextension-polyfill';\n \n export default defineBackground(() => {\n-  localStorage.setItem(\"hello\", 'Hello World')\n   console.log('Hello background!', { id: browser.runtime.id });\n   // Listen for messages from the content script\n   browser.runtime.onMessage.addListener((message, sender, sendResponse) => {\n     // Process the text content\n"
                 }
             ],
             "date": 1709648125089,

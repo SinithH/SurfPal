@@ -6,3 +6,4 @@ node_modules/
 .venv
 .env
 .vscode
+__pycache__

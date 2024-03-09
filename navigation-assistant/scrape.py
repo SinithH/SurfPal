@@ -25,21 +25,12 @@ def extract_tags(html_content):
     tag is an "a" tag.
     """
     soup = BeautifulSoup(html_content, 'html.parser')
-    text_parts = []
-    elements = []
-    if soup.nav:
-        elements = soup.nav.find_all('a')
-        print('nav element found')
-    elif soup.header: 
-        elements = soup.header
-        print('header element found')
-    else:
-        elements = soup.find_all('a')
-        print('nav or header doesn\'t found')
+    text_parts = []    
+    elements = soup.find_all('a')
     for element in elements:
         href = element.get('href')
         if href:
-            text_parts.append(f"{element.get_text()}: '{href}'")
+            text_parts.append(f"{element.get_text().strip()}: '{href}'")
 
     return '\n'.join(text_parts)
 
@@ -72,10 +63,10 @@ async def ascrape_playwright(url) -> str:
         browser = await p.chromium.launch(headless=True)
         try:
             page = await browser.new_page()
-            await page.goto(url)
+            await page.goto(url, timeout=90000)
 
             page_source = await page.content()
-
+   
             # results = remove_unnecessary_lines(extract_tags(remove_unwanted_tags(
             #     page_source)))
             results = extract_tags(remove_unwanted_tags(

@@ -3,25 +3,28 @@ import homeIcon from '@/assets/icons/home-icon.svg';
 import textToSpeechIcon from '@/assets/icons/test-to-speech-icon.svg';
 import { faRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 interface FooterProps {
     handleBackClick: () => void;
     isSummery: boolean
 }
 
-const Footer: React.FC<FooterProps> = ({handleBackClick, isSummery}) => {
+const Footer: React.FC = () => {
 
-    var isSummery: boolean = isSummery;
+    //var isSummery: boolean = isSummery;
 
     return(
       <>
         <div className="fixed bottom-0 w-full">
             <hr className="mx-4"/>
             <div className="inline-flex p-4 gap-12">
-                <button onClick={handleBackClick} className="w-7 h-7 rounded">
+                <button className="w-7 h-7 rounded">
+                <Link to={`/`}>
                     <img src={homeIcon} alt="User" />
+                </Link>
                 </button>
-                {isSummery && (
+                {/* {isSummery && (
                 <div className="inline-flex gap-12">
                     <button className="w-7 h-7 rounded">
                         <img src={textToSpeechIcon} alt="User" />
@@ -30,7 +33,7 @@ const Footer: React.FC<FooterProps> = ({handleBackClick, isSummery}) => {
                         <span>Regenerate</span>
                         <FontAwesomeIcon icon={faRotate} />
                     </button>
-                </div>) }
+                </div>) } */}
             </div>
         </div>
       </>  

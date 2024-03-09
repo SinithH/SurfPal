@@ -1,12 +1,18 @@
 // OptionScreens/SummarizationScreen.tsx
 import React from 'react';
+import Footer from '../shared/Footer';
+import Header from '../shared/Header';
+import ModuleNames from '../../constants/Modules';
 
 const MyAccount: React.FC = () => {
   return (
-    <div>
-      <h1>My Account Screen</h1>
-      {/* Add content for My Account */}
-    </div>
+    <>
+      <div>
+      <Header heading={ModuleNames.MY_ACCOUNT}/>
+        {/* Add content for My Account */}
+      </div>
+      <Footer/>
+    </>
   );
 };
 

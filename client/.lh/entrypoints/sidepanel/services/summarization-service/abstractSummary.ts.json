@@ -1,0 +1,42 @@
+{
+    "sourceFile": "entrypoints/sidepanel/services/summarization-service/abstractSummary.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1709796676528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1709796694234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,5 +19,8 @@\n   }\n   const response = await result.response;\n   const textResp = response.text();\n   return response\n-}\n\\ No newline at end of file\n+}\n+\n+\n+export default getAbstractSummary\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1709797439458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n // Access your API key as an environment variable (see \"Set up your API key\" above)\n const genAI = new GoogleGenerativeAI('AIzaSyBDEMB0-yQNWw1JbA5dt74aujGfjSBn9Lo');\n \n-async function getAbstractSummary(textContent:string) {\n+async function getAbstractSummary(textContent:any) {\n   // For text-only input, use the gemini-pro model\n   const model = genAI.getGenerativeModel({ model: \"gemini-pro\"});\n \n   const prompt = textContent + \" \\n Summarize this webpage using the above text content scraped from the page\"\n"
+                },
+                {
+                    "date": 1709798157976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-const { GoogleGenerativeAI } = require(\"@google/generative-ai\");\n+import { GoogleGenerativeAI } from \"@google/generative-ai\";\n \n \n // Access your API key as an environment variable (see \"Set up your API key\" above)\n const genAI = new GoogleGenerativeAI('AIzaSyBDEMB0-yQNWw1JbA5dt74aujGfjSBn9Lo');\n"
+                },
+                {
+                    "date": 1709891976273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,24 +3,35 @@\n \n // Access your API key as an environment variable (see \"Set up your API key\" above)\n const genAI = new GoogleGenerativeAI('AIzaSyBDEMB0-yQNWw1JbA5dt74aujGfjSBn9Lo');\n \n+// async function getAbstractSummary(textContent:any) {\n+//   // For text-only input, use the gemini-pro model\n+//   const model = genAI.getGenerativeModel({ model: \"gemini-pro\"});\n+\n+//   const prompt = textContent + \" \\n Summarize this webpage using the above text content scraped from the page\"\n+\n+//   const result = await model.generateContentStream(prompt);\n+//   let text = '';\n+//   for await (const chunk of result.stream) {\n+//     const chunkText = chunk.text();\n+//     console.log(chunkText);\n+//     text += chunkText;\n+//   }\n+//   const response = await result.response;\n+//   const textResp = response.text();\n+//   return response\n+// }\n+\n async function getAbstractSummary(textContent:any) {\n-  // For text-only input, use the gemini-pro model\n-  const model = genAI.getGenerativeModel({ model: \"gemini-pro\"});\n+    // For text-only input, use the gemini-pro model\n+    const model = genAI.getGenerativeModel({ model: \"gemini-pro\"});\n+  \n+    const prompt = textContent + \" \\n Summarize this webpage using the above text content scraped from the page\"\n+  \n+    const result = await model.generateContentStream(prompt);\n \n-  const prompt = textContent + \" \\n Summarize this webpage using the above text content scraped from the page\"\n-\n-  const result = await model.generateContentStream(prompt);\n-  let text = '';\n-  for await (const chunk of result.stream) {\n-    const chunkText = chunk.text();\n-    console.log(chunkText);\n-    text += chunkText;\n+    return result\n   }\n-  const response = await result.response;\n-  const textResp = response.text();\n-  return response\n-}\n \n \n export default getAbstractSummary\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1709892429044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,35 +3,25 @@\n \n // Access your API key as an environment variable (see \"Set up your API key\" above)\n const genAI = new GoogleGenerativeAI('AIzaSyBDEMB0-yQNWw1JbA5dt74aujGfjSBn9Lo');\n \n-// async function getAbstractSummary(textContent:any) {\n-//   // For text-only input, use the gemini-pro model\n-//   const model = genAI.getGenerativeModel({ model: \"gemini-pro\"});\n+async function getAbstractSummary(textContent:any) {\n+  // For text-only input, use the gemini-pro model\n+  const model = genAI.getGenerativeModel({ model: \"gemini-pro\"});\n \n-//   const prompt = textContent + \" \\n Summarize this webpage using the above text content scraped from the page\"\n+  const prompt = textContent + \" \\n Summarize this webpage using the above text content scraped from the page\"\n \n-//   const result = await model.generateContentStream(prompt);\n-//   let text = '';\n-//   for await (const chunk of result.stream) {\n-//     const chunkText = chunk.text();\n-//     console.log(chunkText);\n-//     text += chunkText;\n-//   }\n-//   const response = await result.response;\n-//   const textResp = response.text();\n-//   return response\n-// }\n+  const result = await model.generateContentStream(prompt);\n+  let text = '';\n+  for await (const chunk of result.stream) {\n+    const chunkText = chunk.text();\n+    console.log(chunkText);\n+    text += chunkText;\n+  }\n+  const response = await result.response;\n+  const textResp = response.text();\n+  return response\n+}\n \n-async function getAbstractSummary(textContent:any) {\n-    // For text-only input, use the gemini-pro model\n-    const model = genAI.getGenerativeModel({ model: \"gemini-pro\"});\n-  \n-    const prompt = textContent + \" \\n Summarize this webpage using the above text content scraped from the page\"\n-  \n-    const result = await model.generateContentStream(prompt);\n \n-    return result\n-  }\n \n-\n export default getAbstractSummary\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1709905406844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { GoogleGenerativeAI } from \"@google/generative-ai\";\n \n \n // Access your API key as an environment variable (see \"Set up your API key\" above)\n-const genAI = new GoogleGenerativeAI('AIzaSyBDEMB0-yQNWw1JbA5dt74aujGfjSBn9Lo');\n+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY|| '');\n \n async function getAbstractSummary(textContent:any) {\n   // For text-only input, use the gemini-pro model\n   const model = genAI.getGenerativeModel({ model: \"gemini-pro\"});\n"
+                }
+            ],
+            "date": 1709796676528,
+            "name": "Commit-0",
+            "content": "const { GoogleGenerativeAI } = require(\"@google/generative-ai\");\n\n\n// Access your API key as an environment variable (see \"Set up your API key\" above)\nconst genAI = new GoogleGenerativeAI('AIzaSyBDEMB0-yQNWw1JbA5dt74aujGfjSBn9Lo');\n\nasync function getAbstractSummary(textContent:string) {\n  // For text-only input, use the gemini-pro model\n  const model = genAI.getGenerativeModel({ model: \"gemini-pro\"});\n\n  const prompt = textContent + \" \\n Summarize this webpage using the above text content scraped from the page\"\n\n  const result = await model.generateContentStream(prompt);\n  let text = '';\n  for await (const chunk of result.stream) {\n    const chunkText = chunk.text();\n    console.log(chunkText);\n    text += chunkText;\n  }\n  const response = await result.response;\n  const textResp = response.text();\n  return response\n}"
+        }
+    ]
+}

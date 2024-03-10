@@ -4,7 +4,6 @@ import pprint
 from bs4 import BeautifulSoup
 from playwright.async_api import async_playwright
 
-
 def remove_unwanted_tags(html_content, unwanted_tags=["script", "style"]):
     """
     This removes unwanted HTML tags from the given HTML content.
@@ -25,15 +24,28 @@ def extract_tags(html_content):
     tag is an "a" tag.
     """
     soup = BeautifulSoup(html_content, 'html.parser')
-    text_parts = []    
+    navigation_links = []    
+    content_links = []
     elements = soup.find_all('a')
     for element in elements:
         href = element.get('href')
-        if href:
-            text_parts.append(f"{element.get_text().strip()}: '{href}'")
+        if not href:
+            continue
+        url = href.strip()
+        extracted_link = {
+            element.get_text().strip(): url
+        }
+        if check_navigation_links(url) == True:
+            navigation_links.append(extracted_link)
+            continue
+        content_links.append(extracted_link)
 
-    return '\n'.join(text_parts)
+    return (navigation_links, content_links)
 
+def check_navigation_links(link): 
+    if link.startswith('/'): 
+        return True
+    return False    
 
 def remove_unnecessary_lines(content):
     # Split content into lines

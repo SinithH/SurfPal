@@ -1,0 +1,29 @@
+// create a github build pipeline for wxt
+name: Build Extension
+
+on: [push, pull_request]
+  push: 
+    paths:
+      - 'client/**'
+
+jobs:
+  build_client:
+  if: ${{ contains(gihub.event.paths, 'client/') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.15'
+      - name: Install dependencies
+        run: npm ci
+      - name: run for chrome
+        run: npm run dev
+      - name: run for firefox
+        run: npm run dev:firefox
+      - name: build for chrome
+        run: npm run build
+      - name: build for firefox
+        run: npm run build:firefox     

@@ -25,6 +25,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.15'
+      - name: navigate to client
+        run: cd client
       - name: Install dependencies
         run: npm ci
       - name: run for chrome
@@ -34,4 +36,4 @@ jobs:
       - name: build for chrome
         run: npm run build
       - name: build for firefox
-        run: npm run build:firefox     
+        run: npm run build:firefox

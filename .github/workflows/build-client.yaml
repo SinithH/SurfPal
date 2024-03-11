@@ -2,14 +2,21 @@
 
 name: Build Extension
 
-on: [push, pull_request]
+on:
   push: 
+    branches:
+    - '*'
     paths:
-      - 'client/**'
+    - 'client/**'
+  pull_request:
+    branches:
+    - main
+    - development
+    paths:  
+    - 'client/**'
 
 jobs:
   build_client:
-  if: ${{ contains(gihub.event.paths, 'client/') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

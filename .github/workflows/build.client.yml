@@ -28,7 +28,7 @@ jobs:
       - name: navigate to client
         run: cd client
       - name: Install dependencies
-        run: npm ci
+        run: npm i
       - name: run for chrome
         run: npm run dev
       - name: run for firefox

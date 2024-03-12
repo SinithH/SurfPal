@@ -12,7 +12,7 @@ on:
     - 'surfpal-web/**'
 
 jobs:
-  build_client:
+  build_web_app:
     runs-on: ubuntu-latest
     defaults:
       run:

@@ -1,8 +1,13 @@
 import React from 'react'
+import UserCard from './components/userCard'
 
 const MyAccountPage = () => {
   return (
-    <div>MyAccountPage</div>
+    <>
+        <div className='w-full h-full'>
+            <UserCard/>
+        </div>
+    </>
   )
 }
 

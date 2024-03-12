@@ -20,10 +20,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18.15'
+          
+      - name: navigate
+        run: cd client
 
       - name: dir
         run: pwd    

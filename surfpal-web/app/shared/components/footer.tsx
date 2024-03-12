@@ -33,7 +33,7 @@ const Footer = () => {
                                     <div className="text-black font-medium mb-2 hover:text-gray-100 transition duration-150 ease-in-out">Developers
                                     </div>
                                     <ul>
-                                        <li className="mb-2 text-black hover:text-gray-100 transition duration-150 ease-in-out">
+                                        <li className="font-medium mb-2 text-black hover:text-gray-100 transition duration-150 ease-in-out">
                                             {/* <a className="text-black hover:text-gray-100 transition duration-150 ease-in-out" target="_blank" href="https://rapidapi.com/tldrthishq-tldrthishq-default/api/tldrthis/">API Access
                                             </a> */}
                                             API Access
@@ -69,7 +69,7 @@ const Footer = () => {
                                     </a>
                                 </li>
                             </ul> */}
-                            <div className="text-black text-sm mr-5">© 2024 SurfPal, all rights reserved
+                            <div className="text-black text-sm mr-5 font-semibold">© 2024 SurfPal, all rights reserved
                             </div>
                         </div>
                     </div>

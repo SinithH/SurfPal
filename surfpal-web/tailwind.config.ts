@@ -17,7 +17,10 @@ const config: Config = {
       },
       colors: {
         primaryPurple: "#9E00E8",
-      }
+      },
+      scale: {
+        '8': '0.08', // for user avatar in header
+      },
     },
   },
   plugins: [],

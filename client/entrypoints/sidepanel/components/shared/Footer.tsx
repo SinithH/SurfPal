@@ -15,7 +15,7 @@ const Footer: React.FC<FooterProps> = ({handleBackClick, isSummery}) => {
 
     return(
       <>
-        <div className="fixed bottom-0 w-full">
+        <div className="fixed bottom-0 w-full bg-white">
             <hr className="mx-4"/>
             <div className="inline-flex p-4 gap-12">
                 <button onClick={handleBackClick} className="w-7 h-7 rounded">

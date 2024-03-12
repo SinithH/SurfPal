@@ -25,6 +25,7 @@ export default defineContentScript({
           // Send text content to the background script
         browser.runtime.sendMessage({ textContent });
         browser.storage.sync.set({ textContent });
-        browser.storage.local.set({textContent})
+        browser.storage.local.set({textContent});
+        
     },
 })

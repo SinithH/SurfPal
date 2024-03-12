@@ -10,10 +10,13 @@ import Footer from './components/shared/Footer';
 import ModuleNames from './constants/Modules';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const App: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<string | null>(null);
   const [previousScreen, setPreviousScreen] = useState<string | null>(null);
+  // const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
   const handleOptionClick = (option: string) => {
     setPreviousScreen(currentScreen);
@@ -30,7 +33,7 @@ const App: React.FC = () => {
   function renderCurrentScreen() {
     switch (currentScreen) {
       case 'Summarization':
-        return <Summarization />;
+        return <Summarization genAI={genAI} />;
       case 'ImageRecognition':
         return <ImageRecognition />;
       case 'Navigation':

@@ -1,5 +1,3 @@
-#create a github build pipeline for wxt
-
 name: Build Extension
 
 on:
@@ -30,7 +28,7 @@ jobs:
           node-version: '18.15'
           
       - name: Install dependencies
-        run: npm i
+        run: npm ci
 
       - name: build for chrome
         run: npm run build

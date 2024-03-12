@@ -1,5 +1,8 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
+import Image1 from '@/public/assets/icons/close.png';
+import Image2 from '@/public/assets/icons/hamburger.png';
+import Image from 'next/image';
 
 const Header = () => {
 
@@ -21,8 +24,9 @@ const Header = () => {
             </div>
 
             <div className="md:hidden pr-10" onClick={handleClick}>
-              {/* <img src={toggle?close:hamburger} /> */}
-              <img src="landing_Page\src\asset\hamburger.png" alt="AA" />
+              {/* <img src={toggle?close:Image2} /> */}
+              {/* <Image src={toggle ? close : Image2} alt="Image Alt Text" /> */}
+              <Image src={Image1} alt="AA"/>
             </div>
         </div>
         

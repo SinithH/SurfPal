@@ -1,6 +1,6 @@
 const ModuleNames = {
     NAVIGATION: 'Navigation',
-    SUMMERIZATION: 'Summerization',
+    SUMMARIZATION: 'Summarization',
     IMAGE_RECOGNITION: 'Image Recognition',
     MY_ACCOUNT: 'My Account'
 }

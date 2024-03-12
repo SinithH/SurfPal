@@ -24,3 +24,9 @@ web-ext.config.ts
 *.sln
 *.sw?
 /.env.local
+
+# Navigation Assistant 
+.venv
+.env
+.vscode
+__pycache__

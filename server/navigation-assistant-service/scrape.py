@@ -33,7 +33,7 @@ def extract_tags(html_content):
             continue
         url = href.strip()
         extracted_link = {
-            element.get_text().strip(): url
+            "text": element.get_text().strip(), "url": url
         }
         if check_navigation_links(url) == True:
             navigation_links.append(extracted_link)

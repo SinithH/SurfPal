@@ -26,11 +26,13 @@ const Header = () => {
               Sign Up
               </button>  */}
               <ul className="hidden md:flex justify-center items-center space-x-5 pt-3 pb-3">
-                <li>
-                  <a className="text-xl font-bold text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out" href="/login">Sign in</a>
+                <li className="text-xl font-bold text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
+                  {/* <a className="text-xl font-bold text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out" href="/login">Sign in</a> */}
+                  <Link href="/login">Sign in</Link>
                 </li>
-                <li>
-                  <a className="text-xl font-bold btn-sm text-purple-600 hover:text-gray-200 ml-3" href="/signUp">Sign Up</a>
+                <li className="text-xl font-bold btn-sm text-purple-600 hover:text-gray-200 ml-3">
+                  {/* <a className="text-xl font-bold btn-sm text-purple-600 hover:text-gray-200 ml-3" href="/signUp">Sign Up</a> */}
+                  <Link href="/signUp">Sign Up</Link>
                 </li>
               </ul>
             </div>

@@ -25,3 +25,4 @@ web-ext.config.ts
 *.sw?
 /.env.local
 */.env
+*./.lh/

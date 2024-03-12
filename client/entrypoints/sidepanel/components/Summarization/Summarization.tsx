@@ -4,6 +4,7 @@ import ModuleNames from '../../constants/Modules';
 import clipboardCopy from 'clipboard-copy';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from '../shared/Footer';
 import browser from 'webextension-polyfill';
 import { faRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

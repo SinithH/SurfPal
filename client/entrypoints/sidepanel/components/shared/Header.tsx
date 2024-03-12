@@ -2,6 +2,7 @@ import React from "react";
 import summeryIcon from '@/assets/icons/summary-icon.png';
 import navigationIcon from '@/assets/icons/navigation-icon.svg';
 import imageRecIcon from '@/assets/icons/image-rec-icon.svg';
+import userIcon from '@/assets/icons/user-icon.svg';
 import ModuleNames from "../../constants/Modules";
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,6 +22,8 @@ const Header: React.FC<HeaderProps> = ({heading, handleCopyClick, isSummary}) =>
                 return summeryIcon;
             case ModuleNames.IMAGE_RECOGNITION:
                 return imageRecIcon;
+            case ModuleNames.MY_ACCOUNT:
+                return userIcon;
             default:
                 return '';
         }

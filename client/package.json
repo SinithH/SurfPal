@@ -1,5 +1,5 @@
 {
-  "name": "wxt-starter",
+  "name": "surfpal-dev",
   "description": "manifest.json description",
   "private": true,
   "version": "0.0.0",
@@ -25,6 +25,7 @@
     "dotenv": "^16.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0",
     "react-toastify": "^10.0.4",
     "webextension-polyfill": "^0.10.0"
   },

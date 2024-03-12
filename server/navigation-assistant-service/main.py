@@ -11,7 +11,7 @@ app = FastAPI()
 def read_root(content: Content): 
     if content == None: 
         return {"message": "the content wasn't provided."}
-    data = extract_tags(remove_unwanted_tags(content))
-    return {"url": content,"data": data}
+    navigation_links, content_links = extract_tags(remove_unwanted_tags(content.content))
+    return {"data": {"navigation": navigation_links, "content": content_links}}
 
 

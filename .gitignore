@@ -23,9 +23,11 @@ web-ext.config.ts
 *.njsproj
 *.sln
 *.sw?
-.env.local
+
 
 # Navigation Assistant 
 .venv
 .vscode
 __pycache__
+*/.env.local
+surfpal-web/.env.local

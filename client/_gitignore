@@ -12,6 +12,7 @@ node_modules
 stats.html
 .wxt
 web-ext.config.ts
+/.env.local
 
 # Editor directories and files
 .vscode/*
@@ -23,3 +24,7 @@ web-ext.config.ts
 *.njsproj
 *.sln
 *.sw?
+.lh
+*.env
+
+

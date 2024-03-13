@@ -10,15 +10,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 interface HeaderProps {
     heading: string,
     handleCopyClick?: () => void,
-    isSummery?: boolean
+    isSummary?: boolean
 }
 
-const Header: React.FC<HeaderProps> = ({heading, handleCopyClick, isSummery}) => {
+const Header: React.FC<HeaderProps> = ({heading, handleCopyClick, isSummary}) => {
     const getHeaderIcon  = (): string => {
         switch (heading) {
             case ModuleNames.NAVIGATION:
                 return navigationIcon;
-            case ModuleNames.SUMMERIZATION:
+            case ModuleNames.SUMMARIZATION:
                 return summeryIcon;
             case ModuleNames.IMAGE_RECOGNITION:
                 return imageRecIcon;
@@ -35,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({heading, handleCopyClick, isSummery}) =>
                 <div className="inline-flex items-center p-3 gap-2">
                     <img src={getHeaderIcon()} alt="" className="h-4" />
                     <h3 className="font-kanit text-primary">{ heading }</h3>
-                    {isSummery && (<button onClick={handleCopyClick} className="fixed right-7" title="copy to clipboard">
+                    {isSummary && (<button onClick={handleCopyClick} className="fixed right-7" title="copy to clipboard">
                         <FontAwesomeIcon icon={faCopy} size="2x"/>
                     </button>) }
                 </div>

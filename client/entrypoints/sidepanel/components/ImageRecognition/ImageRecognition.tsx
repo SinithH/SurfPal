@@ -34,7 +34,7 @@ const ImageRecognition: React.FC = () => {
       <div className="bg-gray-200 p-10 rounded-md ml-2 mr-3">
         {result}
       </div> */}
-      <Footer/>
+      <Footer module={ModuleNames.IMAGE_RECOGNITION}/>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Navigation: React.FC = () => {
       <Header heading={ModuleNames.NAVIGATION}/>
       {/* Add content for Navigation */}
     </div>
-    <Footer/>
+    <Footer module={ModuleNames.NAVIGATION}/>
     </>
 
   );

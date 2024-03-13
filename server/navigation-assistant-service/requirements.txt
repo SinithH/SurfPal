@@ -1,0 +1,5 @@
+dotenv
+google-generativeai
+beautifulsoup4
+fastapi
+uvicorn[standard]

@@ -1,4 +1,5 @@
 import browser from 'webextension-polyfill';
+import abstractSummary from './sidepanel/services/summarization-service/getSummary';
 // Function to extract text content from DOM
 function extractTextFromDOM(node: Node): string {
     let text = '';
@@ -15,6 +16,8 @@ function extractTextFromDOM(node: Node): string {
 export default defineContentScript({
     matches: ['*://*/*'],
     async main(ctx) {
+        // console.log("Hello");
+        // alert("Hello")
           // Extract text content from the entire document
         const textContent: string = extractTextFromDOM(document.body)
           // Send text content to the background script
@@ -23,7 +26,18 @@ export default defineContentScript({
           textBody: document.body.innerHTML, 
           currentUrl: window.location.href
         });
-        browser.storage.sync.set({ textContent });
-        browser.storage.local.set({textContent})
+        //browser.storage.sync.set({ textContent });
+        browser.storage.local.set({textContent});
+
+        browser.runtime.onMessage.addListener((message)=>{
+          if(message.reloadText == 'reloadText'){
+            const textContent: string = extractTextFromDOM(document.body);
+            
+            // Send text content to the background script
+            browser.runtime.sendMessage({ textContent });
+            //browser.storage.sync.set({ textContent });
+            browser.storage.local.set({textContent});
+          }
+        })
     }
 })

@@ -6,28 +6,29 @@ import browser from 'webextension-polyfill';
 
 const Navigation: React.FC = () => {
   let contentScript = '';
-  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  let currentUrl = '';
+  browser.runtime.onMessage.addListener((message) => {
     contentScript = message.textBody
+    currentUrl = message.currentUrl
     fetchLinks();
   });
   const fetchLinks = async () => {
-    if(!contentScript) { 
+    if (!contentScript || !currentUrl ) {
       return;
     }
-  
     const result = await fetch(import.meta.env.VITE_NAVIGATION_URL, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        content: contentScript
+        content: contentScript,
+        url: currentUrl
       })
     })
     if (!result) {
       throw new Error('failed to fetch')
     }
-  
     setData(await result.json());
   }
   const [data, setData] = useState<INavigationResponse>();
@@ -36,18 +37,22 @@ const Navigation: React.FC = () => {
     <>
       <div>
         <Header heading={ModuleNames.NAVIGATION} />
-        <h1 className='m-3'>The Navigation Links: </h1>
-        <ul className='mx-3 mt-3'>
-          {data?.data.navigation.map((link: { [key: string]: string }) => {
-            return <li>{link[Object.keys(link)[0]]}</li>
-          })}
-        </ul>
-        <h1 className='m-3'>The Content Links: </h1>
-        <ul className='mx-3 mt-3'>
-          {data?.data.content.map((link: { [key: string]: string }) => {
-            return <li>{link[Object.keys(link)[0]]}</li>
-          })}
-        </ul>
+        <div className="p-3">
+          <h1 className='mb-2'>The Navigation Links: </h1>
+          <hr />
+          <ul>
+            {data?.data.navigation.map((link) => {
+              return <li>{link.text}: {link.url}</li>
+            })}
+          </ul>
+          <h1 className='my-2'>The Content Links: </h1>
+          <hr />
+          <ul>
+            {data?.data.content.map((link) => {
+              return <li>{link.text}: {link.url}</li>
+            })}
+          </ul>
+        </div>
       </div>
       <Footer />
     </>
@@ -59,10 +64,12 @@ export default Navigation;
 interface INavigationResponse {
   data: {
     navigation: {
-      [key: string]: string
+      text: string,
+      url: string
     }[],
     content: {
-      [key: string]: string
+      text: string,
+      url: string
     }[]
   }
 }

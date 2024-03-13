@@ -17,9 +17,12 @@ export default defineContentScript({
     async main(ctx) {
           // Extract text content from the entire document
         const textContent: string = extractTextFromDOM(document.body)
-        const textBody = document.body.innerHTML;
           // Send text content to the background script
-        browser.runtime.sendMessage({ textContent, textBody });
+        browser.runtime.sendMessage({ 
+          textContent, 
+          textBody: document.body.innerHTML, 
+          currentUrl: window.location.href
+        });
         browser.storage.sync.set({ textContent });
         browser.storage.local.set({textContent})
     }

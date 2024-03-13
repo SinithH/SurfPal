@@ -1,5 +1,5 @@
 {
-  "name": "wxt-starter",
+  "name": "surfpal-dev",
   "description": "manifest.json description",
   "private": true,
   "version": "0.0.0",
@@ -19,11 +19,15 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@google/generative-ai": "^0.2.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "clipboard-copy": "^4.0.1",
+    "dotenv": "^16.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-toastify": "^10.0.4"
+    "react-router-dom": "^6.22.0",
+    "react-toastify": "^10.0.4",
+    "webextension-polyfill": "^0.10.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.46",

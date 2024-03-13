@@ -6,4 +6,7 @@ export default defineConfig({
   vite: () => ({
     plugins: [react()],
   }),
+  manifest: {
+    permissions: ['sidePanel', 'storage', 'tabs', 'scripting']
+  }
 });

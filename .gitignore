@@ -23,10 +23,3 @@ web-ext.config.ts
 *.njsproj
 *.sln
 *.sw?
-/.env.local
-
-# Navigation Assistant 
-.venv
-.env
-.vscode
-__pycache__

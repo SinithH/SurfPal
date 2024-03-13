@@ -1,24 +1,22 @@
-import { Card, Switch, Typography } from '@material-tailwind/react'
+import { Card, Switch, Typography } from '@material-tailwind/react';
 import { Kanit } from 'next/font/google';
-import React, { useState } from 'react'
+import React from 'react';
 
 interface ToggleSettingProps {
-    settingTopic: string,
-    settingDesc: string,
-    setToggleResponse: (newValue: boolean) => void
+    settingTopic: string;
+    settingDesc: string;
+    toggleState: boolean; // Change: Added toggleState prop
+    setToggleResponse: (newValue: boolean) => void;
 }
 
 const kanit = Kanit({
     weight: ['400', '700'],
     subsets: ['latin'],
-})
+});
 
-const ToggleSetting: React.FC<ToggleSettingProps> = ({ settingTopic, settingDesc, setToggleResponse }) => {
-    const [toggleState, setToggleState] = useState<boolean>(false);
-
+const ToggleSetting: React.FC<ToggleSettingProps> = ({ settingTopic, settingDesc, toggleState, setToggleResponse }) => {
     const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = event.target.checked;
-        setToggleState(newValue);
         setToggleResponse(newValue);
     };
 

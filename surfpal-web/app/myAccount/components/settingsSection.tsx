@@ -27,11 +27,13 @@ const SettingsSection = () => {
                 <ToggleSetting 
                     settingTopic={'Enable Image Recognition'} 
                     settingDesc={'Enabling this feature will allow you to generate text descriptions for the images in a web page.'} 
+                    toggleState={imageRecognition}
                     setToggleResponse={setImageRecognition}                    
                 />
                 <ToggleSetting 
                     settingTopic={'Enable Text-To-Speech'} 
                     settingDesc={'Power up the immersive text-to-speech engine of SurfPal'} 
+                    toggleState={ttsSetting}
                     setToggleResponse={setTTSSetting}                    
                 />
                 <DropDownSetting 

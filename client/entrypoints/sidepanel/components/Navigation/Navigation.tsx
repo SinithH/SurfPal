@@ -4,6 +4,20 @@ import ModuleNames from '../../constants/Modules';
 import Footer from '../shared/Footer';
 import browser from 'webextension-polyfill';
 
+interface INavigationResponse {
+  data: {
+    navigation: {
+      text: string,
+      url: string
+    }[],
+    content: {
+      text: string,
+      url: string
+    }[]
+  }
+}
+
+
 const Navigation: React.FC = () => {
   let contentScript = '';
   let currentUrl = '';
@@ -61,15 +75,3 @@ const Navigation: React.FC = () => {
 
 export default Navigation;
 
-interface INavigationResponse {
-  data: {
-    navigation: {
-      text: string,
-      url: string
-    }[],
-    content: {
-      text: string,
-      url: string
-    }[]
-  }
-}

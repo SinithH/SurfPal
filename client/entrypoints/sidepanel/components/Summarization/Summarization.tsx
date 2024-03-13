@@ -32,14 +32,17 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
     } = useStore()
   
     useEffect(() => {
-      const handleUnload = (tabId:number,changeInfo: browser.Tabs.OnUpdatedChangeInfoType, tab: browser.Tabs.Tab) => {
+      const handleUnload = async(tabId:number,changeInfo: browser.Tabs.OnUpdatedChangeInfoType, tab: browser.Tabs.Tab) => {
         console.log("On updated")
         console.log(tab)
         clearSummary();
         clearParagraphSummary();
         clearSelectedParagraph();
         generatingSummary(false)
+        updateSummaryType('paragraph')
         browser.storage.local.remove('textContent')
+        const reloadText:string = 'reloadText';
+        browser.tabs.sendMessage(tab.id || 99999999,{reloadText})
       };
 
       const handleTabChange = async(activeInfo:browser.Tabs.OnActivatedActiveInfoType)=>{
@@ -49,6 +52,7 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
         clearParagraphSummary();
         clearSelectedParagraph();
         generatingSummary(false)
+        updateSummaryType('paragraph')
         browser.storage.local.remove('textContent')
         const activeTab = await browser.tabs.get(activeInfo.tabId)
         const reloadText:string = 'reloadText';

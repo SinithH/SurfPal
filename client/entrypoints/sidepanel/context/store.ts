@@ -59,7 +59,7 @@ const useStore = create<SummaryState>((set) => ({
   updateParagraphSummary: (paragraphSummary:string)=>set(()=>({paragraphSummary:paragraphSummary})),
   clearParagraphSummary: ()=> set({paragraphSummary:''}),
 
-  summaryType:'page',
+  summaryType:'paragraph',
   updateSummaryType:(type:string)=>set((state)=>({summaryType: type})),
 
 }))

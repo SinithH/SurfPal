@@ -4,6 +4,7 @@ from scrape import extract_tags, remove_unwanted_tags
 
 class Content(BaseModel):
     content: str
+    url: str
     
 app = FastAPI()
 
@@ -11,7 +12,7 @@ app = FastAPI()
 def read_root(content: Content): 
     if content == None: 
         return {"message": "the content wasn't provided."}
-    navigation_links, content_links = extract_tags(remove_unwanted_tags(content.content))
+    navigation_links, content_links = extract_tags(remove_unwanted_tags(content.content), content.url)
     return {"data": {"navigation": navigation_links, "content": content_links}}
 
 

@@ -17,7 +17,7 @@ def remove_unwanted_tags(html_content, unwanted_tags=["script", "style"]):
     return str(soup)
 
 
-def extract_tags(html_content):
+def extract_tags(html_content, website_url):
     """
     This takes in HTML content and a list of tags, and returns a string
     containing the text content of all elements with those tags, along with their href attribute if the
@@ -35,15 +35,17 @@ def extract_tags(html_content):
         extracted_link = {
             "text": element.get_text().strip(), "url": url
         }
-        if check_navigation_links(url) == True:
+        if check_navigation_links(url, website_url) == True:
             navigation_links.append(extracted_link)
             continue
         content_links.append(extracted_link)
 
     return (navigation_links, content_links)
 
-def check_navigation_links(link): 
-    if link.startswith('/'): 
+def check_navigation_links(link: str, website_url: str):
+    if link.startswith(website_url): 
+        return True
+    if link.startswith('//') == False and link.startswith('/') == True: 
         return True
     return False    
 

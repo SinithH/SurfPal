@@ -24,7 +24,7 @@ interface SummaryState {
     clearTextContent: ()=>void;
 
     selectedParagraph:string
-    updateSelectedParagraph: (selectedText:string)=>void;
+    updateSelectedParagraph: (selectedText:string)=>boolean;
     clearSelectedParagraph:()=>void;
 
     paragraphSummary:string
@@ -50,7 +50,9 @@ const useStore = create<SummaryState>((set) => ({
   clearSummary:() => set({ summary:'',questions:[] }),
 
   selectedParagraph:'',
-  updateSelectedParagraph: (selectedText:string)=>set((state)=>({selectedParagraph: selectedText})),
+  updateSelectedParagraph: (selectedText:string)=>{
+    set((state)=>({selectedParagraph: selectedText}));
+    return true},
   clearSelectedParagraph: ()=> set({selectedParagraph:''}),
 
   paragraphSummary:'',

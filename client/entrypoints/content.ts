@@ -1,5 +1,5 @@
 import browser from 'webextension-polyfill';
-import abstractSummary from './sidepanel/services/summarization-service/abstractSummary';
+import abstractSummary from './sidepanel/services/summarization-service/getSummary';
 // Function to extract text content from DOM
 function extractTextFromDOM(node: Node): string {
     let text = '';
@@ -25,15 +25,16 @@ export default defineContentScript({
         const textContent: string = extractTextFromDOM(document.body);
           // Send text content to the background script
         browser.runtime.sendMessage({ textContent });
-        browser.storage.sync.set({ textContent });
+        //browser.storage.sync.set({ textContent });
         browser.storage.local.set({textContent});
 
         browser.runtime.onMessage.addListener((message)=>{
           if(message.reloadText == 'reloadText'){
             const textContent: string = extractTextFromDOM(document.body);
+            
             // Send text content to the background script
             browser.runtime.sendMessage({ textContent });
-            browser.storage.sync.set({ textContent });
+            //browser.storage.sync.set({ textContent });
             browser.storage.local.set({textContent});
           }
         })

@@ -6,12 +6,11 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../shared/Footer';
 import browser from 'webextension-polyfill';
-import { faRotate } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Question from './Question';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import useStore from '../../context/store';
 import SummaryHeader from './SummaryHeader';
+import generateSummary from '../../services/summarization-service/getSummary';
 
 interface Question {
   question: string;
@@ -33,37 +32,68 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
     } = useStore()
   
     useEffect(() => {
-      const handleUnload = () => {
+      const handleUnload = (tabId:number,changeInfo: browser.Tabs.OnUpdatedChangeInfoType, tab: browser.Tabs.Tab) => {
+        console.log("On updated")
+        console.log(tab)
         clearSummary();
         clearParagraphSummary();
         clearSelectedParagraph();
+        generatingSummary(false)
         browser.storage.local.remove('textContent')
       };
+
+      const handleTabChange = async(activeInfo:browser.Tabs.OnActivatedActiveInfoType)=>{
+        console.log("Tab updated")
+        console.log(activeInfo)
+        clearSummary();
+        clearParagraphSummary();
+        clearSelectedParagraph();
+        generatingSummary(false)
+        browser.storage.local.remove('textContent')
+        const activeTab = await browser.tabs.get(activeInfo.tabId)
+        const reloadText:string = 'reloadText';
+        browser.tabs.sendMessage(activeTab.id || 99999999,{reloadText})
+      }
 
       const handleMenuClick = (info:browser.Menus.OnClickData, tab:browser.Tabs.Tab | undefined)=>{
         const mediaTypes = ['audio','video','image']
         const mediaType:string = info?.mediaType || 'ok';
         clearSelectedParagraph()
+        clearParagraphSummary()
     
         if (info.menuItemId === "generateSummaryItem" && !(mediaTypes.includes(mediaType))) {
           const selectedText = info.selectionText || "summary";
-          updateSelectedParagraph(selectedText)
-          toast.success('Selected', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false, theme: 'colored' });
-          updateSummaryType('paragraph')
+          console.log(selectedText)
+          let selectionDone = updateSelectedParagraph(selectedText)
+          if(selectionDone){
+            console.log(selectedParagraph)
+            toast.success('Selected', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false});
+            updateSummaryType('paragraph')
+            generatingSummary(true)
+            directlyGenerateParagraphSummary(selectedText);
+
+          }
+
+
         } else{
           console.log("Invalid text paragraph")
           clearSelectedParagraph()
           updateSummaryType('page')
-          toast.error('Please select a text paragraph', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false, theme: 'colored' });
+          toast.error('Please select a text paragraph', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false});
         }
       }
+
+
   
       browser.tabs.onUpdated.addListener(handleUnload);
       browser.contextMenus.onClicked.addListener(handleMenuClick);
+      browser.tabs.onActivated.addListener(handleTabChange)
   
       return () => {
         browser.tabs.onUpdated.removeListener(handleUnload);
         browser.contextMenus.onClicked.removeListener(handleMenuClick);
+        browser.tabs.onActivated.removeListener(handleTabChange)
+
       };
     }, []);
 
@@ -76,90 +106,39 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
     
   }
 
-  async function divideSummaryAndQuestions(jsonString: string) {
-    try {
-      console.log(jsonString)
-      jsonString = jsonString.split('json')[1].split('```')[0];
-      const jsonData: SummaryResponse = JSON.parse(jsonString);
-      updateSummary(jsonData)
-    } catch (error) {
-      console.error('Error while dividing summary and questions:', error);
-      toast.error('Incomplete response from model', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false })
-    }
-  }
-
-
-  async function getAbstractSummary(textContent: any): Promise<string> {
-    try {
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const prompt =
-        textContent +
-        " \n Analyze the given text content from the webpage and give me an abstract summary of this webpage with what this webpage is about. And also give me 5 potential most important questions from the given content with the answers for them. Only add questions which can be answered from the given content. Don't include questions which can't be answered using only the given content. Send your response as a json with summary,questions array with question and answer";
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const fullResponse = response.text();
-      generatingSummary(false);
-      divideSummaryAndQuestions(fullResponse);
-      return fullResponse;
-    } catch (error) {
-      console.error('Error while getting abstract summary:', error);
-      throw error;
-    }
-  }
-
-  async function generateSummary(){
-    try {
-      const storageData = await browser.storage.local.get('textContent');
-
-      let textContent = storageData.textContent;
-
-      // Check if textContent exists and limit its length if necessary
-      if (textContent) {
-        const MAX_TEXT_LENGTH = 10000; // Define maximum text length
-        if (textContent.length > MAX_TEXT_LENGTH) {
-          textContent = textContent.substring(0, MAX_TEXT_LENGTH); // Limit text content length
-        }
-        generatingSummary(true);
-        let getSummary = getAbstractSummary(textContent).catch((reason)=>{
-          throw new Error(reason)
-        });
-        toast.promise(getSummary,{
-          pending:'Generating Summary',
-          success:'Successfully Generated',
-          error:'Something went wrong'
-        })
-        //divideSummaryAndQuestions(jsonString);
-      } else {
-        console.log('No text content found');
-        generatingSummary(false)
-        toast.error('Please visit a valid site', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false, theme:'colored' })
-      }
-    } catch (error) {
-      console.error('Error occurred while handling summary click:', error);
-      generatingSummary(false)
-      toast.error('Uh Oh! Something went wrong', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false })
-    }
+  async function directlyGenerateParagraphSummary(selectedText:string){
+    await generateSummary(generatingSummary,updateSummary, genAI,selectedText, 'paragraph', updateParagraphSummary).then(()=>{console.log(paragraphSummary)})
   }
 
   async function handleSummaryClick() {
     updateSummaryType('page')
-    if(summary.length > 1 && questions.length > 1){
+    if(summary.length > 1){
       generatingSummary(false)
       return
     }
+    const storageData = await browser.storage.local.get('textContent');
+
+    const textContent:string = storageData.textContent;
+    console.log(textContent)
     generatingSummary(true)
-    generateSummary();
+    await generateSummary(generatingSummary,updateSummary, genAI,textContent, 'page', updateParagraphSummary)
   }
 
   async function handleParaSummaryClick(){
     updateSummaryType('paragraph')
-
-    if(selectedParagraph.length > 1){
+    console.log(paragraphSummary)
+    console.log(selectedParagraph)
+    if(paragraphSummary.length > 1){
+      console.log("Existing para summary")
       generatingSummary(false)
       return
+    } else if(selectedParagraph.length > 1){
+      console.log("Generating Para Summary")
+      await generateSummary(generatingSummary,updateSummary, genAI,selectedParagraph, 'paragraph', updateParagraphSummary).then(()=>{console.log(paragraphSummary)})
+      
+    } else{
+      toast.warn('Please select a text paragraph', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false });
     }
-    generatingSummary(true)
-    console.log("Generating Para Summary")
   }
 
 
@@ -186,7 +165,7 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
             <div className='font-kanit w-full'>
               <p>
                 {loading && <span>Generating...</span>}
-                {!loading && selectedParagraph}
+                {!loading && paragraphSummary}
               </p>
             </div>
           }

@@ -22,12 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Header/>
-        <Hero/>
-        <MainFeatures/>
-        <UseCase/>
-        <Footer/>
-        <main className="mt-16">
+        <Header />
+        <main className="mt-24">
             {children}
         </main>
       </body>

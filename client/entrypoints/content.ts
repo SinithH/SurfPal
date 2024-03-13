@@ -11,21 +11,19 @@ function extractTextFromDOM(node: Node): string {
     }
     return text;
   }
-  
-
-  
 
 export default defineContentScript({
     matches: ['*://*/*'],
     async main(ctx) {
-        console.log("Hello");
-        alert("Hello")
           // Extract text content from the entire document
-        const textContent: string = extractTextFromDOM(document.body);
+        const textContent: string = extractTextFromDOM(document.body)
           // Send text content to the background script
-        browser.runtime.sendMessage({ textContent });
+        browser.runtime.sendMessage({ 
+          textContent, 
+          textBody: document.body.innerHTML, 
+          currentUrl: window.location.href
+        });
         browser.storage.sync.set({ textContent });
-        browser.storage.local.set({textContent});
-        
-    },
+        browser.storage.local.set({textContent})
+    }
 })

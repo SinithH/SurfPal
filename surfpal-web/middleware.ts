@@ -4,9 +4,15 @@ import { NextResponse } from 'next/server';
 export async function middleware(req: any) {
     const res = NextResponse.next();
     const supabase = createMiddlewareClient({req, res});
-    await supabase.auth.getSession();
+    const session = await supabase.auth.getSession();
+    const {data: {user}} = await supabase.auth.getUser();
+
+    if(session && user) {
+        return res;
+    }
+
+
     
-    // const {data: {user}} = await supabase.auth.getUser();
 
     // const pathname = new URL(req.url, 'http://dummyurl').pathname;
     
@@ -18,9 +24,13 @@ export async function middleware(req: any) {
     //     return NextResponse.redirect(new URL('/login', req.url));
     // }
 
-    return res;
+    const redirectUrl = req.nextUrl.clone();
+    redirectUrl.pathname = '/login'
+    redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname)
+    return NextResponse.redirect(redirectUrl)
+
 }
 
-// export const config = {
-//     matcher: ['/', '/myAccount']
-// } 
+export const config = {
+    matcher: ['/myAccount']
+} 

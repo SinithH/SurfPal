@@ -1,43 +1,93 @@
+'use client'
+
+import { Kanit } from 'next/font/google'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react';
+import { createClientComponentClient} from '@supabase/auth-helpers-nextjs';
+import Image from 'next/image';
+import UserAvatar from '@/public/assets/circle-user-regular.svg';
+import { Card, CardBody } from '@material-tailwind/react';
+
+const kanit = Kanit({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+})
 
 const Header = () => {
 
-  const[toggle,setToggle]=useState(false)
-  const handleClick = ()=> setToggle(!toggle)
-  
+  const router = useRouter();
+
+  const supabase = createClientComponentClient();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [dorpDownActivated, setDropDownActivated] = useState(false);
+
+
+  useEffect(() => {
+    const handleAuthStateChange = async (event: any, session: any) => {
+        if (event === 'SIGNED_IN') {
+            setUser(session.user);
+        } else {
+            setUser(null);
+        }
+    };
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(handleAuthStateChange);
+
+    async function getUser() {
+        const { data: { user } }: any = await supabase.auth.getUser();
+        setUser(user);
+        setLoading(false);
+    }
+
+    getUser();
+
+    return () => {
+        authListener.subscription.unsubscribe();
+    };
+
+}, []);
+
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    const res = await supabase.auth.getUser();
+    setUser(null);
+    setDropDownActivated(!dorpDownActivated);
+    router.push('/login');
+  }
+
   return (
 
-    <div className='w-full h-[100px] bg-gray-800 dark rgb(99, 104, 151) border-b fixed top-0 z-50'>
-        <div className='md:max-w-[1480px] max-w-[600px] m-auto w-full h-full '>
-            <div className='hidden md:flex justify-center items-center space-x-5 pt-5'>
-              <img src="image" alt="image" className='h-[25px]'/>
-              <button className='pr-8 py-3 flex justify-between items-center bg-[#97b2d7] px-6 gap-5 text-white rounded-md font-bold'>
-               Sign In
-              </button>
-              <button className='pr-8 px-8 py-3 rounded-md bg-[#97b2d7] text-white font-bold'>
-              Sign Up
-              </button> 
-            </div>
-
-            <div className="md:hidden pr-10" onClick={handleClick}>
-              {/* <img src={toggle?close:hamburger} /> */}
-              <img src="landing_Page\src\asset\hamburger.png" alt="AA" />
+    <div className={`${kanit.className} w-full h-20 bg-white border-b drop-shadow-sm fixed top-0 z-50 px-10`}>
+        <div className='w-full h-full flex items-center'>
+            <div className='inline-flex justify-between w-full'>
+              {/* <img src="image" alt="image" className='h-[25px]'/> */}
+              <h1>SurfPal</h1>
+              {!user && 
+                <div className='inline-flex gap-6'>
+                  <Link className='text-primaryPurple font-normal py-2' href={'/login'}>
+                    Sign In
+                  </Link>
+                  <Link className='text-white bg-primaryPurple py-2 px-3 rounded-full font-normal' href={'/signUp'}>
+                    Sign Up
+                  </Link>
+                </div>
+              }
+              {user &&
+                <Image src={UserAvatar} alt={'Avatar'} className='cursor-pointer w-10 h-10' onClick={() => setDropDownActivated(!dorpDownActivated)}></Image>
+              }
             </div>
         </div>
-        
-        <div className={toggle?'absolute z-10 p-4 bg-white w-full px-8 md:hidden':'hidden'}>
-          <ul>
-              <div className="flex flex-col my-4 gap-4">
-                              <button className='pr-8 px-8 py-3 flex justify-center items-center bg-[#0e2443] gap-5 text-white rounded-md font-bold'>
-                  Sign In
-                </button>
-                            <button className='px-8 py-3 rounded-md bg-[#0e2443] text-white font-bold'>
-                Sign Up
-              </button>
-              </div>
-          </ul>
-        </div>
+        {dorpDownActivated && 
+          <Card className='w-fit border-gray-400 border fixed top-24 right-2 z-50' placeholder={undefined}>
+              <CardBody placeholder={undefined} className='w-full'>
+                <Link className='py-2 px-8 text-sm cursor-pointer hover:bg-blue-gray-50 w-full' href={'/myAccount'}>My Account</Link>
+                <p className='py-2 px-8 text-sm cursor-pointer hover:bg-blue-gray-50 w-full text-red-500' onClick={handleLogout}>Log out</p>
+              </CardBody>
+          </Card>
+        }
     </div>
     
   )

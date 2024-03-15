@@ -68,11 +68,12 @@ def format(elements):
     links = []    
     for element in elements:
         href = element.get('href')
-        if not href:
+        text_content = element.get_text().strip()
+        if not href or not text_content:
             continue
         url = href.strip()
         extracted_link = {
-            "text": element.get_text().strip(), "url": url
+            "text": text_content, "url": url
         }
         links.append(extracted_link)
 
@@ -80,6 +81,8 @@ def format(elements):
         
 def check_navigation_links(element: str, website_url: str):
     link = element.get('href')
+    if not link: 
+        return False
     if link.startswith(website_url): 
         return True
     if link.startswith('//') == False and link.startswith('/') == True: 

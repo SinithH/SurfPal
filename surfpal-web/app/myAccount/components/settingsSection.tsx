@@ -2,7 +2,7 @@
 
 import { Typography } from '@material-tailwind/react'
 import { Kanit } from 'next/font/google'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ToggleSetting from './shared/toggleSetting'
 import DropDownSetting from './shared/dropDownSetting'
 import { updateSettings } from '@/app/server-actions/updateSettings'
@@ -30,20 +30,28 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({userSettings}) => {
     const [fontSize, setFontSize] = useState(userSettings?.fontsize || 'normal');
     const [ttsSpeed, setTTSSpeed] = useState(userSettings?.ttsspeed || 'normal');
     
+    const initialSettingsRef = useRef(userSettings);
+
     useEffect(() => {
-        
-        // calling the server-action
-        updateSettings({
-            imageRecognition,
-            ttsSetting,
-            theme,
-            fontSize,
-            ttsSpeed
-        }).then(response => {
-            console.log(response);
-        }).catch(error => {
-            console.error(error);
-        });
+        // Only call updateSettings if the settings have actually changed
+        if (initialSettingsRef.current &&
+            (imageRecognition !== initialSettingsRef.current.imagerecognition ||
+             ttsSetting !== initialSettingsRef.current.texttospeech ||
+             theme !== initialSettingsRef.current.theme ||
+             fontSize !== initialSettingsRef.current.fontsize ||
+             ttsSpeed !== initialSettingsRef.current.ttsspeed)) {
+            updateSettings({
+                imageRecognition,
+                ttsSetting,
+                theme,
+                fontSize,
+                ttsSpeed
+            }).then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.error(error);
+            });
+        }
     }, [imageRecognition, ttsSetting, theme, fontSize, ttsSpeed]);
     
   return (

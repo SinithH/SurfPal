@@ -83,7 +83,7 @@ const Header = () => {
         {dorpDownActivated && 
           <Card className='w-fit border-gray-400 border fixed top-24 right-2 z-50' placeholder={undefined}>
               <CardBody placeholder={undefined} className='w-full'>
-                <Link className='py-2 px-8 text-sm cursor-pointer hover:bg-blue-gray-50 w-full' href={'/myAccount'}>My Account</Link>
+                <Link className='py-2 px-8 text-sm cursor-pointer hover:bg-blue-gray-50 w-full' href={'/myAccount'} onClick={() => setDropDownActivated(!dorpDownActivated)}>My Account</Link>
                 <p className='py-2 px-8 text-sm cursor-pointer hover:bg-blue-gray-50 w-full text-red-500' onClick={handleLogout}>Log out</p>
               </CardBody>
           </Card>

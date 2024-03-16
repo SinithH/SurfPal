@@ -27,7 +27,6 @@ const UserCard = () => {
     useEffect(() => {
         async function getUser(){
             const {data: {user}}: any = await supabase.auth.getUser();
-            console.log("🚀 ~ getUser ~ user:", user)
             setUser(user);
             if(user.user_metadata.firstName){
                 setUserName(user?.user_metadata?.firstName + " " + user?.user_metadata?.lastName)

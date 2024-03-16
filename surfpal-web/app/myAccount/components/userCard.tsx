@@ -16,7 +16,10 @@ const kanit = Kanit({
 const UserCard = () => {
 
     const supabase = createClientComponentClient();
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({
+        user_metadata: {
+            avatar_url: '',
+        }});
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [loading, setLoading] = useState(true);
@@ -26,7 +29,11 @@ const UserCard = () => {
             const {data: {user}}: any = await supabase.auth.getUser();
             console.log("🚀 ~ getUser ~ user:", user)
             setUser(user);
-            setUserName(user?.user_metadata?.firstName + " " + user?.user_metadata?.lastName)
+            if(user.user_metadata.firstName){
+                setUserName(user?.user_metadata?.firstName + " " + user?.user_metadata?.lastName)
+            }else {
+                setUserName(user?.user_metadata?.full_name)
+            }
             setUserEmail(user?.user_metadata?.email);
             setLoading(false);
         }
@@ -39,7 +46,12 @@ const UserCard = () => {
     <>
         <Card placeholder={undefined} className=' flex flex-col lg:grid lg:grid-rows-5 lg:h-full w-full lg:w-1/3 p-8 lg:rounded-tl-none lg:rounded-bl-none lg:fixed left-0'>
             <div className='lg:row-span-3 items-center justify-center flex flex-col gap-1 lg:gap-5'>
-                <Image src={UserAvatar} alt={'Avatar'} className='transform lg:scale-75 scale-50 h-32 flex justify-self-center'></Image>
+                {user && user.user_metadata.avatar_url && (
+                    <Image className='h-32 w-32 rounded-full' src={user.user_metadata.avatar_url} alt={'Avatar'} width={300} height={300}></Image>
+                )}
+                {user && !user.user_metadata.avatar_url && (
+                    <Image src={UserAvatar} alt={'Avatar'} className='transform lg:scale-75 scale-50 h-32 flex justify-self-center'></Image>
+                )}
                 <Typography placeholder={undefined} className={`${kanit.className} font-normal text-2xl`}>
                     Welcome, {userName}
                 </Typography>

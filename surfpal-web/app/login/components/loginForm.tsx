@@ -63,6 +63,22 @@ const LoginForm = () => {
         }
     }
 
+    const handleLoginwithGoogle = async () => {
+        try {
+            const { data, error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                  queryParams: {
+                    access_type: 'offline',
+                    prompt: 'consent',
+                  },
+                },
+            })
+        } catch (error) {
+            
+        }
+    }
+
     const validateForm = (): boolean => {
         if(!email && !password) {
             setErrorMsg('Please fill in all the required fields!');
@@ -99,7 +115,7 @@ const LoginForm = () => {
                     <hr className='w-2/5'/><p className='text-xs'>OR</p><hr className='w-2/5'/>
                 </div>
                 <div className='pt-6'>
-                    <button className='w-full rounded-full p-2 bg-transparent border border-gray-200 text-sm relative'>
+                    <button className='w-full rounded-full p-2 bg-transparent border border-gray-200 text-sm relative' onClick={handleLoginwithGoogle}>
                         <Image src={GoogleIcon} alt={''} className='scale-75 absolute left-1 top-1/2 -translate-y-1/2'></Image>
                         Continue with Google
                     </button>

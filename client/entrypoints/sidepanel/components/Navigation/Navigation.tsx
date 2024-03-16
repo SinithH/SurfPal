@@ -3,6 +3,7 @@ import Header from '../shared/Header';
 import ModuleNames from '../../constants/Modules';
 import Footer from '../shared/Footer';
 import browser from 'webextension-polyfill';
+import NavigationLink from '../shared/NavigationLink';
 
 interface INavigationResponse {
   data: {
@@ -27,7 +28,7 @@ const Navigation: React.FC = () => {
     fetchLinks();
   });
   const fetchLinks = async () => {
-    if (!contentScript || !currentUrl ) {
+    if (!contentScript || !currentUrl) {
       return;
     }
     const result = await fetch(import.meta.env.VITE_NAVIGATION_URL, {
@@ -56,14 +57,14 @@ const Navigation: React.FC = () => {
           <hr />
           <ul>
             {data?.data.navigation.map((link) => {
-              return <li>{link.text}: {link.url}</li>
+              return <NavigationLink textContent={link.text} href={link.url} />
             })}
           </ul>
           <h1 className='my-2'>The Content Links: </h1>
           <hr />
           <ul>
             {data?.data.content.map((link) => {
-              return <li>{link.text}: {link.url}</li>
+              return <NavigationLink textContent={link.text} href={link.url}/>
             })}
           </ul>
         </div>

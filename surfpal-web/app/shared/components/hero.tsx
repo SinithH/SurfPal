@@ -5,9 +5,9 @@ const Hero = () => {
         <div className="w-full bg-gray-900 dark">
             <div className="relative pt-10 pb-10 md:pt-20 md:pb-16">
                 <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16 border border-red flex flex-col space-y-7">
-                    <div className="text-white text-xl">Image Recognition </div>
-                    <div className="text-white text-xl">Summarization</div>
-                    <div className="text-white text-xl">Navigation Assistance</div>
+                    <div className="text-primaryPurple text-xl">Image Recognition </div>
+                    <div className="text-primaryPurple text-xl">Summarization</div>
+                    <div className="text-primaryPurple text-xl">Navigation Assistance</div>
                     <p className="text-xl text-white mb-8" data-aos="fade-up" 
                         data-aos-delay="200">
                         SurfPal helps you to summarize any piece of text and Recognize the Images in the website 

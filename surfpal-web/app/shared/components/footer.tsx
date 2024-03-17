@@ -14,15 +14,15 @@ const Footer = () => {
                             </div>
                             <div className="md:col-span-8 lg:col-span-7 grid sm:grid-cols-3 gap-8">
                                 <div className="text-sm">
-                                    <div className="text-black font-medium mb-2 hover:text-gray-100 transition duration-150 ease-in-out">Company
+                                    <div className="text-primaryPurple font-medium mb-2 hover:text-gray-100 transition duration-150 ease-in-out">Company
                                     </div>
                                     <ul>
-                                        <li className="mb-2 text-black hover:text-gray-100 transition duration-150 ease-in-out">
+                                        <li className="mb-2 text-primaryPurple hover:text-gray-100 transition duration-150 ease-in-out">
                                             {/* <a className="text-black hover:text-gray-100 transition duration-150 ease-in-out" href="/privacy">Privacy Policy
                                             </a> */}
                                             Privacy Policy
                                         </li>
-                                        <li className="mb-2 text-black hover:text-gray-100 transition duration-150 ease-in-out">
+                                        <li className="mb-2 text-primaryPurple hover:text-gray-100 transition duration-150 ease-in-out">
                                             {/* <a className="text-black hover:text-gray-100 transition duration-150 ease-in-out" href="/terms">Terms
                                             </a> */}
                                             Terms
@@ -69,7 +69,7 @@ const Footer = () => {
                                     </a>
                                 </li>
                             </ul> */}
-                            <div className="text-black text-sm mr-5 font-semibold">© 2024 SurfPal, all rights reserved
+                            <div className="text-primaryPurple text-sm mr-5 font-semibold">© 2024 SurfPal, all rights reserved
                             </div>
                         </div>
                     </div>

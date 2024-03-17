@@ -2,22 +2,25 @@
 
 import Link from "next/link"
 import React from "react"
-import { TypeAnimation } from 'react-type-animation';
+import Typewriter from 'typewriter-effect';
 
 const Hero = () => {
     return(
         <div className="w-full bg-gray-900 dark">
-            <div className="relative pt-10 pb-10 md:pt-20 md:pb-16">
-                <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16 border border-red flex flex-col space-y-7">
-                {/* <TypeAnimation
-                sequence={[
-                    'SurfPal'
-                ]}
-                wrapper="span"
-                speed={10}
-                style={{ fontSize: '4.5rem', display: 'inline-block' }}
-                repeat={Infinity}
-                /> */}
+            <div className="relative md:pt-12">
+                <div className="max-w-3xl mx-auto text-center pb-6 md:pb-16 flex flex-col space-y-7">
+                <h1 className="text-5xl font-style: italic font-bold letter-spacing: 0.1em text-primaryPurple pt-5">SurfPal</h1>
+                <h1 className="text-3xl font-bold text-white">
+                    <Typewriter
+                            options={{
+                            strings:[
+                                "Extension for Your Hard Time",
+                                "Just one Click"
+                            ],
+                            autoStart: true,
+                            loop: true
+                        }}/>
+                    </h1>
                 </div>
             </div>
             

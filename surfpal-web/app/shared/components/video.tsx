@@ -61,7 +61,7 @@ const Video = () => {
         <div className="relative w-full h-full">
         <Image src={Image3} alt="Description" className="object-fit: cover"/>
           <div className="absolute inset-0 grid w-full place-items-center bg-black/75">
-            <div className="w-3/4 pl-12 pb-12 md:w-2/4 md:pl-20 md:pb-20 lg:pl-32 lg:pb-32">
+            <div className="w-3/4 pl-12 md:w-2/4 md:pl-20 lg:pl-32">
               <Typography
                 variant="h1"
                 color="white"
@@ -84,7 +84,7 @@ const Video = () => {
         <div className="relative w-full h-full">
         <Image src={Image4} alt="Description" className="object-fit: cover"/>
           <div className="absolute inset-0 grid w-full place-items-center bg-black/75">
-            <div className="w-3/4 pl-12 pb-12 md:w-2/4 md:pl-20 md:pb-20 lg:pl-32 lg:pb-32">
+            <div className="w-3/4 pl-12 md:w-2/4 md:pl-20 lg:pl-32">
               <Typography
                 variant="h1"
                 color="white"

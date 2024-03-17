@@ -28,8 +28,9 @@ const MainFeatures = () => {
                                                     <div className="font-architects-daughter text-xl text-purple-600 mb-2">Summarization 
                                                     </div>
                                                         <h3 className="h3 mb-3 text-white">100% Automatic Website Summarization with just a one click</h3>
-                                                        <p className="text-xl text-gray-400 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry is standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                                                        </p>
+                                                        <p className="text-xl text-gray-400 mb-4">For reading long texts and websites hardly you have to devote your valuable time.
+                                                            It's over now. You can have Quality,Brief and Smooth Summary with in small time. Just need to Download
+                                                            SurfPal extension and start your summarization.</p>
                                                 </div>
                                         </div>
                                     </div>
@@ -42,18 +43,9 @@ const MainFeatures = () => {
                                                     <div className="font-architects-daughter text-xl text-purple-600 mb-2">Navigation Assistance
                                                     </div>
                                                         <h3 className="h3 mb-3 text-white">Navigation Assistance - for all the sites in websites</h3>
-                                                        <p className="text-xl text-gray-400 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry is standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                                            {/* <ul className="text-lg text-gray-400 -mb-2">
-                                                                <li className="flex items-center mb-2">
-                                                                    <span>Lorem Ipsum is simply dummy text</span>
-                                                                </li>
-                                                                <li className="flex items-center mb-2">
-                                                                    <span>Lorem Ipsum is simply dummy text</span>
-                                                                </li>
-                                                                <li className="flex items-center">
-                                                                    <span>Lorem Ipsum is simply dummy text</span>
-                                                                </li>
-                                                            </ul> */}
+                                                        <p className="text-xl text-gray-400 mb-4">Reading a website and finding relevant links which you wants to navigate is 
+                                                            consuming your valuable time. But SurfPal will collect the all links in your current webpage
+                                                            and easily you can navigate through them.</p>
                                                 </div>
                                         </div>
                                     </div>
@@ -66,7 +58,9 @@ const MainFeatures = () => {
                                                     <div className="font-architects-daughter text-xl text-purple-600 mb-2">Image Recognition
                                                     </div>
                                                         <h3 className="h3 mb-3 text-white">Recognizing all the images in websites</h3>
-                                                        <p className="text-xl text-gray-400 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry is standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                                        <p className="text-xl text-gray-400 mb-4">When reading long texts and websites, you will receive many images and you have to understand what it is!.
+                                                            It's also time vesting. SurfPal will save your time in Image Recognition. You can easily recognize each and every
+                                                            image in that relevant website.</p>
                                                 </div>
                                         </div>
                                     
@@ -80,15 +74,9 @@ const MainFeatures = () => {
                                                     <div className="font-architects-daughter text-xl text-purple-600 mb-2">My Account
                                                     </div>
                                                     <h3 className="h3 mb-3 text-white">Customization - Customize the extension</h3>
-                                                    <p className="text-xl text-gray-400 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry is standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                                    {/* <ul className="text-lg text-gray-400 -mb-2">
-                                                        <li className="flex items-center mb-2"><span>Lorem Ipsum is simply dummy text</span>
-                                                        </li>
-                                                        <li className="flex items-center mb-2"><span>Lorem Ipsum is simply dummy text</span>
-                                                        </li>
-                                                        <li className="flex items-center"><span>Lorem Ipsum is simply dummy text</span>
-                                                        </li>
-                                                    </ul> */}
+                                                    <p className="text-xl text-gray-400 mb-4">You can customize the extension according to your needs or remove added features as your preferences. 
+                                                        You have full control over how SurfPal looks like.
+                                                        Download SurfPal and experience it for yourself.</p>
                                                 </div>
                                         </div>
                                     </div>

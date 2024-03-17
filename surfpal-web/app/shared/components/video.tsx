@@ -2,19 +2,19 @@
 
 import { Carousel, Typography} from "@material-tailwind/react";
 import Image from 'next/image';
-import Image1 from '@/public/assets/icons/image10.png';
-import Image2 from '@/public/assets/icons/image11.png';
-import Image3 from '@/public/assets/icons/image12.png';
-import Image4 from '@/public/assets/icons/image13.png';
+import Image1 from '@/public/assets/icons/image21.png';
+import Image2 from '@/public/assets/icons/image22.png';
+import Image3 from '@/public/assets/icons/image23.png';
+import Image4 from '@/public/assets/icons/image24.png';
 import React from "react"
 
 const Video = () => {
     return(
-        <div className="w-full bg-gray-900 dark">
-        <Carousel className="rounded-xl " placeholder={undefined}>
-        <div className="relative h-500 w-500">
-        <Image src={Image1} alt="Description"/>
-          <div className="absolute inset-0 grid h-800 w-1000 place-items-center bg-black/75">
+       <div className="w-full h-full bg-gray-900 dark">
+        <Carousel className="rounded-xl w-500 h-500 " placeholder={undefined}>
+        <div className="relative w-full h-full">
+        <Image src={Image1} alt="Description" className="object-fit: cover" />
+          <div className="absolute inset-0 grid w-full place-items-center bg-black/75">
             <div className="w-3/4 text-center md:w-2/4">
               <Typography
                 variant="h1"
@@ -35,9 +35,9 @@ const Video = () => {
             </div>
           </div>
         </div>
-        <div className="relative h-full w-full">
-        <Image src={Image2} alt="Description"/>
-          <div className="absolute inset-0 grid h-full w-full items-center bg-black/75">
+        <div className="relative w-full h-full">
+        <Image src={Image2} alt="Description" className="object-fit: cover"/>
+          <div className="absolute inset-0 grid w-full place-items-center bg-black/75">
             <div className="w-3/4 pl-12 md:w-2/4 md:pl-20 lg:pl-32">
               <Typography
                 variant="h1"
@@ -58,9 +58,9 @@ const Video = () => {
             </div>
           </div>
         </div>
-        <div className="relative h-full w-full">
-        <Image src={Image3} alt="Description"/>
-          <div className="absolute inset-0 grid h-full w-full items-end bg-black/75">
+        <div className="relative w-full h-full">
+        <Image src={Image3} alt="Description" className="object-fit: cover"/>
+          <div className="absolute inset-0 grid w-full place-items-center bg-black/75">
             <div className="w-3/4 pl-12 pb-12 md:w-2/4 md:pl-20 md:pb-20 lg:pl-32 lg:pb-32">
               <Typography
                 variant="h1"
@@ -81,9 +81,9 @@ const Video = () => {
             </div>
           </div>
         </div>
-        <div className="relative h-full w-full">
-        <Image src={Image4} alt="Description"/>
-          <div className="absolute inset-0 grid h-full w-full items-end bg-black/75">
+        <div className="relative w-full h-full">
+        <Image src={Image4} alt="Description" className="object-fit: cover"/>
+          <div className="absolute inset-0 grid w-full place-items-center bg-black/75">
             <div className="w-3/4 pl-12 pb-12 md:w-2/4 md:pl-20 md:pb-20 lg:pl-32 lg:pb-32">
               <Typography
                 variant="h1"
@@ -105,7 +105,7 @@ const Video = () => {
           </div>
         </div>
         </Carousel>
-      </div>
+        </div>
     );
     
 }

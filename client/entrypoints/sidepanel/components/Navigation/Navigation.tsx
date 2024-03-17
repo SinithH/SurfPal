@@ -4,6 +4,7 @@ import ModuleNames from '../../constants/Modules';
 import Footer from '../shared/Footer';
 import browser from 'webextension-polyfill';
 import NavigationLink from '../shared/NavigationLink';
+import useStore from '../../context/store';
 
 interface INavigationResponse {
   data: {
@@ -20,6 +21,16 @@ interface INavigationResponse {
 
 
 const Navigation: React.FC = () => {
+
+  const {userSettings} = useStore();
+  const [mode, setMode] = useState('');
+
+  useEffect(() => {
+    if(userSettings && userSettings.theme == 'dark') {
+      setMode('bg-darkBg text-white');
+    }
+  }, [userSettings])
+  
   let contentScript = '';
   let currentUrl = '';
   browser.runtime.onMessage.addListener((message) => {
@@ -50,7 +61,7 @@ const Navigation: React.FC = () => {
 
   return (
     <>
-      <div>
+      <div className={`${mode} h-full`}>
         <Header heading={ModuleNames.NAVIGATION} />
         <div className="p-3">
           <h1 className='mb-2'>The Navigation Links: </h1>

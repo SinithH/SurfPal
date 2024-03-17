@@ -28,8 +28,17 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
       summary, questions, updateSummary, clearSummary, loading, generatingSummary, 
       selectedParagraph, updateSelectedParagraph,clearSelectedParagraph, 
       paragraphSummary, updateParagraphSummary, clearParagraphSummary,
-      summaryType, updateSummaryType
+      summaryType, updateSummaryType,
+      userSettings
     } = useStore()
+
+    const [mode, setMode] = useState('');
+
+    useEffect(() => {
+      if(userSettings && userSettings.theme == 'dark') {
+        setMode('bg-darkBg text-white');
+      }
+    }, [userSettings])
   
     useEffect(() => {
       const handleUnload = async(tabId:number,changeInfo: browser.Tabs.OnUpdatedChangeInfoType, tab: browser.Tabs.Tab) => {
@@ -147,7 +156,7 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
 
 
   return (
-    <div>
+    <div className={`${mode} h-full`}>
       <Header heading={ModuleNames.SUMMARIZATION} handleCopyClick={handleCopyClick} isSummary={true}/>
       <div className='h-auto mt-5 mb-10 px-5 text-base overflow-y-scroll'>
         <SummaryHeader handleSummaryClick={handleSummaryClick} handleParaSummaryClick={handleParaSummaryClick}/>

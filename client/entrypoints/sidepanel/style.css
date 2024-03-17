@@ -4,12 +4,22 @@
 
 :root {
   --primary-color: #9E00E8;
+  --dark-bg: 15, 23, 42;
+  --dark-tile-hover-bg: 21, 31, 54
+}
+
+*{
+  /* @apply transition-colors duration-75; */
 }
 
 body {
   min-width: 440px;
   min-height: 450px;
+  height: 100vh;
+}
 
+#root{
+  height: 100%;
 }
 
 .bg-primary {

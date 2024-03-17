@@ -2,22 +2,57 @@
 
 import { Typography } from '@material-tailwind/react'
 import { Kanit } from 'next/font/google'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ToggleSetting from './shared/toggleSetting'
 import DropDownSetting from './shared/dropDownSetting'
+import { updateSettings } from '@/app/server-actions/updateSettings'
 
 const kanit = Kanit({
     weight: ['400', '700'],
     subsets: ['latin'],
 })
 
-const SettingsSection = () => {
+interface SettingsSectionProps {
+    userSettings: {
+        imagerecognition: boolean,
+        texttospeech: boolean,
+        theme: string,
+        fontsize: string,
+        ttsspeed: string
+    }
+}
 
-    const [imageRecognition, setImageRecognition] = useState(false);
-    const [ttsSetting, setTTSSetting] = useState(false);
-    const [theme, setTheme] = useState('light');
-    const [fontSize, setFontSize] = useState('normal');
-    const [ttsSpeed, setTTSSpeed] = useState('normal');
+const SettingsSection: React.FC<SettingsSectionProps> = ({userSettings}) => {
+    
+    const [imageRecognition, setImageRecognition] = useState(userSettings?.imagerecognition || false);
+    const [ttsSetting, setTTSSetting] = useState(userSettings?.texttospeech || false);
+    const [theme, setTheme] = useState(userSettings?.theme || 'light');
+    const [fontSize, setFontSize] = useState(userSettings?.fontsize || 'normal');
+    const [ttsSpeed, setTTSSpeed] = useState(userSettings?.ttsspeed || 'normal');
+    
+    const initialSettingsRef = useRef(userSettings);
+
+    useEffect(() => {
+        // Only call updateSettings if the settings have actually changed
+        if (initialSettingsRef.current &&
+            (imageRecognition !== initialSettingsRef.current.imagerecognition ||
+             ttsSetting !== initialSettingsRef.current.texttospeech ||
+             theme !== initialSettingsRef.current.theme ||
+             fontSize !== initialSettingsRef.current.fontsize ||
+             ttsSpeed !== initialSettingsRef.current.ttsspeed)) {
+            updateSettings({
+                imageRecognition,
+                ttsSetting,
+                theme,
+                fontSize,
+                ttsSpeed
+            }).then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.error(error);
+            });
+        }
+    }, [imageRecognition, ttsSetting, theme, fontSize, ttsSpeed]);
     
   return (
     <>

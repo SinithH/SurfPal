@@ -31,3 +31,4 @@ web-ext.config.ts
 __pycache__
 */.env.local
 surfpal-web/.env.local
+*/.env.local

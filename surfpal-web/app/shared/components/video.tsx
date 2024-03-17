@@ -1,6 +1,6 @@
 'use client'
 
-import { Carousel, Typography, Button } from "@material-tailwind/react";
+import { Carousel, Typography} from "@material-tailwind/react";
 import Image from 'next/image';
 import Image1 from '@/public/assets/icons/image10.png';
 import Image2 from '@/public/assets/icons/image11.png';

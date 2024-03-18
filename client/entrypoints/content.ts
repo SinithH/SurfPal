@@ -19,6 +19,9 @@ export default defineContentScript({
         // console.log("Hello");
         // alert("Hello")
           // Extract text content from the entire document
+        let utterance = new SpeechSynthesisUtterance("Hello Started")
+        console.log(window.speechSynthesis.getVoices())
+        window.speechSynthesis.speak(utterance);
         const textContent: string = extractTextFromDOM(document.body)
           // Send text content to the background script
         browser.runtime.sendMessage({ 

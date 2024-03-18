@@ -8,6 +8,7 @@ import ModuleNames from "../../constants/Modules";
 import useStore from "../../context/store";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TextToSpeech from "../Summarization/TextToSpeech";
 
 interface FooterProps {
     module: string
@@ -47,9 +48,7 @@ const Footer: React.FC<FooterProps> = ({module}) => {
                 </button>
                 {module == ModuleNames.SUMMARIZATION && (
                 <div className="inline-flex gap-12">
-                    <button className="w-7 h-7 rounded">
-                        <img src={textToSpeechIcon} alt="User" />
-                    </button>
+                    <TextToSpeech/>
                     <button onClick={handleRegenerateClick} className="p-2 h-7 inline-flex gap-3 items-center rounded-lg bg-primary text-white">
                         <span>Regenerate</span>
                         <FontAwesomeIcon icon={faRotate} />

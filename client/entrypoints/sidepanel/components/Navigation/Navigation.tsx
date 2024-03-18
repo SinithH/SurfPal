@@ -3,68 +3,22 @@ import Header from '../shared/Header';
 import ModuleNames from '../../constants/Modules';
 import Footer from '../shared/Footer';
 import browser from 'webextension-polyfill';
-import NavigationLink from '../shared/NavigationLink';
+import NavigationLink from './NavigationLink';
+import useNavigationStore, { INavigationResponse } from '../../context/navigation-store';
 
-interface INavigationResponse {
-  data: {
-    navigation: {
-      text: string,
-      url: string
-    }[],
-    content: {
-      text: string,
-      url: string
-    }[]
-  }
-}
-
-
-const Navigation: React.FC = () => {
-  let contentScript = '';
-  let currentUrl = '';
-  browser.runtime.onMessage.addListener((message) => {
-    contentScript = message.textBody
-    currentUrl = message.currentUrl
-    fetchLinks();
-  });
-  const fetchLinks = async () => {
-    if (!contentScript || !currentUrl) {
-      return;
-    }
-    const result = await fetch(import.meta.env.VITE_NAVIGATION_URL, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        content: contentScript,
-        url: currentUrl
-      })
-    })
-    if (!result) {
-      throw new Error('failed to fetch')
-    }
-    setData(await result.json());
-  }
-  const [data, setData] = useState<INavigationResponse>();
-
+const Navigation: React.FC<{links: INavigationResponse; url: string}> = ({links, url}) => {
+  const loading = false
   return (
     <>
+      <Header heading={ModuleNames.NAVIGATION} />
       <div>
-        <Header heading={ModuleNames.NAVIGATION} />
         <div className="p-3">
-          <h1 className='mb-2'>The Navigation Links: </h1>
+          {/* {loading && <h1>Generating...</h1>} */}
+          {<h1 className='mb-2'>The Navigation Links: </h1>}
           <hr />
           <ul>
-            {data?.data.navigation.map((link) => {
-              return <NavigationLink textContent={link.text} href={link.url} />
-            })}
-          </ul>
-          <h1 className='my-2'>The Content Links: </h1>
-          <hr />
-          <ul>
-            {data?.data.content.map((link) => {
-              return <NavigationLink textContent={link.text} href={link.url}/>
+            {links?.data.navigation.map((link) => {
+              return <NavigationLink textContent={link.text} href={link.url} currentUrl={url} key={link.text} />
             })}
           </ul>
         </div>

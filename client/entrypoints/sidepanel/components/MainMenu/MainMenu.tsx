@@ -27,47 +27,47 @@ const MainMenu: React.FC = () => {
   }, [userSettings])
   
   return (
-    <div className={`${mode} grid grid-cols-2 grid-rows-2 p-4 max-w-screen-md mx-auto text-xl font-kanit h-full`}>
+    <div className={`${mode} grid p-4 max-w-screen-md mx-auto text-xl font-kanit h-full overflow-y-hidden`}>
 
       <Link to={`/navigation`}>
-      <div className="aspect-w-1 aspect-h-1 flex items-center justify-center">
-        <div className={`flex flex-col items-center border-r-2 border-b-2 justify-center cursor-pointer ${hover}`}>
-            <img src={navigationIcon} alt="Navigation" className="h-20 w-20 mb-2" />
-            <span className="text-center">Navigation</span>
+        <div className={` h-full  cursor-pointer hover:pl-5 transition-all duration-75 ${hover}`}>
+          <div className={` w-full inline-flex gap-4 items-center pl-16 py-10 sm:py-5 `}>
+              <img src={navigationIcon} alt="Navigation" className="sm:h-20 sm:w-20 w-10 h-10 sm:mb-2" />
+              <span className="text-center text-3xl sm:text-4xl">Navigation</span>
+          </div>
         </div>
-      </div>
       </Link>
-
+      <hr />
       <Link to={`/summarization`}>
-      <div className={`aspect-w-1 aspect-h-1 flex items-center justify-center cursor-pointer ${hover}`}>
-        <div className="flex flex-col items-center justify-center border-b-2">
-          <img src={summaryIcon} alt="Summary" className="h-20 w-20 mb-2 " />
-          <span className="text-center">Summarization</span>
+        <div className={` h-full  cursor-pointer hover:pl-5 transition-all duration-75 ${hover}`}>
+          <div className=" inline-flex gap-4 items-center justify-start pl-16 py-10 sm:py-5 ">
+            <img src={summaryIcon} alt="Summary" className="sm:h-20 sm:w-20 w-10 h-10 sm:mb-2" />
+            <span className="text-center text-3xl sm:text-4xl">Summarization</span>
+          </div>
         </div>
-      </div>
       </Link>
-
+      <hr />
       <Link to={`/image-recognition`}>
-      <div className={`aspect-w-1 aspect-h-1 flex items-center justify-center cursor-pointer ${hover}`}>
-        <div className="flex flex-col items-center justify-center border-r-2">
-            <img src={imageRecIcon} alt="Image Recognition" className="h-20 w-20 mb-2" />
-            <span className="text-center">Images</span>
+        <div className={` h-full  cursor-pointer hover:pl-5 transition-all duration-75 ${hover}`}>
+          <div className=" inline-flex gap-4 items-center justify-start pl-16 py-10 sm:py-5 ">
+              <img src={imageRecIcon} alt="Image Recognition" className="sm:h-20 sm:w-20 w-10 h-10 sm:mb-2" />
+              <span className="text-center text-3xl sm:text-4xl">Images</span>
+          </div>
         </div>
-      </div>
       </Link>
-
+      <hr />
       <Link to={`/my-account`}>
-      <div className={`aspect-w-1 aspect-h-1 flex items-center justify-center cursor-pointer ${hover}`}>
-        <div className="flex flex-col items-center justify-center">
-            <img src={userIcon} alt="User" className="h-20 w-20 mb-2 " />
-            <span className="text-center">My Account</span>
+        <div className={` h-full  cursor-pointer hover:pl-5 transition-all duration-75 ${hover}`}>
+          <div className=" inline-flex gap-4 items-center justify-start pl-16 py-10 sm:py-5 ">
+              <img src={userIcon} alt="User" className="sm:h-20 sm:w-20 w-10 h-10 sm:mb-2" />
+              <span className="text-center text-3xl sm:text-4xl">My Account</span>
+          </div>
         </div>
-      </div>
       </Link>
 
-      <div className='flex flex-row gap-1 mt-2'>
+      <div className={`inline-flex items-center gap-2 mt-2 px-4 py-2 cursor-pointer w-fit rounded-full justify-self-end ${hover}`}>
         <span className='text-sm'>Give Feedback</span>
-        <img src={feedbackIcon} alt="Feedback" />
+        <img src={feedbackIcon} alt="Feedback" className='w-5 h-5' />
       </div>
     </div>
   );

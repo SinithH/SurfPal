@@ -11,11 +11,11 @@ interface SummaryResponse {
 }
 
 interface Settings {
-  imageRecognition?: boolean,
-  ttsSetting?: boolean,
+  imagerecognition?: boolean,
+  texttospeech?: boolean,
   theme?: string,
-  fontSize?: string,
-  ttsSpeed?: string
+  fontsize?: string,
+  ttsspeed?: string
 }
 interface SummaryState {
     summary: string;
@@ -93,11 +93,11 @@ const useStore = create<SummaryState>((set) => ({
   },
   updateSettings: (settings: Settings) => set({ userSettings: settings }),
   resetSettings: () => set({ userSettings: {
-    imageRecognition: false,
-    ttsSetting: false,
+    imagerecognition: false,
+    texttospeech: false,
     theme: 'light',
-    fontSize: 'normal',
-    ttsSpeed: 'normal'
+    fontsize: 'normal',
+    ttsspeed: 'normal'
   } }),
 }))
 

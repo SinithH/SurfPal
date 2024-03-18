@@ -33,10 +33,26 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
     } = useStore()
 
     const [mode, setMode] = useState('');
-
+    const [fontSize, setFontSize] = useState('');
+    
     useEffect(() => {
       if(userSettings && userSettings.theme == 'dark') {
         setMode('bg-darkBg text-white');
+      }
+
+      if(userSettings) {
+        switch(userSettings.fontsize){
+          case 'small':
+            setFontSize('text-xs');
+            return;
+          case 'normal':
+            setFontSize('');
+            return;
+          case 'large':
+            setFontSize('text-xl');
+            return;
+        }
+        
       }
     }, [userSettings])
   
@@ -161,7 +177,7 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
       <div className='h-auto mt-5 mb-10 px-5 text-base overflow-y-scroll'>
         <SummaryHeader handleSummaryClick={handleSummaryClick} handleParaSummaryClick={handleParaSummaryClick}/>
           {summaryType == 'page' &&  
-            <div className='font-kanit w-full'>
+            <div className={`${fontSize} font-kanit w-full`}>
               <p>
                 {loading && <span>Generating...</span>}
                 {!loading && summary}

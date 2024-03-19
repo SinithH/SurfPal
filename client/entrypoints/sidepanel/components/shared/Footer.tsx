@@ -30,8 +30,6 @@ const Footer: React.FC<FooterProps> = ({module}) => {
             toast.warn('Please reload', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false })
             return
         }
-        console.log("Regenerating!")
-
     }
   }
 

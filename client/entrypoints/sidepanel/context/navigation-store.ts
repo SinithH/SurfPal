@@ -1,11 +1,10 @@
 import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
-interface INavigationState {
-    contentScript: string;
-    currentUrl: string;
-    loading: boolean;
-    setData: (script: string, url: string) => void;
-    links: INavigationResponse
+interface INavigationState {    
+    contentUrl: string;
+    data: { [url: string]: INavigationResponse };
+    setData: (url: string, data: INavigationResponse) => void;
 }
 
 export interface INavigationResponse {
@@ -21,15 +20,13 @@ export interface INavigationResponse {
     }
 }
 
-const useNavigationStore = create<INavigationState>((set) => ({
-    loading: true,
-    contentScript: '',
-    currentUrl: '',
-    setData: (script, url) => set({
-        contentScript: script,
-        currentUrl: url
-    }),
-    links: { data: { navigation: [], content: [] } }
-}))
+const useNavigationStore = create(persist(devtools<INavigationState>((set) => ({
+    contentUrl: '',
+    data: {},
+    setData: (url, data) => set((store) => ({
+        data: { ...store.data , [url]: data },
+        contentUrl: url
+    })),
+})), { name: "navigationData" }))
 
 export default useNavigationStore;

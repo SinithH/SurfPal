@@ -1,5 +1,5 @@
 // App.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainMenu from './components/MainMenu/MainMenu';
 import Summarization from './components/Summarization/Summarization';
 import ImageRecognition from './components/ImageRecognition/ImageRecognition';
@@ -9,17 +9,20 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Routes, Route, Outlet } from 'react-router-dom';
-import useStore from './context/store';
-import useNavigationStore, { INavigationResponse } from './context/navigation-store';
 import { getNavigationLinks } from './services/navigation-service/getNavigation';
+import useNavigationStore from './context/navigation-store';
 
 const App: React.FC = () => {
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-  const [navigationLinks, setNavigationLinks] = useState<INavigationResponse>({ data: { navigation: [], content: [] } });
-  const [url, setUrl] = useState<string>('');
+  const [navigationLoading, setNavigationLoading] = useState<boolean>(false);
+  const { contentUrl, data, setData } = useNavigationStore();
   browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-    setUrl(message.currentUrl)
-    setNavigationLinks(await getNavigationLinks(message.textBody, message.currentUrl));
+    if (message.currentUrl !== contentUrl) {
+      setNavigationLoading(true);
+      const response = await getNavigationLinks(message.textBody, message.currentUrl, data)
+      setData(message.currentUrl, response!)
+    }
+    setNavigationLoading(false);
   })
   return (
     <div>
@@ -28,7 +31,7 @@ const App: React.FC = () => {
         <Route path="/" element={<MainMenu />} />
         <Route path="/summarization" element={<Summarization genAI={genAI} />} />
         <Route path="/image-recognition" element={<ImageRecognition />} />
-        <Route path="/navigation" element={<Navigation links={navigationLinks} url={url}/>} />
+        <Route path="/navigation" element={<Navigation loading={navigationLoading} />} />
         <Route path="/my-account" element={<MyAccount />} />
       </Routes>
       <Outlet />

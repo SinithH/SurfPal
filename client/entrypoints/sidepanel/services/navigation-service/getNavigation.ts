@@ -4,7 +4,7 @@ export async function getNavigationLinks(script: string, url: string, data: { [u
   if(data[url]) { 
     return data[url];
   }
-  return await fetchLinks(script, url)
+  return await fetchLinks(script, url);
 }
 
 const fetchLinks = async (script: string, url: string) => {

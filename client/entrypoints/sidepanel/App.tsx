@@ -14,15 +14,15 @@ import useNavigationStore from './context/navigation-store';
 
 const App: React.FC = () => {
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-  const [navigationLoading, setNavigationLoading] = useState<boolean>(false);
+  const [navigationLoading, setNavigationLoading] = useState<boolean>(true);
   const { contentUrl, data, setData } = useNavigationStore();
   browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
     if (message.currentUrl !== contentUrl) {
-      setNavigationLoading(true);
+      setNavigationLoading(true)
       const response = await getNavigationLinks(message.textBody, message.currentUrl, data)
       setData(message.currentUrl, response!)
     }
-    setNavigationLoading(false);
+    setNavigationLoading(false)
   })
   return (
     <div>

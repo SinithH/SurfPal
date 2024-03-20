@@ -9,7 +9,7 @@ export default defineBackground(() => {
   browser.tabs.onActivated.addListener(async(activeInfo)=>{
     const tab = await browser.tabs.get(activeInfo.tabId)
     const reloadText:string = 'reloadText';
-    browser.tabs.sendMessage(tab.id || 99999999,{reloadText})
+    await browser.tabs.sendMessage(tab.id || 99999999,{reloadText})
   })
 
   browser.contextMenus.create({

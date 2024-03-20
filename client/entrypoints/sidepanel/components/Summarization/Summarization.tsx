@@ -58,8 +58,6 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
   
     useEffect(() => {
       const handleUnload = async(tabId:number,changeInfo: browser.Tabs.OnUpdatedChangeInfoType, tab: browser.Tabs.Tab) => {
-        console.log("On updated")
-        console.log(tab)
         clearSummary();
         clearParagraphSummary();
         clearSelectedParagraph();
@@ -71,8 +69,6 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
       };
 
       const handleTabChange = async(activeInfo:browser.Tabs.OnActivatedActiveInfoType)=>{
-        console.log("Tab updated")
-        console.log(activeInfo)
         clearSummary();
         clearParagraphSummary();
         clearSelectedParagraph();
@@ -92,20 +88,15 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
     
         if (info.menuItemId === "generateSummaryItem" && !(mediaTypes.includes(mediaType))) {
           const selectedText = info.selectionText || "summary";
-          console.log(selectedText)
           let selectionDone = updateSelectedParagraph(selectedText)
           if(selectionDone){
-            console.log(selectedParagraph)
             toast.success('Selected', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false});
             updateSummaryType('paragraph')
             generatingSummary(true)
             directlyGenerateParagraphSummary(selectedText);
 
           }
-
-
         } else{
-          console.log("Invalid text paragraph")
           clearSelectedParagraph()
           updateSummaryType('page')
           toast.error('Please select a text paragraph', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false});
@@ -129,14 +120,13 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
   const handleCopyClick = () => {
     if(summary.length > 1){
       clipboardCopy(summary);
-      console.log("Copying");
       toast.success('Copied to Clipboard', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false });
     }
     
   }
 
   async function directlyGenerateParagraphSummary(selectedText:string){
-    await generateSummary(generatingSummary,updateSummary, genAI,selectedText, 'paragraph', updateParagraphSummary).then(()=>{console.log(paragraphSummary)})
+    await generateSummary(generatingSummary,updateSummary, genAI,selectedText, 'paragraph', updateParagraphSummary)
   }
 
   async function handleSummaryClick() {
@@ -148,22 +138,17 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
     const storageData = await browser.storage.local.get('textContent');
 
     const textContent:string = storageData.textContent;
-    console.log(textContent)
     generatingSummary(true)
     await generateSummary(generatingSummary,updateSummary, genAI,textContent, 'page', updateParagraphSummary)
   }
 
   async function handleParaSummaryClick(){
     updateSummaryType('paragraph')
-    console.log(paragraphSummary)
-    console.log(selectedParagraph)
     if(paragraphSummary.length > 1){
-      console.log("Existing para summary")
       generatingSummary(false)
       return
     } else if(selectedParagraph.length > 1){
-      console.log("Generating Para Summary")
-      await generateSummary(generatingSummary,updateSummary, genAI,selectedParagraph, 'paragraph', updateParagraphSummary).then(()=>{console.log(paragraphSummary)})
+      await generateSummary(generatingSummary,updateSummary, genAI,selectedParagraph, 'paragraph', updateParagraphSummary)
       
     } else{
       toast.warn('Please select a text paragraph', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false });

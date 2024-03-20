@@ -23,7 +23,7 @@ const fetchLinks = async (script: string, url: string) => {
         url
       })
     })
-    if (!result) {
+    if (result.status !== 200) {
       throw new Error('failed to fetch')
     }
     const response: INavigationResponse = await result.json()

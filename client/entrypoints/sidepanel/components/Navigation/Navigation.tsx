@@ -46,4 +46,3 @@ const Navigation: React.FC<{loading: boolean}> = ({loading}) => {
 };
 
 export default Navigation;
-

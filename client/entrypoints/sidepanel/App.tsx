@@ -9,10 +9,40 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Routes, Route, Outlet } from 'react-router-dom';
+import useStore from './context/store';
+import { supabase } from './lib/helper/supabaseClient';
 import { getNavigationLinks } from './services/navigation-service/getNavigation';
 import useNavigationStore from './context/navigation-store';
 
 const App: React.FC = () => {
+
+  const {updateUser, updateSettings} = useStore();
+
+
+  useEffect(() => {
+    async function getSession() {
+      try {
+        const {data: {user}}: any = await supabase.auth.getUser();
+        updateUser(user);
+
+        if(user) {
+          const { data } = await supabase
+            .from('settings')
+            .select()
+            .eq('userid', user.id)
+            .single();
+
+            if(data) updateSettings(data);
+          }
+
+      } catch (error) {
+        console.error(error);        
+      }
+    }
+
+    getSession();
+  }, [])
+  
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
   const [navigationLoading, setNavigationLoading] = useState<boolean>(true);
   const { contentUrl, data, setData } = useNavigationStore();
@@ -25,7 +55,7 @@ const App: React.FC = () => {
     setNavigationLoading(false)
   })
   return (
-    <div>
+    <div className='h-full'>
       <ToastContainer />
       <Routes>
         <Route path="/" element={<MainMenu />} />
@@ -40,3 +70,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+

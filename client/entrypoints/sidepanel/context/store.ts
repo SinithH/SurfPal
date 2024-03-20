@@ -5,11 +5,18 @@ interface Question {
     answer: string;
   }
   
-  interface SummaryResponse {
-    summary: string;
-    questions: Question[];
-  }
+interface SummaryResponse {
+  summary: string;
+  questions: Question[];
+}
 
+interface Settings {
+  imagerecognition?: boolean,
+  texttospeech?: boolean,
+  theme?: string,
+  fontsize?: string,
+  ttsspeed?: string
+}
 interface SummaryState {
     summary: string;
     questions: Question[];
@@ -34,6 +41,15 @@ interface SummaryState {
     summaryType: string;
     updateSummaryType: (summaryType:string)=>void;
 
+    // curresnt authenticated user state
+    currentUser: any;
+    updateUser: (user: any) => void;
+    clearUser: () => void;
+
+    // configuration settings of the current user
+    userSettings: Settings;
+    updateSettings: (settings: Settings) => void;
+    resetSettings: () => void;
 }
 
 const useStore = create<SummaryState>((set) => ({
@@ -62,6 +78,27 @@ const useStore = create<SummaryState>((set) => ({
   summaryType:'paragraph',
   updateSummaryType:(type:string)=>set((state)=>({summaryType: type})),
 
+  // curresnt authenticated user state
+  currentUser: {},
+  updateUser: (user: any) => set({ currentUser: user}),  
+  clearUser: () => set({currentUser: null}),
+
+  // configuration settings of the current user
+  userSettings: {
+    imageRecognition: false,
+    ttsSetting: false,
+    theme: 'light',
+    fontSize: 'normal',
+    ttsSpeed: 'normal'
+  },
+  updateSettings: (settings: Settings) => set({ userSettings: settings }),
+  resetSettings: () => set({ userSettings: {
+    imagerecognition: false,
+    texttospeech: false,
+    theme: 'light',
+    fontsize: 'normal',
+    ttsspeed: 'normal'
+  } }),
 }))
 
 export default useStore;

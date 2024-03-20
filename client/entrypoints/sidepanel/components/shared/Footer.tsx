@@ -50,7 +50,7 @@ const Footer: React.FC<FooterProps> = ({module}) => {
 
     return(
       <>
-        <div className={`${mode} fixed bottom-0 w-full`}>
+        <div className={`${mode} bg-white fixed bottom-0 w-full`}>
             <hr className="mx-4"/>
             <div className="inline-flex p-4 gap-12">
                 <button className="w-7 h-7 rounded">

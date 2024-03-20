@@ -54,7 +54,7 @@ const UserCard = () => {
                 <Typography placeholder={undefined} className={`font-normal text-2xl font-kanit`}>
                     Welcome, {userName}
                 </Typography>
-                <button className='py-2 px-3 text-white text-sm bg-primary rounded-full w-fit justify-self-center flex'>Edit Profile</button>
+                <button className='py-2 px-3 text-white text-sm bg-primary rounded-full w-fit justify-self-center flex'>View Profile</button>
             </div>
             <div className='lg:row-span-2 flex flex-col items-center justify-start'>
                 <div className='inline-flex gap-2 items-center mt-4 lg:mt-0'>

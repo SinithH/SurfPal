@@ -30,11 +30,18 @@ const ImageRecognition: React.FC = () => {
   return (
     <div className={`${mode} h-full`}>
       <Header heading={ModuleNames.IMAGE_RECOGNITION}/>
-      {/* Add content for Image Recognition screen */}
-      <div className="bg-gray-200 p-10 rounded-md mb-4 ml-3 mr-3 mt-3">
-        <img src="image.jpg" alt="Description of the image" />
-        {result}
-      </div>
+      {currentUser && !userSettings.imagerecognition && (
+        <p>link to web</p>
+      )}
+      {currentUser && userSettings.imagerecognition && (
+        <div className="bg-gray-200 p-10 rounded-md mb-4 ml-3 mr-3 mt-3">
+          <img src="image.jpg" alt="Description of the image" />
+          {result}
+        </div>
+      )}
+      {!currentUser && (
+        <p>link to login</p>
+      )}
       {/* <div className="bg-gray-200 p-10 rounded-md mb-4 ml-3 mr-3">
         {result}
       </div>

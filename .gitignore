@@ -27,6 +27,8 @@ web-ext.config.ts
 
 # Navigation Assistant 
 .venv
-.env
 .vscode
 __pycache__
+*/.env.local
+surfpal-web/.env.local
+*/.env.local

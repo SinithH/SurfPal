@@ -11,7 +11,7 @@ const MyAccount: React.FC = () => {
       <Header heading={ModuleNames.MY_ACCOUNT}/>
         {/* Add content for My Account */}
       </div>
-      <Footer/>
+      <Footer module={ModuleNames.MY_ACCOUNT}/>
     </>
   );
 };

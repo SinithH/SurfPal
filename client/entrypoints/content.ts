@@ -25,11 +25,9 @@ export default defineContentScript({
     browser.storage.local.set({ textContent });
 
     browser.runtime.onMessage.addListener(async (message) => {
-      if (message.reloadText === 'reloadText') {
-        const textContent: string = extractTextFromDOM(document.body); 
-
+      if (message.purpose === Purpose.RELOAD_TEXT) {
         await browser.runtime.sendMessage({
-          textContent,
+          textContent: extractTextFromDOM(document.body),
           textBody: document.body.innerHTML,
           currentUrl: window.location.href
         });

@@ -11,6 +11,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import useStore from '../../context/store';
 import SummaryHeader from './SummaryHeader';
 import generateSummary from '../../services/summarization-service/getSummary';
+import { Purpose } from '@/enum/purpose-enum';
 
 interface Question {
   question: string;
@@ -39,8 +40,7 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
         generatingSummary(false)
         updateSummaryType('paragraph')
         browser.storage.local.remove('textContent')
-        const reloadText:string = 'reloadText';
-        browser.tabs.sendMessage(tab.id || 99999999,{reloadText})
+        browser.tabs.sendMessage(tab.id || 99999999,{purpose: Purpose.RELOAD_TEXT})
       };
 
       const handleTabChange = async(activeInfo:browser.Tabs.OnActivatedActiveInfoType)=>{
@@ -51,8 +51,7 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
         updateSummaryType('paragraph')
         browser.storage.local.remove('textContent')
         const activeTab = await browser.tabs.get(activeInfo.tabId)
-        const reloadText:string = 'reloadText';
-        browser.tabs.sendMessage(activeTab.id || 99999999,{reloadText})
+        browser.tabs.sendMessage(activeTab.id || 99999999,{purpose: Purpose.RELOAD_TEXT})
       }
 
       const handleMenuClick = (info:browser.Menus.OnClickData, tab:browser.Tabs.Tab | undefined)=>{

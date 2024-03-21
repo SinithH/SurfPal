@@ -1,3 +1,4 @@
 export enum Purpose {
-    NAVIGATE = "navigate"
+    NAVIGATE = "navigate",
+    RELOAD_TEXT = "reloadText"
 }

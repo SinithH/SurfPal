@@ -11,6 +11,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Routes, Route, Outlet } from 'react-router-dom';
 import { getNavigationLinks } from './services/navigation-service/getNavigation';
 import useNavigationStore from './context/navigation-store';
+import { Purpose } from '@/enum/purpose-enum';
 
 const App: React.FC = () => {
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
@@ -21,6 +22,12 @@ const App: React.FC = () => {
       setNavigationLoading(true)
       const response = await getNavigationLinks(message.textBody, message.currentUrl, data)
       setData(message.currentUrl, response!)
+
+      const [tab] = await browser.tabs.query({ active: true, lastFocusedWindow: true });
+      await browser.tabs.sendMessage(tab.id!, {
+        purpose: Purpose.NAVIGATE,
+        links: response?.data.navigation.map((data) => data.url)
+      });
     }
     setNavigationLoading(false)
   })

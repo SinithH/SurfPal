@@ -14,7 +14,7 @@ url = 'https://www.wsj.com'
 
 if __name__ == '__main__':    
     llm = ChatGoogleGenerativeAI(model="gemini-pro")
-    result = llm.invoke("Get the navigation links from the below HTML source code:")
+    result = llm.invoke("Get the top 10 navigation links from:")
     print(result.content)
 
 

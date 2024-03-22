@@ -16,12 +16,26 @@ function extractTextFromDOM(node: Node): string {
 export default defineContentScript({
     matches: ['*://*/*'],
     async main(ctx) {
+
+      const allVoicesObtained = new Promise(function(resolve, reject) {
+        let voices = window.speechSynthesis.getVoices();
+        if (voices.length !== 0) {
+          resolve(voices);
+        } else {
+          window.speechSynthesis.addEventListener("voiceschanged", function() {
+            voices = window.speechSynthesis.getVoices();
+            resolve(voices);
+          });
+        }
+      });
+      
+      allVoicesObtained.then(voices => console.log("All voices:", voices));
+      
+        // Wait for the voices to be loaded
+
         // console.log("Hello");
         // alert("Hello")
           // Extract text content from the entire document
-        let utterance = new SpeechSynthesisUtterance("Hello Started")
-        console.log(window.speechSynthesis.getVoices())
-        window.speechSynthesis.speak(utterance);
         const textContent: string = extractTextFromDOM(document.body)
           // Send text content to the background script
         browser.runtime.sendMessage({ 
@@ -40,6 +54,11 @@ export default defineContentScript({
             browser.runtime.sendMessage({ textContent });
             //browser.storage.sync.set({ textContent });
             browser.storage.local.set({textContent});
+          }
+          if(message.content != null){
+            let synth = window.speechSynthesis
+            console.log("Speech Listened")
+
           }
         })
     }

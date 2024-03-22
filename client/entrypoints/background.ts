@@ -1,3 +1,4 @@
+import { Purpose } from '@/enum/purpose-enum';
 import browser from 'webextension-polyfill';
 
 export default defineBackground(() => {
@@ -8,8 +9,7 @@ export default defineBackground(() => {
 
   browser.tabs.onActivated.addListener(async(activeInfo)=>{
     const tab = await browser.tabs.get(activeInfo.tabId)
-    const reloadText:string = 'reloadText';
-    browser.tabs.sendMessage(tab.id || 99999999,{reloadText})
+    await browser.tabs.sendMessage(tab.id || 99999999,{purpose: Purpose.RELOAD_TEXT})
   })
 
   browser.contextMenus.create({

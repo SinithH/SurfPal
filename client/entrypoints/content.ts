@@ -1,6 +1,6 @@
+import { Purpose } from '@/enum/purpose-enum';
 import browser from 'webextension-polyfill';
-import abstractSummary from './sidepanel/services/summarization-service/getSummary';
-// Function to extract text content from DOM
+
 function extractTextFromDOM(node: Node): string {
   let text = '';
   if (node.nodeType === Node.TEXT_NODE) {
@@ -24,17 +24,18 @@ export default defineContentScript({
     });
     browser.storage.local.set({ textContent });
 
-    browser.runtime.onMessage.addListener((message) => {
-      if (message.reloadText == 'reloadText') {
-        const textContent: string = extractTextFromDOM(document.body); 
-
-        browser.runtime.sendMessage({
-          textContent,
+    browser.runtime.onMessage.addListener(async (message) => {
+      if (message.purpose === Purpose.RELOAD_TEXT) {
+        await browser.runtime.sendMessage({
+          textContent: extractTextFromDOM(document.body),
           textBody: document.body.innerHTML,
           currentUrl: window.location.href
         });
         //browser.storage.sync.set({ textContent });
-        browser.storage.local.set({ textContent });
+        await browser.storage.local.set({ textContent });
+      }
+      if (message.purpose === Purpose.NAVIGATE) { 
+        window.location.href=message.url
       }
     })
   }

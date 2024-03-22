@@ -2,14 +2,12 @@ name: Build web app
 
 on:
   push:
-    paths:
-    - 'surfpal-web/**'
-  pull_request:
-    branches:
-    - main
-    - development
     paths:  
     - 'surfpal-web/**'
+
+env:
+  NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}    
 
 jobs:
   build_web_app:

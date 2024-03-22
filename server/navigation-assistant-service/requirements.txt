@@ -1,5 +1,6 @@
-dotenv
-google-generativeai
-beautifulsoup4
-fastapi
-uvicorn[standard]
+beautifulsoup4==4.10.0
+fastapi==0.110.0
+langchain_google_genai==0.0.9
+playwright==1.42.0
+pydantic==2.6.4
+python-dotenv==1.0.1

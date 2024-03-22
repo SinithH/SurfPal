@@ -7,6 +7,6 @@ export default defineConfig({
     plugins: [react()],
   }),
   manifest: {
-    permissions: ['sidePanel', 'storage', 'tabs', 'scripting']
+    permissions: ['sidePanel', 'storage', 'tabs', 'scripting', 'contextMenus']
   }
 });

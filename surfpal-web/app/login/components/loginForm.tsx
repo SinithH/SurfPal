@@ -91,7 +91,7 @@ const LoginForm = () => {
   return (
     <>
         <Toaster richColors position='top-center'/>
-        <Card placeholder={undefined} className='w-full md:w-2/6 h-full px-16 py-10'>
+        <Card placeholder={undefined} className='w-full sm:w-5/6 md:w-4/6 h-full px-16 py-10'>
             <div className=''>
                 <Typography placeholder={undefined} className={`${kanit.className} text-4xl text-primaryPurple`}>Login</Typography>
                 <Typography placeholder={undefined} className='text-sm pt-4'>Don't have an account? <Link href={'/signUp'} className='font-medium underline'>Create Now</Link></Typography>

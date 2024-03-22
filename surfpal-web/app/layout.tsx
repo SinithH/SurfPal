@@ -22,7 +22,6 @@ export default function RootLayout({
         <main className="mt-24">
             {children}
         </main>
-        <Footer/>
       </body>
     </html>
   );

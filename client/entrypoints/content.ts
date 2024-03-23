@@ -23,6 +23,25 @@ export default defineContentScript({
       currentUrl: window.location.href
     });
     await browser.storage.local.set({ textContent });
+    document.addEventListener('keydown', (e: KeyboardEvent) => {      
+      const linksObjectString = localStorage.getItem('navigationLinks')
+      if ([
+        'Digit1',
+        'Digit2',
+        'Digit3',
+        'Digit4',
+        'Digit5',
+        'Digit6',
+        'Digit7',
+        'Digit8',
+        'Digit9',
+        'Digit0'
+      ].includes(e.code) && e.ctrlKey && e.shiftKey && linksObjectString) {        
+        const linksObject = JSON.parse(linksObjectString)
+        const links = linksObject[window.location.href]
+        window.location.href = links[Number(e.code.replace('Digit', ''))]
+      }
+    })
 
     browser.runtime.onMessage.addListener(async (message) => {
       switch (message.purpose) {
@@ -36,15 +55,16 @@ export default defineContentScript({
           await browser.storage.local.set({ textContent });
           break;
         case Purpose.NAVIGATE:
-          window.location.href = message.url
+          // window.location.href = message.url
+          console.log(`Navigated to: ${message.url}`);
           break;
         case Purpose.NAVIGATION_KEYBOARD_SHORTCUT:
-          const links = message.links
-          document.addEventListener('keydown', (e: KeyboardEvent) => {
-            if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].includes(e.key.trim()) && e.ctrlKey) {
-              window.location.href = links[Number(e.key)]
-            }
-          })
+          const navigationLinks = JSON.parse(localStorage.getItem('navigationLinks') ?? '{}')
+          if (!message.links) {
+            break;
+          }
+          navigationLinks[window.location.href] = message.links
+          localStorage.setItem('navigationLinks', JSON.stringify(navigationLinks))
           break;
       }
     })

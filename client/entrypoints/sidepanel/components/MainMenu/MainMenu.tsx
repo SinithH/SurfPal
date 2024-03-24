@@ -6,17 +6,24 @@ import summaryIcon from '@/assets/icons/summary-icon.png';
 import navigationIcon from '@/assets/icons/navigation-icon.svg';
 import imageRecIcon from '@/assets/icons/image-rec-icon.svg';
 import feedbackIcon from '@/assets/icons/feedback-icon.svg';
+import FeedBackPopover from '../FeedBack/FeedBackPopover';
 import { Link } from 'react-router-dom';
 import useStore from '../../context/store';
+import {Popover,PopoverHandler,PopoverContent,Button,Input,Typography,} from "@material-tailwind/react";
 
 const MainMenu: React.FC = () => {
 
   const [mode, setMode] = useState('');
   const [hover, setHover] = useState('');
-
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const {userSettings} = useStore();
-
-
+  const handlePopoverClick = () => {
+    setIsPopoverOpen(!isPopoverOpen); 
+  };
+  const [showFeedBack, setShowFeedBack] = useState<boolean>(false);
+  const onClose = () => {
+    setShowFeedBack(false);
+  };
   useEffect(() => {
       if(userSettings && userSettings.theme == 'dark') {
         setMode('bg-darkBg text-white');
@@ -25,7 +32,7 @@ const MainMenu: React.FC = () => {
         setHover('hover:bg-slate-200');
       }
   }, [userSettings])
-  
+
   return (
     <div className={`${mode} grid p-4 max-w-screen-md mx-auto text-xl font-kanit h-full overflow-y-hidden`}>
 
@@ -65,12 +72,20 @@ const MainMenu: React.FC = () => {
         </div>
       </Link>
 
-      <Link to={`/feedback`}>
+      {/* <Link to={`/feedback`}>
       <div className={`inline-flex items-center gap-2 mt-2 px-4 py-2 cursor-pointer w-fit rounded-full justify-self-end ${hover}`}>
         <span className='text-sm'>Give Feedback</span>
         <img src={feedbackIcon} alt="Feedback" className='w-5 h-5' />
+        <FeedBackPopover/>
       </div>
-      </Link>
+      </Link> */}
+      <div className='inline-flex items-center gap-2 mt-2 px-4 py-2 cursor-pointer w-fit rounded-full'>
+        {/* <h1 className='text-3xl font-bold mt-4'>FeedBack</h1> */}
+        <button onClick={() => setShowFeedBack(true)} className='bg-violet-500 px-4 py-2 rounded-lg text-lg'>
+          FeedBack
+        </button>
+        {showFeedBack && <FeedBackPopover onClose={onClose}/>}
+      </div>
     </div>
   );
 };

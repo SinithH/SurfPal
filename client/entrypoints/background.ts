@@ -17,4 +17,10 @@ export default defineBackground(() => {
     title: "Generate Summary",
     contexts: ["selection"]
   });
+
+  browser.contextMenus.create({
+    id: "generateImageDescription",
+    title: "Generate Image Description",
+    contexts: ["image"]
+  });
 });

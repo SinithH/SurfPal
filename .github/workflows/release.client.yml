@@ -32,7 +32,7 @@ jobs:
         run: npm run zip
 
       - name: build for firefox
-        run: npm run zip -b firefox
+        run: npm run zip:firefox
 
 # Create a release
   create_release:

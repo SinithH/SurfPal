@@ -55,8 +55,7 @@ export default defineContentScript({
           await browser.storage.local.set({ textContent });
           break;
         case Purpose.NAVIGATE:
-          // window.location.href = message.url
-          console.log(`Navigated to: ${message.url}`);
+          window.location.href = message.url
           break;
         case Purpose.NAVIGATION_KEYBOARD_SHORTCUT:
           const navigationLinks = JSON.parse(localStorage.getItem('navigationLinks') ?? '{}')

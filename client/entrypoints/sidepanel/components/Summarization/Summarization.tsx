@@ -156,9 +156,9 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
 
 
   return (
-    <div className={`${mode} h-fit mt-10 dark:bg-darkBg dark:text-white`}>
+    <div className={`${mode} h-full mt-10 dark:bg-darkBg dark:text-white`}>
       <Header heading={ModuleNames.SUMMARIZATION} handleCopyClick={handleCopyClick} isSummary={true}/>
-      <div className='h-auto mt-5 mb-10 px-5 text-base overflow-y-scroll'>
+      <div className='h-full mt-5 mb-10 px-5 text-base overflow-y-scroll'>
         <SummaryHeader handleSummaryClick={handleSummaryClick} handleParaSummaryClick={handleParaSummaryClick}/>
           {summaryType == 'page' &&  
             <div className={`${fontSize} font-kanit w-full`}>

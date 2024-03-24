@@ -9,6 +9,7 @@ import useStore from "../../context/store";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { supabase } from "../../lib/helper/supabaseClient";
+import SignOutIcon from '@/public/icon/sign-out.svg'; 
 
 interface FooterProps {
     module: string
@@ -51,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({module}) => {
       <>
         <div className={`${mode} bg-white fixed bottom-0 w-full dark:bg-darkBg dark:text-white`}>
             <hr className="mx-4"/>
-            <div className="inline-flex p-4 gap-12">
+            <div className="inline-flex p-4 gap-12 w-full justify-between">
                 <button className="w-7 h-7 rounded">
                 <Link to={`/`}>
                     <img src={homeIcon} alt="User" />
@@ -68,7 +69,8 @@ const Footer: React.FC<FooterProps> = ({module}) => {
                     </button>
                 </div>) }
                 {module == ModuleNames.MY_ACCOUNT && (
-                  <button onClick={handleLogOut} className="inline-flex bg-transparent text-lg text-red-500 font-kanit">
+                  <button onClick={handleLogOut} className="inline-flex bg-transparent self-end text-lg text-red-500 font-kanit gap-2 items-center">
+                    <img src={SignOutIcon} alt="sign out" className="h-5" />
                     <p>Log out</p>
                   </button>
                 )}

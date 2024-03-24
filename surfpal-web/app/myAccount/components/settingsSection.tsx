@@ -6,7 +6,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import ToggleSetting from './shared/toggleSetting'
 import DropDownSetting from './shared/dropDownSetting'
 import { updateSettings } from '@/app/server-actions/updateSettings'
-import useStore from '@/lib/store'
 
 const kanit = Kanit({
     weight: ['400', '700'],
@@ -25,10 +24,9 @@ interface SettingsSectionProps {
 
 const SettingsSection: React.FC<SettingsSectionProps> = ({userSettings}) => {
     
-    const { theme } = useStore();
     const [imageRecognition, setImageRecognition] = useState(userSettings?.imagerecognition || false);
     const [ttsSetting, setTTSSetting] = useState(userSettings?.texttospeech || false);
-    const [extTheme, setTheme] = useState(userSettings?.theme || 'light');
+    const [theme, setTheme] = useState(userSettings?.theme || 'light');
     const [fontSize, setFontSize] = useState(userSettings?.fontsize || 'normal');
     const [ttsSpeed, setTTSSpeed] = useState(userSettings?.ttsspeed || 'normal');
     
@@ -39,13 +37,13 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({userSettings}) => {
         if (initialSettingsRef.current &&
             (imageRecognition !== initialSettingsRef.current.imagerecognition ||
              ttsSetting !== initialSettingsRef.current.texttospeech ||
-             extTheme !== initialSettingsRef.current.theme ||
+             theme !== initialSettingsRef.current.theme ||
              fontSize !== initialSettingsRef.current.fontsize ||
              ttsSpeed !== initialSettingsRef.current.ttsspeed)) {
             updateSettings({
                 imageRecognition,
                 ttsSetting,
-                theme: extTheme,
+                theme,
                 fontSize,
                 ttsSpeed
             }).then(response => {
@@ -54,11 +52,11 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({userSettings}) => {
                 console.error(error);
             });
         }
-    }, [imageRecognition, ttsSetting, extTheme, fontSize, ttsSpeed]);
+    }, [imageRecognition, ttsSetting, theme, fontSize, ttsSpeed]);
     
   return (
     <>
-        <div className={`${theme} w-full lg:w-2/3 flex flex-col items-center float-right pt-7 dark:text-white`}>
+        <div className='w-full lg:w-2/3 flex flex-col items-center float-right pt-7'>
             <Typography placeholder={undefined} className={`${kanit.className} text-2xl lg:text-4xl font-normal`}>Customize your Extension</Typography>
             <div className='pt-8 w-full px-8'>
                 <ToggleSetting 
@@ -78,7 +76,7 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({userSettings}) => {
                     settingDesc={'This will change the theme of the extension. You can change it any time.'} 
                     setDropdownResponse={setTheme}
                     options={['light', 'dark']}
-                    selected={extTheme}
+                    selected={theme}
                 />
                 <DropDownSetting 
                     settingTopic={'Select the preferred font size'} 

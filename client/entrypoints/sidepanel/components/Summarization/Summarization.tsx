@@ -77,6 +77,9 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
       }
 
       const handleMenuClick = (info:browser.Menus.OnClickData, tab:browser.Tabs.Tab | undefined)=>{
+        if(info.menuItemId !== "generateSummaryItem"){ 
+          return
+        }
         const mediaTypes = ['audio','video','image']
         const mediaType:string = info?.mediaType || 'ok';
         clearSelectedParagraph()
@@ -103,12 +106,12 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
   
       browser.tabs.onUpdated.addListener(handleUnload);
       browser.contextMenus.onClicked.addListener(handleMenuClick);
-      browser.tabs.onActivated.addListener(handleTabChange)
+      browser.tabs.onActivated.addListener(handleTabChange);
   
       return () => {
         browser.tabs.onUpdated.removeListener(handleUnload);
         browser.contextMenus.onClicked.removeListener(handleMenuClick);
-        browser.tabs.onActivated.removeListener(handleTabChange)
+        browser.tabs.onActivated.removeListener(handleTabChange);
 
       };
     }, []);

@@ -16,6 +16,7 @@ import { supabase } from './lib/helper/supabaseClient';
 import { getNavigationLinks } from './services/navigation-service/getNavigation';
 import useNavigationStore from './context/navigation-store';
 import { Purpose } from '@/enum/purpose-enum';
+import FeedBackPopover from './components/FeedBack/FeedBackPopover';
 
 const App: React.FC = () => {
   const { updateUser, updateSettings } = useStore();
@@ -77,6 +78,7 @@ const App: React.FC = () => {
         <Route path="/image-recognition" element={<ImageRecognition />} />
         <Route path="/navigation" element={<Navigation loading={navigationLoading} />} />
         <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/feedback" element={<FeedBackPopover />} />
       </Routes>
       <Outlet />
     </div>

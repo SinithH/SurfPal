@@ -3,15 +3,17 @@ import React from 'react'
 import Hero from '../shared/components/hero'
 import MainFeatures from '../shared/components/mainFeature'
 import UseCase from '../shared/components/useCase'
-import Video from '../shared/components/video'
+import CarouselComponent from '../shared/components/carousel'
+import Footer from '../shared/components/footer'
 
 const LandingPage = () => {
   return (
         <>
         <Hero/>
-        <Video/>
+        <CarouselComponent/>
         <MainFeatures/>
         <UseCase/>
+        <Footer/>
         </>
     )
 }

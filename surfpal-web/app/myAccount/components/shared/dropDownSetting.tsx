@@ -1,3 +1,4 @@
+import useStore from '@/lib/store';
 import { Card, Select, Switch, Typography, Option, select } from '@material-tailwind/react'
 import { Kanit } from 'next/font/google';
 import React, { useState } from 'react'
@@ -25,9 +26,11 @@ const DropDownSetting: React.FC<DropDownSettingProps> = ({
     const handleDropdownChange = (value: any) => {
         setDropdownResponse(value);
     };
+
+    const { theme } = useStore();
     
   return (
-    <Card placeholder={undefined} className='w-full p-6 mr-8 my-7 grid grid-cols-8 justify-center'>
+    <Card placeholder={undefined} className={`${theme} w-full p-6 mr-8 my-7 grid grid-cols-8 justify-center dark:bg-carouselDarkBg dark:text-white`}>
         <div className='col-span-6 pl-5'>
             <Typography placeholder={undefined} className={`${kanit.className} text-xl font-normal`}>{settingTopic}</Typography>
             <Typography placeholder={undefined}>{settingDesc}</Typography>

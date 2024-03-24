@@ -11,14 +11,11 @@ const ImageRecognition: React.FC = () => {
   const[imageUrl, setImageUrl] = useState('');
   const [result, setResultUrl] = useState <string> (imageUrl);
   const [images, setImages] = useState<NodeListOf<HTMLImageElement> | null>(null);
-  const [mode, setMode] = useState('');
-
+  
   const {currentUser, userSettings} = useStore();
+  const [mode, setMode] = useState(userSettings?.theme || '');
   
   useEffect(() => {
-    if(userSettings && userSettings.theme == 'dark') {
-        setMode('bg-darkBg text-white');
-    }
     const fetchImages = () => {
       const allImages = document.querySelectorAll('img');
       setImages(allImages);
@@ -28,7 +25,7 @@ const ImageRecognition: React.FC = () => {
   }, []); 
 
   return (
-    <div className={`${mode} h-full`}>
+    <div className={`${mode} dark:bg-darkBg dark:text-white h-full`}>
       <Header heading={ModuleNames.IMAGE_RECOGNITION}/>
       {currentUser && !userSettings.imagerecognition && (
         <p>link to web</p>

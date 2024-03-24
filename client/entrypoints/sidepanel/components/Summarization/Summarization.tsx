@@ -33,13 +33,10 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
       userSettings
     } = useStore()
 
-    const [mode, setMode] = useState('');
+    const [mode, setMode] = useState(userSettings?.theme || '');
     const [fontSize, setFontSize] = useState('');
     
     useEffect(() => {
-      if(userSettings && userSettings.theme == 'dark') {
-        setMode('bg-darkBg text-white');
-      }
 
       if(userSettings) {
         switch(userSettings.fontsize){
@@ -156,7 +153,7 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
 
 
   return (
-    <div className={`${mode} h-full`}>
+    <div className={`${mode} h-svh mt-10 dark:bg-darkBg dark:text-white`}>
       <Header heading={ModuleNames.SUMMARIZATION} handleCopyClick={handleCopyClick} isSummary={true}/>
       <div className='h-auto mt-5 mb-10 px-5 text-base overflow-y-scroll'>
         <SummaryHeader handleSummaryClick={handleSummaryClick} handleParaSummaryClick={handleParaSummaryClick}/>

@@ -64,7 +64,9 @@ const App: React.FC = () => {
         <Route path="/image-recognition" element={<ImageRecognition />} />
         <Route path="/navigation" element={<Navigation loading={navigationLoading} />} />
         <Route path="/my-account" element={<MyAccount />} />
-        <Route path="/feedback" element={<FeedBackPopover />} />
+        <Route path="/feedback" element={<FeedBackPopover onClose={function (): void {
+          throw new Error('Function not implemented.');
+        } } />} />
       </Routes>
       <Outlet />
     </div>

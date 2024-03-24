@@ -11,16 +11,9 @@ const UserCard = () => {
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [loading, setLoading] = useState(true);
-    const [mode, setMode] = useState('');
-
+    
     const {currentUser, userSettings} = useStore();
-
-
-    useEffect(() => {
-        if(userSettings && userSettings.theme == 'dark') {
-            setMode('bg-darkBg text-white');
-        }
-    }, [userSettings])
+    const [mode, setMode] = useState(userSettings?.theme || '');
 
 
     useEffect(() => {
@@ -43,7 +36,7 @@ const UserCard = () => {
     
   return (
     <>
-        <Card placeholder={undefined} className={`${mode} flex flex-col h-full w-full p-8`}>
+        <Card placeholder={undefined} className={`${mode} flex flex-col h-full w-full p-8 dark:bg-darkBg dark:text-white mt-10`}>
             <div className='items-center justify-center flex flex-col gap-1'>
                 {currentUser && currentUser.user_metadata.avatar_url && (
                     <img className='h-32 w-32 rounded-full' src={currentUser.user_metadata.avatar_url} alt={'Avatar'} width={300} height={300}></img>

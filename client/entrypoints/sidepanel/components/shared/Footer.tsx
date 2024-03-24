@@ -18,15 +18,9 @@ const Footer: React.FC<FooterProps> = ({module}) => {
 
   //var isSummery: boolean = isSummery;
   const {summaryType, paragraphSummary, summary, updateSummary, clearSummary, clearUser, currentUser, userSettings} = useStore();
-  const [mode, setMode] = useState('');
+  const [mode, setMode] = useState(userSettings?.theme || '');
 
-  useEffect(() => {
-      if(userSettings && userSettings.theme == 'dark') {
-          setMode('bg-darkBg text-white');
-      }
-  }, [userSettings])
-  
-  const handleRegenerateClick = ()=>{
+    const handleRegenerateClick = ()=>{
     if(summaryType == "paragraph"){
       if(!(paragraphSummary.length > 1)){
         toast.warn('Please select a paragraph and generate summary', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false })
@@ -50,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({module}) => {
 
     return(
       <>
-        <div className={`${mode} bg-white fixed bottom-0 w-full`}>
+        <div className={`${mode} bg-white fixed bottom-0 w-full dark:bg-darkBg dark:text-white`}>
             <hr className="mx-4"/>
             <div className="inline-flex p-4 gap-12">
                 <button className="w-7 h-7 rounded">

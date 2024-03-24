@@ -14,18 +14,10 @@ const MyAccount: React.FC = () => {
     user_metadata: {
         avatar_url: '',
     }});
-  const [mode, setMode] = useState('');
 
   const {currentUser, userSettings} = useStore();
+  const [mode, setMode] = useState(userSettings?.theme || '');
 
-
-  useEffect(() => {
-      if(userSettings && userSettings.theme == 'dark') {
-          setMode('bg-darkBg text-white');
-      }
-
-  }, [userSettings])
-  
   
   useEffect(() => {
     setUser(currentUser);
@@ -33,7 +25,7 @@ const MyAccount: React.FC = () => {
   
   return (
     <>
-      <div className={`${mode} h-full`}>
+      <div className={`${mode} h-full dark:bg-darkBg dark:text-white overflow-hidden`}>
         <Header heading={ModuleNames.MY_ACCOUNT}/>
       {user && currentUser && (
         <UserCard />

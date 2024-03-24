@@ -61,7 +61,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<MainMenu />} />
         <Route path="/summarization" element={<Summarization genAI={genAI} />} />
-        <Route path="/image-recognition" element={<ImageRecognition />} />
+        <Route path="/image-recognition" element={<ImageRecognition genAI={genAI} />} />
         <Route path="/navigation" element={<Navigation loading={navigationLoading} />} />
         <Route path="/my-account" element={<MyAccount />} />
         <Route path="/feedback" element={<FeedBackPopover />} />

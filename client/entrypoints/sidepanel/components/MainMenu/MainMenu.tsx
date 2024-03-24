@@ -72,15 +72,7 @@ const MainMenu: React.FC = () => {
         </div>
       </Link>
 
-      {/* <Link to={`/feedback`}>
-      <div className={`inline-flex items-center gap-2 mt-2 px-4 py-2 cursor-pointer w-fit rounded-full justify-self-end ${hover}`}>
-        <span className='text-sm'>Give Feedback</span>
-        <img src={feedbackIcon} alt="Feedback" className='w-5 h-5' />
-        <FeedBackPopover/>
-      </div>
-      </Link> */}
       <div className='inline-flex items-center gap-2 mt-2 px-4 py-2 cursor-pointer w-fit rounded-full'>
-        {/* <h1 className='text-3xl font-bold mt-4'>FeedBack</h1> */}
         <button onClick={() => setShowFeedBack(true)} className='bg-violet-500 px-4 py-2 rounded-lg text-lg'>
           FeedBack
         </button>

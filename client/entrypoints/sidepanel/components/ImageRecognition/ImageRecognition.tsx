@@ -67,7 +67,7 @@ const ImageRecognition: React.FC<{ genAI:GoogleGenerativeAI }> = ({ genAI }) => 
 
 
   return (
-    <div className={`${mode} h-full`}>
+    <div className={`${mode} dark:bg-darkBg dark:text-white h-full`}>
       <Header heading={ModuleNames.IMAGE_RECOGNITION}/>
       <div className='h-auto mt-8 px-5 pb-16 mx-auto text-base overflow-y-scroll'>           
             <div className={`${fontSize} font-kanit w-full`}>

@@ -16,15 +16,8 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({heading, handleCopyClick, isSummary}) => {
     const {userSettings} = useStore();
-    const [mode, setMode] = useState('');
+    const [mode, setMode] = useState(userSettings?.theme || '');
 
-    useEffect(() => {
-        if(userSettings && userSettings.theme == 'dark') {
-            setMode('bg-darkBg');
-        }
-
-    }, [userSettings])
-    
     const getHeaderIcon  = (): string => {
         switch (heading) {
             case ModuleNames.NAVIGATION:
@@ -40,9 +33,13 @@ const Header: React.FC<HeaderProps> = ({heading, handleCopyClick, isSummary}) =>
         }
     }
 
+    useEffect(() => {
+        setMode(userSettings?.theme || '');
+    }, [userSettings.theme])
+
     return(
         <>
-            <div className={`${mode}`}>
+            <div className={`${mode} dark:bg-darkBg w-full p-1 fixed top-0 z-50`}>
                 <div className="inline-flex items-center p-3 gap-2">
                     <img src={getHeaderIcon()} alt="" className="h-4" />
                     <h3 className="font-kanit text-primary">{ heading }</h3>

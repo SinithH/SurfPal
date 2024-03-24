@@ -20,7 +20,7 @@ const MainFeatures = () => {
     
   return (
     <div className={`${kanit.className} ${theme} w-full dark:bg-gray-900 `}>
-      <section id="mainFeatures" className="relative w-full">
+      <section id="mainFeatures" className="relative w-full flex justify-center">
         <div className="relative md:container px-4 sm:px-6">
           <section>
             <div className="max-w-6xl mx-auto px-4 sm:px-6">

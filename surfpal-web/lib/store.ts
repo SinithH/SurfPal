@@ -13,7 +13,7 @@ export type Actions = {
 const useStore = create<State & Actions>()(
     persist(
         (set, get) => ({
-            theme: '',
+            theme: 'dark',
             toggleLightMode: () => set((state) => ({
                 theme: ''
             })),

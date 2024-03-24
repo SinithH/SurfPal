@@ -9,7 +9,7 @@ import Image from 'next/image';
 import UserAvatar from '@/public/assets/circle-user-regular.svg';
 import Moon from '@/public/assets/moon-solid.svg'
 import Sun from '@/public/assets/sun-solid.svg'
-import { Card, CardBody } from '@material-tailwind/react';
+import { Card, CardBody, Typography } from '@material-tailwind/react';
 import useStore from '@/lib/store';
 
 const kanit = Kanit({
@@ -69,10 +69,10 @@ const Header = () => {
         <div className='w-full h-full flex items-center'>
             <div className='inline-flex justify-between w-full'>
               {/* <img src="image" alt="image" className='h-[25px]'/> */}
-              <div>
-                <h1>SurfPal</h1>
-              </div>
-              <div className='inline-flex items-center gap-5'>
+              <Link className='cursor-pointer' href={'/'}>
+                <Typography className='text-xl font-semibold'placeholder={undefined}>SurfPal</Typography>
+              </Link>
+              <div className='inline-flex items-center gap-8'>
                 <div className='w-5 cursor-pointer'>
                   {theme === 'dark' ?
                     (<Image src={Sun} alt={''} onClick={() => toggleLightMode()}></Image>) :
@@ -90,7 +90,12 @@ const Header = () => {
                   </div>
                 }
                 {user &&
-                  <Image src={UserAvatar} alt={'Avatar'} className='cursor-pointer w-10 h-10' onClick={() => setDropDownActivated(!dorpDownActivated)}></Image>
+                  <>
+                    <div className='inline-flex gap-6 items-center'>
+                      <Link href={'/myAccount'} className='hover:text-primaryPurple'>My Account</Link>
+                      <Image src={UserAvatar} alt={'Avatar'} className='cursor-pointer w-10 h-10' onClick={() => setDropDownActivated(!dorpDownActivated)}></Image>
+                    </div>
+                  </>
                 }
               </div>
             </div>

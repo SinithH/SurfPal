@@ -32,6 +32,10 @@ const MyAccount: React.FC = () => {
   }, [currentUser, user])
 
   useEffect(() => {
+    setMode(userSettings?.theme || '');
+  }, [userSettings.theme])
+
+  useEffect(() => {
     // Only call updateSettings if the settings have actually changed
     if (initialSettingsRef.current &&
         (ttsSetting !== initialSettingsRef.current.texttospeech ||

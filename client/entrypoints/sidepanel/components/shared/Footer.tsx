@@ -43,6 +43,7 @@ const Footer: React.FC<FooterProps> = ({module}) => {
   
   const handleLogOut = async () => {
     clearUser();
+    userSettings.theme = '';
     await supabase.auth.signOut();
   }
 

@@ -3,7 +3,12 @@ import browser from 'webextension-polyfill';
 
 export default defineBackground(() => {
   
-  console.log('Hello background!', { id: browser.runtime.id });
+  browser.runtime.onInstalled.addListener(({ reason }) => {
+    if(reason === 'install'){
+      storage.setItem('local:installDate', '2023-12-22T15:27:25.950Z');
+    }
+  });
+
   // Listen for messages from the content script
   browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Process the text content

@@ -20,7 +20,11 @@ const Footer: React.FC<FooterProps> = ({module}) => {
   const {summaryType, paragraphSummary, summary, updateSummary, clearSummary, clearUser, currentUser, userSettings} = useStore();
   const [mode, setMode] = useState(userSettings?.theme || '');
 
-    const handleRegenerateClick = ()=>{
+  useEffect(() => {
+    setMode(userSettings?.theme || '');
+  }, [userSettings.theme])
+
+  const handleRegenerateClick = ()=>{
     if(summaryType == "paragraph"){
       if(!(paragraphSummary.length > 1)){
         toast.warn('Please select a paragraph and generate summary', { position: 'top-center', autoClose: 2000, hideProgressBar: true, pauseOnHover: false })

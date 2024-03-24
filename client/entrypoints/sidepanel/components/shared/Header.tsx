@@ -33,6 +33,10 @@ const Header: React.FC<HeaderProps> = ({heading, handleCopyClick, isSummary}) =>
         }
     }
 
+    useEffect(() => {
+        setMode(userSettings?.theme || '');
+    }, [userSettings.theme])
+
     return(
         <>
             <div className={`${mode} dark:bg-darkBg w-full p-1 fixed top-0 z-50`}>

@@ -11,7 +11,7 @@ const NavigationLinks: React.FC<{links: INavigationResponse}> = ({ links }) => {
         if (!value) {
             setFilteredLinksData(links.data.navigation);
         }
-        setFilteredLinksData(links.data.navigation.filter((row) => row.text.includes(value)));
+        setFilteredLinksData(links.data.navigation.filter((row) => row.text.toLowerCase().includes(value.toLowerCase())));
     }
     return (
         <div className="p-3">

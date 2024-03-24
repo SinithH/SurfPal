@@ -33,13 +33,10 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
       userSettings
     } = useStore()
 
-    const [mode, setMode] = useState('');
+    const [mode, setMode] = useState(userSettings?.theme || '');
     const [fontSize, setFontSize] = useState('');
     
     useEffect(() => {
-      if(userSettings && userSettings.theme == 'dark') {
-        setMode('bg-darkBg text-white');
-      }
 
       if(userSettings) {
         switch(userSettings.fontsize){
@@ -80,6 +77,9 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
       }
 
       const handleMenuClick = (info:browser.Menus.OnClickData, tab:browser.Tabs.Tab | undefined)=>{
+        if(info.menuItemId !== "generateSummaryItem"){ 
+          return
+        }
         const mediaTypes = ['audio','video','image']
         const mediaType:string = info?.mediaType || 'ok';
         clearSelectedParagraph()
@@ -106,12 +106,12 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
   
       browser.tabs.onUpdated.addListener(handleUnload);
       browser.contextMenus.onClicked.addListener(handleMenuClick);
-      browser.tabs.onActivated.addListener(handleTabChange)
+      browser.tabs.onActivated.addListener(handleTabChange);
   
       return () => {
         browser.tabs.onUpdated.removeListener(handleUnload);
         browser.contextMenus.onClicked.removeListener(handleMenuClick);
-        browser.tabs.onActivated.removeListener(handleTabChange)
+        browser.tabs.onActivated.removeListener(handleTabChange);
 
       };
     }, []);
@@ -156,9 +156,9 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
 
 
   return (
-    <div className={`${mode} h-full`}>
+    <div className={`${mode} h-full mt-10 dark:bg-darkBg dark:text-white`}>
       <Header heading={ModuleNames.SUMMARIZATION} handleCopyClick={handleCopyClick} isSummary={true}/>
-      <div className='h-auto mt-5 mb-10 px-5 text-base overflow-y-scroll'>
+      <div className='h-full mt-5 mb-10 px-5 text-base overflow-y-scroll'>
         <SummaryHeader handleSummaryClick={handleSummaryClick} handleParaSummaryClick={handleParaSummaryClick}/>
           {summaryType == 'page' &&  
             <div className={`${fontSize} font-kanit w-full`}>
@@ -183,6 +183,7 @@ const Summarization: React.FC<{ genAI: GoogleGenerativeAI}> = ({ genAI}) => {
             </div>
           }
         
+        <div className='h-52'></div>
       </div>
       <Footer module={ModuleNames.SUMMARIZATION}/>
     </div>

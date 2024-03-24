@@ -7,6 +7,8 @@ import { Kanit } from 'next/font/google';
 import UserAvatar from '@/public/assets/user-avatar.svg';
 import Envelope from '@/public/assets/envelope-solid 1.svg';
 import Image from 'next/image';
+import MyAccountVector from '@/public/assets/web-designer-building-website.svg';
+import useStore from '@/lib/store';
 
 const kanit = Kanit({
     weight: ['400', '700'],
@@ -15,6 +17,7 @@ const kanit = Kanit({
 
 const UserCard = () => {
 
+    const { theme } = useStore();
     const supabase = createClientComponentClient();
     const [user, setUser] = useState({
         user_metadata: {
@@ -43,7 +46,7 @@ const UserCard = () => {
     
   return (
     <>
-        <Card placeholder={undefined} className=' flex flex-col lg:grid lg:grid-rows-5 lg:h-full w-full lg:w-1/3 p-8 lg:rounded-tl-none lg:rounded-bl-none lg:fixed left-0'>
+        <Card placeholder={undefined} className={`${theme} flex flex-col lg:grid lg:grid-rows-6 lg:h-full w-full lg:w-1/3 p-8 lg:rounded-tl-none lg:rounded-bl-none lg:fixed left-0 dark:bg-carouselDarkBg dark:text-white`}>
             <div className='lg:row-span-3 items-center justify-center flex flex-col gap-1 lg:gap-5'>
                 {user && user.user_metadata.avatar_url && (
                     <Image className='h-32 w-32 rounded-full' src={user.user_metadata.avatar_url} alt={'Avatar'} width={300} height={300}></Image>
@@ -55,13 +58,16 @@ const UserCard = () => {
                     Welcome, {userName}
                 </Typography>
                 <button className='py-2 px-3 text-white text-sm bg-primaryPurple rounded-full w-fit justify-self-center flex'>Edit Profile</button>
-            </div>
-            <div className='lg:row-span-2 flex flex-col items-center justify-start'>
                 <div className='inline-flex gap-2 items-center mt-4 lg:mt-0'>
                     <Image src={Envelope} alt={'Envelope'} className='transform scale-75'></Image>
                     <Typography placeholder={undefined} className={`${kanit.className} font-normal text-xs`}>
                         {userEmail}
                     </Typography>
+                </div>
+            </div>
+            <div className='lg:row-span-3 lg:flex hidden flex-col items-center justify-start'>
+                <div className='flex items-center justify-center mt-4 lg:mt-0'>
+                    <Image src={MyAccountVector} alt={'Envelope'} className='w-3/5'></Image>
                 </div>
             </div>
         </Card>

@@ -2,8 +2,8 @@ import React from "react"
 
 const Footer = () => {
     return(
-            <div className="w-full bg-gray-800 dark">
-                <div className="py-4 md:py-8">
+            <div className="w-full ">
+                <div className="py-4 md:py-8 dark:bg-gray-800 bg-gray-300 z-10">
                     <div className="max-w-6xl mx-auto px-4 sm:px-6">
                         <div className="grid md:grid-cols-12 gap-8 lg:gap-20 mb-8 md:mb-12">
                             <div className="md:col-span-4 lg:col-span-5">
@@ -13,16 +13,16 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className="md:col-span-8 lg:col-span-7 grid sm:grid-cols-3 gap-8">
-                                <div className="text-sm">
-                                    <div className="text-primaryPurple font-medium mb-2 hover:text-gray-100 transition duration-150 ease-in-out">Company
+                                <div className="text-sm text-primaryPurple">
+                                    <div className=" font-medium mb-2 hover:text-gray-100 transition duration-150 ease-in-out">Company
                                     </div>
                                     <ul>
-                                        <li className="mb-2 text-primaryPurple hover:text-gray-100 transition duration-150 ease-in-out">
+                                        <li className="mb-2  hover:text-gray-100 transition duration-150 ease-in-out">
                                             {/* <a className="text-black hover:text-gray-100 transition duration-150 ease-in-out" href="/privacy">Privacy Policy
                                             </a> */}
                                             Privacy Policy
                                         </li>
-                                        <li className="mb-2 text-primaryPurple hover:text-gray-100 transition duration-150 ease-in-out">
+                                        <li className="mb-2  hover:text-gray-100 transition duration-150 ease-in-out">
                                             {/* <a className="text-black hover:text-gray-100 transition duration-150 ease-in-out" href="/terms">Terms
                                             </a> */}
                                             Terms
@@ -42,7 +42,7 @@ const Footer = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="md:flex md:items-center md:justify-between">
+                        <div className="md:flex md:items-center md:justify-center">
                             {/* <ul className="flex mb-4 md:order-1 md:ml-4 md:mb-0">
                                 <li>
                                     <a className="flex justify-center items-center text-purple-600 bg-gray-800 hover:text-gray-100 hover:bg-purple-600 rounded-full transition duration-150 ease-in-out" aria-label="Twitter" target="_black" href="https://twitter.com/tldrthis">
@@ -69,7 +69,7 @@ const Footer = () => {
                                     </a>
                                 </li>
                             </ul> */}
-                            <div className="text-primaryPurple text-sm mr-5 font-semibold">© 2024 SurfPal, all rights reserved
+                            <div className="text-primaryPurple text-sm mr-5 text">&copy; 2024 SurfPal, all rights reserved
                             </div>
                         </div>
                     </div>

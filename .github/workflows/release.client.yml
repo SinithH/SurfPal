@@ -35,7 +35,7 @@ jobs:
         run: npm run zip:firefox
 
       - name: List files
-        run: ls -R client/.output
+        run: ls -R .output/
 
 # Create a release
   create_release:
@@ -52,7 +52,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            client/.output/*.zip
+            .output/*.zip
           tag_name: ${{ github.ref }}
           draft: false
           prerelease: false

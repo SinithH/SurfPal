@@ -75,7 +75,7 @@ return (
         <button onClick={onClose} className='place-self-end'><X size={30}/></button>
         <div className='bg-gray-400 rounded-xl px-20 py-10 flex flex-col gap-5 items-center mx-4 w-50 h-100'>
           <h1 className="text-3xl font-bold">How did we do?</h1>
-          <p className="text-black max-w-md text-xl">
+          <p className="text-black max-w-md text-xl text-center">
                   Rate "SurfPal" from 1-5 Stars <br />(1-Poor, 5-Excellent)
           </p>
           <div className="grid grid-cols-5 gap-5">
@@ -107,14 +107,14 @@ return (
           <div className='grid grid-cols-2 pt-15 gap-x-5 px-10 sm:grid-cols-1'>
                   <div className='flex justify-start sm:justify-center'>
                     <button type="button"
-                      className="w-full bg-purple-800 rounded-xl py-3 px-6 hover:bg-white hover:text-black transition-all"
+                      className="w-full bg-primary rounded-xl py-3 px-6 hover:bg-white hover:text-black transition-all"
                       onClick={handleCancel}>
                       Cancel
                     </button>
                   </div>
                   <div className='flex justify-end sm:justify-center sm:pt-3'>
                     <button 
-                      className="w-full bg-purple-800 rounded-xl py-3 px-6 hover:bg-white hover:text-black transition-all"
+                      className="w-full bg-primary rounded-xl py-3 px-6 hover:bg-white hover:text-black transition-all"
                       // disabled={isSubmitDisabled}
                       onClick={handleSubmit}>
                       Submit

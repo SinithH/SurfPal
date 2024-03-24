@@ -34,6 +34,9 @@ jobs:
       - name: build for firefox
         run: npm run zip:firefox
 
+      - name: List files
+        run: ls -R client/.output
+
 # Create a release
   create_release:
     needs: build_client

@@ -17,6 +17,11 @@ const config: Config = {
       },
       colors: {
         primaryPurple: "#9E00E8",
+        darkBg: 'rgba(var(--dark-bg))',
+        lightBg: '#fcfcfc',
+        darkTileHover: 'rgba(var(--dark-tile-hover-bg))',
+        carouselLightBg: '#fbebd7',
+        carouselDarkBg: '#1a2642'
       },
       scale: {
         '8': '0.08', // for user avatar in header
@@ -24,5 +29,6 @@ const config: Config = {
     },
   },
   plugins: [],
+  darkMode: 'selector',
 };
 export default config;

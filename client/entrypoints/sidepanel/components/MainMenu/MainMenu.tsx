@@ -35,7 +35,7 @@ const MainMenu: React.FC = () => {
 
       <Link to={`/navigation`}>
         <div className={` h-full  cursor-pointer hover:pl-5 transition-all duration-75 dark:hover:bg-darkTileHover hover:bg-slate-200 `}>
-          <div className={` w-full inline-flex gap-4 items-center pl-16 py-10 sm:py-5 `}>
+          <div className={` w-full inline-flex gap-4 items-center sm:pl-16 pl-8 py-10 sm:py-5 `}>
               <img src={navigationIcon} alt="Navigation" className="sm:h-20 sm:w-20 w-10 h-10 sm:mb-2" />
               <span className="text-center text-3xl sm:text-4xl">Navigation</span>
           </div>
@@ -44,7 +44,7 @@ const MainMenu: React.FC = () => {
       <hr />
       <Link to={`/summarization`}>
         <div className={`h-full  cursor-pointer hover:pl-5 transition-all duration-75 dark:hover:bg-darkTileHover hover:bg-slate-200 `}>
-          <div className=" inline-flex gap-4 items-center justify-start pl-16 py-10 sm:py-5 ">
+          <div className=" inline-flex gap-4 items-center justify-start sm:pl-16 pl-8 py-10 sm:py-5 ">
             <img src={summaryIcon} alt="Summary" className="sm:h-20 sm:w-20 w-10 h-10 sm:mb-2" />
             <span className="text-center text-3xl sm:text-4xl">Summarization</span>
           </div>
@@ -53,7 +53,7 @@ const MainMenu: React.FC = () => {
       <hr />
       <Link to={`/image-recognition`}>
         <div className={` h-full  cursor-pointer hover:pl-5 transition-all duration-75 dark:hover:bg-darkTileHover hover:bg-slate-200 `}>
-          <div className=" inline-flex gap-4 items-center justify-start pl-16 py-10 sm:py-5 ">
+          <div className=" inline-flex gap-4 items-center justify-start sm:pl-16 pl-8 py-10 sm:py-5 ">
               <img src={imageRecIcon} alt="Image Recognition" className="sm:h-20 sm:w-20 w-10 h-10 sm:mb-2" />
               <span className="text-center text-3xl sm:text-4xl">Images</span>
           </div>
@@ -62,7 +62,7 @@ const MainMenu: React.FC = () => {
       <hr />
       <Link to={`/my-account`}>
         <div className={` h-full  cursor-pointer hover:pl-5 transition-all duration-75 dark:hover:bg-darkTileHover hover:bg-slate-200 `}>
-          <div className=" inline-flex gap-4 items-center justify-start pl-16 py-10 sm:py-5 ">
+          <div className=" inline-flex gap-4 items-center justify-start sm:pl-16 pl-8 py-10 sm:py-5 ">
               <img src={userIcon} alt="User" className="sm:h-20 sm:w-20 w-10 h-10 sm:mb-2" />
               <span className="text-center text-3xl sm:text-4xl">My Account</span>
           </div>

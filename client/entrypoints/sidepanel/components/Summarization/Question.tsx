@@ -16,7 +16,7 @@ const Question: React.FC<{ question: string; answer: string }> = ({ question, an
         <h2 className="text-base">{question}</h2>
       </div>
       {showAnswer && (
-        <div className="mt-2 bg-gray-100 p-3 rounded-md">
+        <div className="mt-2 bg-gray-100 p-3 rounded-md dark:bg-darkTileHover">
           <p className="text-sm">{answer}</p>
         </div>
       )}

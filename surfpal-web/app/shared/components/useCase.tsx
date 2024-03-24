@@ -9,8 +9,8 @@ const UseCase = () => {
                             <div className="max-w-6xl mx-auto px-4 sm:px-6">
                                 <div className="py-12 md:py-20 border-t border-gray-800">
                                     <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-                                        <div className="mb-4 text-2xl text-white font-medium">Featured by the world best websites</div>
-                                        <p className="text-xl text-gray-400">Our platform has been recognized and utilized by top-tier websites across the globe, solidifying our reputation for excellence and reliability in the digital world.</p>
+                                        <div className="mb-4 text-2xl text-white font-medium">Discover a world of accessibility at your fingertips! </div>
+                                        <p className="text-xl text-gray-400">Unleash the power of web accessibility with our free extension! Seamlessly customize your browsing experience while ensuring inclusivity for visually impaired users. Try it now and embark on a journey of empowerment!</p>
                                     </div>
                                     
                                 </div>

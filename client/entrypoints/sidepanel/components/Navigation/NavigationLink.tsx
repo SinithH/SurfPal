@@ -7,7 +7,7 @@ const NavigationLink: React.FC<{ textContent: string; href: string}> = ({ textCo
         const [tab] = await browser.tabs.query({ active: true, lastFocusedWindow: true });
         await browser.tabs.sendMessage(tab.id!, { purpose: Purpose.NAVIGATE, url });
     }
-    return <li className='my-1 p-1 border text-primary rounded' onClick={() => onLinkClick(href)}>{textContent}</li>
+    return <li className='my-1 p-1 border text-primary rounded cursor-pointer' onClick={() => onLinkClick(href)}>{textContent}</li>
 }
 
 export default NavigationLink;

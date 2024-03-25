@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavigationSearch from "./NavigationSearch";
 import NavigationLink from "./NavigationLink";
 import INavigationResponse from "@/interfaces/navigation-resopnse.interface";
@@ -7,6 +7,7 @@ import NavigationLinkWithDescription from "./NavigationLinkWithDescription";
 
 const NavigationLinks: React.FC<{ links: INavigationResponse }> = ({ links }) => {
     const [filteredLinksData, setFilteredLinksData] = useState(links?.data.navigation);
+    const [combinedLinks, setCombinedLinks] = useState<{ title: string; URL: string; description?: string }[]>([]);
     const { top10Data, contentUrl } = useNavigationStore();
 
     const searchEvent = (event: any) => {
@@ -17,28 +18,51 @@ const NavigationLinks: React.FC<{ links: INavigationResponse }> = ({ links }) =>
         setFilteredLinksData(links.data.navigation.filter((row) => row.text.toLowerCase().includes(value.toLowerCase())));
     }
 
+    useEffect(() => {
+        let combinedObjects: { title: string; URL: string; description?: string }[] = [];
+        filteredLinksData.forEach(obj => {
+            combinedObjects.push({ title: obj.text, URL: obj.url });
+        });
+        if (!top10Data[contentUrl]) {
+            setCombinedLinks(combinedObjects);
+            return;
+        }
+        top10Data[contentUrl].forEach(obj => {
+            const object = combinedObjects.find(link => link.URL == obj.URL)
+            if (object) {
+                object.description = obj.description;
+            }
+        });
+        combinedObjects = combinedObjects.sort((a, b) => {
+            if (a.description && !b.description) {
+                return -1;
+            } else if (!a.description && b.description) {
+                return 1;
+            } else {
+                return 0;
+            }
+        })
+        setCombinedLinks(combinedObjects);
+    }, [links.data.navigation, filteredLinksData, top10Data])
+
     return (
         <div className="p-3">
-            {top10Data[contentUrl] && <h1 className='mb-2'>The Top Navigation Links: </h1>}
-            {top10Data[contentUrl] && <hr />}
-            {top10Data[contentUrl] && <ul>
-                {top10Data[contentUrl].map((topLink) => {
-                    return <NavigationLinkWithDescription
-                        textContent={topLink.title}
-                        description={topLink.description}
-                        href={topLink.URL}
-                        key={topLink.title} />
-                })}
-            </ul>}
             <h1 className='mb-2'>The Navigation Links: </h1>
             <NavigationSearch searchEvent={searchEvent} />
             <hr />
             <ul>
-                {filteredLinksData && filteredLinksData.map((link) => {
+                {filteredLinksData && combinedLinks.map((link) => {
+                    if (link.description) {
+                        return <NavigationLinkWithDescription
+                            textContent={link.title}
+                            description={link.description}
+                            href={link.URL}
+                            key={link.title} />
+                    }
                     return <NavigationLink
-                        textContent={link.text}
-                        href={link.url}
-                        key={link.text} />
+                        textContent={link.title}
+                        href={link.URL}
+                        key={link.title} />
                 })}
             </ul>
         </div>
@@ -46,3 +70,4 @@ const NavigationLinks: React.FC<{ links: INavigationResponse }> = ({ links }) =>
 }
 
 export default NavigationLinks;
+

@@ -54,9 +54,9 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
 
   const { data, contentUrl, top10Data, setTop10LinksData } = useNavigationStore();
   const handleGetNavigationTop10Links = async () => {
-    const response =  await getTop10NavigationLinks(data[contentUrl].data.navigation, contentUrl, top10Data)
+    const response = await getTop10NavigationLinks(data[contentUrl].data.navigation, contentUrl, top10Data)
     if (response) {
-      setTop10LinksData(contentUrl, response!)     
+      setTop10LinksData(contentUrl, response!)
 
       const [tab] = await browser.tabs.query({ active: true, lastFocusedWindow: true });
       await browser.tabs.sendMessage(tab.id!, {
@@ -64,6 +64,10 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
         links: response?.map((data) => data.URL)
       });
     }
+  }
+  const handleGetNavigationLinks= async () => {    
+    const [tab] = await browser.tabs.query({ active: true, lastFocusedWindow: true });
+    await browser.tabs.sendMessage(tab.id!, { purpose: Purpose.RELOAD_TEXT });
   }
 
   return (
@@ -95,6 +99,9 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
             <div className="inline-flex gap-12">
               <button onClick={handleGetNavigationTop10Links} className="p-2 h-7 inline-flex gap-3 items-center rounded-lg bg-primary text-white">
                 <span>Generate Top 10 Navigation Links</span>
+                <FontAwesomeIcon icon={faRotate} />
+              </button>
+              <button onClick={handleGetNavigationLinks} className="p-2 h-7 inline-flex gap-3 items-center rounded-lg bg-primary text-white">
                 <FontAwesomeIcon icon={faRotate} />
               </button>
             </div>)}

@@ -9,14 +9,17 @@ import NavigationLoading from './NavigationLoading';
 import NavigationLinks from './NavigationLinks';
 import { Purpose } from '@/enum/purpose-enum';
 import useNavigationStore from '../../context/navigation-store';
+import useStore from '../../context/store';
 
 const Navigation: React.FC<{ loading: boolean }> = ({ loading }) => {
   const { data, contentUrl } = useNavigationStore();
+  const { userSettings } = useStore();
   const links = data[contentUrl];
+  const [mode, setMode] = useState(userSettings?.theme || '');
   return (
     <>
       <Header heading={ModuleNames.NAVIGATION} />
-      <div className='py-10'>
+      <div className={`py-10 ${mode} dark:bg-darkBg dark:text-white`}>
         {loading && <NavigationLoading />}
         {!loading && <NavigationLinks links={links} />}
       </div>

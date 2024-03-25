@@ -1,0 +1,63 @@
+name: create release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+env:
+  VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
+  NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}   
+
+jobs:
+  build_client:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: npm ci
+
+      - name: build for chrome
+        run: npm run zip
+
+      - name: build for firefox
+        run: npm run zip:firefox
+
+
+
+      - name: copy build files
+        run: |
+          pwd
+          cp .output/*zip .
+
+      - name: List files
+        run: ls
+
+      - name: Get tag message
+        id: tag_message
+        run: echo "::set-output name=message::$(git show -s --format=%s ${{ github.ref.name }})"  
+
+      - name: Create Release
+        id: create_release    
+        uses: softprops/action-gh-release@v2.0.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: client/**.zip
+          tag_name: ${{ github.ref.name }}
+          body: ${{ steps.tag_message.outputs.message }}
+          draft: false

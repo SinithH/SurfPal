@@ -1,10 +1,9 @@
-name: Build Extension
+name: create release
 
 on:
   push:
-    paths:  
-    - 'client/**'
-
+    tags:
+        - 'v*'
 env:
   VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
   NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
@@ -24,13 +23,31 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.15'
+          node-version: '20'
           
       - name: Install dependencies
         run: npm ci
 
       - name: build for chrome
-        run: npm run build
+        run: npm run zip
 
       - name: build for firefox
-        run: npm run build:firefox
+        run: npm run zip:firefox
+
+      - name: copy build files
+        run: cp .output/*zip client/
+
+      - name: List files
+        run: ls
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            *.zip
+          tag_name: ${{ github.ref }}
+          draft: false
+          prerelease: false

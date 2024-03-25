@@ -11,8 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { supabase } from "../../lib/helper/supabaseClient";
 import { getTop10NavigationLinks } from "../../services/navigation-service/getNavigationTopList";
 import useNavigationStore from "../../context/navigation-store";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Purpose } from "@/enum/purpose-enum";
+import SignOutIcon from '@/public/icon/sign-out.svg';
 
 interface FooterProps {
   module: string;
@@ -22,13 +22,11 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
 
   //var isSummery: boolean = isSummery;
   const { summaryType, paragraphSummary, summary, updateSummary, clearSummary, clearUser, currentUser, userSettings } = useStore();
-  const [mode, setMode] = useState('');
+  const [mode, setMode] = useState(userSettings?.theme || '');
 
   useEffect(() => {
-    if (userSettings && userSettings.theme == 'dark') {
-      setMode('bg-darkBg text-white');
-    }
-  }, [userSettings])
+    setMode(userSettings?.theme || '');
+  }, [userSettings.theme])
 
   const handleRegenerateClick = () => {
     if (summaryType == "paragraph") {
@@ -49,6 +47,7 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
 
   const handleLogOut = async () => {
     clearUser();
+    userSettings.theme = '';
     await supabase.auth.signOut();
   }
 
@@ -72,9 +71,9 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
 
   return (
     <>
-      <div className={`${mode} bg-white fixed bottom-0 w-full`}>
+      <div className={`${mode} bg-white fixed bottom-0 w-full dark:bg-darkBg dark:text-white`}>
         <hr className="mx-4" />
-        <div className="inline-flex p-4 gap-12">
+        <div className="inline-flex p-4 gap-12 w-full justify-between">
           <button className="w-7 h-7 rounded">
             <Link to={`/`}>
               <img src={homeIcon} alt="User" />
@@ -90,11 +89,6 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
                 <FontAwesomeIcon icon={faRotate} />
               </button>
             </div>)}
-          {module == ModuleNames.MY_ACCOUNT && (
-            <button onClick={handleLogOut} className="inline-flex bg-transparent text-lg text-red-500 font-kanit">
-              <p>Log out</p>
-            </button>
-          )}
           {module == ModuleNames.NAVIGATION && (
             <div className="inline-flex gap-3">
               <button onClick={handleGetNavigationTop10Links} className="p-2 h-7 inline-flex gap-3 items-center rounded-lg bg-primary text-white">
@@ -109,7 +103,7 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 export default Footer;

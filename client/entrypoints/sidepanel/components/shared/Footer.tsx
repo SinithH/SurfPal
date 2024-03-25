@@ -65,7 +65,7 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
       });
     }
   }
-  const handleGetNavigationLinks= async () => {    
+  const handleGetNavigationLinks = async () => {
     const [tab] = await browser.tabs.query({ active: true, lastFocusedWindow: true });
     await browser.tabs.sendMessage(tab.id!, { purpose: Purpose.RELOAD_TEXT });
   }
@@ -96,12 +96,13 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
             </button>
           )}
           {module == ModuleNames.NAVIGATION && (
-            <div className="inline-flex gap-12">
+            <div className="inline-flex gap-3">
               <button onClick={handleGetNavigationTop10Links} className="p-2 h-7 inline-flex gap-3 items-center rounded-lg bg-primary text-white">
-                <span>Generate Top 10 Navigation Links</span>
+                <span>Generate Top 10 Links</span>
                 <FontAwesomeIcon icon={faRotate} />
               </button>
               <button onClick={handleGetNavigationLinks} className="p-2 h-7 inline-flex gap-3 items-center rounded-lg bg-primary text-white">
+                <span>Refresh</span>
                 <FontAwesomeIcon icon={faRotate} />
               </button>
             </div>)}

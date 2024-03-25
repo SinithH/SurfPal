@@ -7,7 +7,7 @@ import NavigationLinkWithDescription from "./NavigationLinkWithDescription";
 
 const NavigationLinks: React.FC<{ links: INavigationResponse }> = ({ links }) => {
     const [filteredLinksData, setFilteredLinksData] = useState(links?.data.navigation);
-    const [combinedLinks, setCombinedLinks] = useState<{ title: string; URL: string; description?: string }[]>([]);
+    const [combinedLinks, setCombinedLinks] = useState<ICombinedNavigationList[]>([]);
     const { top10Data, contentUrl } = useNavigationStore();
 
     const searchEvent = (event: any) => {
@@ -19,7 +19,7 @@ const NavigationLinks: React.FC<{ links: INavigationResponse }> = ({ links }) =>
     }
 
     useEffect(() => {
-        let combinedObjects: { title: string; URL: string; description?: string }[] = [];
+        let combinedObjects: ICombinedNavigationList[] = [];
         filteredLinksData.forEach(obj => {
             combinedObjects.push({ title: obj.text, URL: obj.url });
         });
@@ -27,16 +27,19 @@ const NavigationLinks: React.FC<{ links: INavigationResponse }> = ({ links }) =>
             setCombinedLinks(combinedObjects);
             return;
         }
-        top10Data[contentUrl].forEach(obj => {
+        top10Data[contentUrl].forEach((obj, index) => {
             const object = combinedObjects.find(link => link.URL == obj.URL)
             if (object) {
                 object.description = obj.description;
+                object.index = index
             }
         });
         combinedObjects = combinedObjects.sort((a, b) => {
-            if (a.description && !b.description) {
+            if (a.index !== undefined && b.index !== undefined) {
+                return a.index - b.index;
+            } else if (a.index !== undefined && b.index === undefined) {
                 return -1;
-            } else if (!a.description && b.description) {
+            } else if (a.index === undefined && b.index !== undefined) {
                 return 1;
             } else {
                 return 0;
@@ -57,6 +60,7 @@ const NavigationLinks: React.FC<{ links: INavigationResponse }> = ({ links }) =>
                             textContent={link.title}
                             description={link.description}
                             href={link.URL}
+                            index={link.index!}
                             key={link.title} />
                     }
                     return <NavigationLink
@@ -71,3 +75,9 @@ const NavigationLinks: React.FC<{ links: INavigationResponse }> = ({ links }) =>
 
 export default NavigationLinks;
 
+interface ICombinedNavigationList { 
+    title: string; 
+    URL: string; 
+    description?: string, 
+    index?: number 
+}

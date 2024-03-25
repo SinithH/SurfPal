@@ -34,8 +34,12 @@ jobs:
       - name: build for firefox
         run: npm run zip:firefox
 
+
+
       - name: copy build files
-        run: cp .output/*zip client/
+        run: |
+          pwd
+          cp .output/*zip .
 
       - name: List files
         run: ls

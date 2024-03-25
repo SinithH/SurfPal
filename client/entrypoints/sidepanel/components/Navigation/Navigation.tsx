@@ -16,7 +16,7 @@ const Navigation: React.FC<{ loading: boolean }> = ({ loading }) => {
   return (
     <>
       <Header heading={ModuleNames.NAVIGATION} />
-      <div className='pb-10'>
+      <div className='py-10'>
         {loading && <NavigationLoading />}
         {!loading && <NavigationLinks links={links} />}
       </div>

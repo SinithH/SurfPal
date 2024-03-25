@@ -23,7 +23,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '20'
           
       - name: Install dependencies
         run: npm ci
@@ -34,8 +34,11 @@ jobs:
       - name: build for firefox
         run: npm run zip:firefox
 
+      - name: copy build files
+        run: cp .output/*zip client/
+
       - name: List files
-        run: ls -R .output/
+        run: ls
 
       - name: Create Release
         id: create_release
@@ -44,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            .output/*.zip
+            *.zip
           tag_name: ${{ github.ref }}
           draft: false
           prerelease: false

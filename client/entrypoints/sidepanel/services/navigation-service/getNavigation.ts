@@ -1,10 +1,20 @@
 import INavigationResponse from "@/interfaces/navigation-resopnse.interface";
 
 export async function getNavigationLinks(script: string, url: string, data: { [url: string]: INavigationResponse }) {
-  if(data[url]) { 
-    return data[url];
+  try{
+    if (inProgress) { 
+      return 'wait';
+    }
+    inProgress = true
+    if(data[url]) { 
+      return data[url];
+    }
+    return await fetchLinks(script, url);
+  } catch (error) { 
+    console.error(error)
+  } finally { 
+    inProgress = false
   }
-  return await fetchLinks(script, url);
 }
 
 const fetchLinks = async (script: string, url: string) => {
@@ -32,3 +42,5 @@ const fetchLinks = async (script: string, url: string) => {
     console.error(error);
   }
 }
+
+let inProgress = false

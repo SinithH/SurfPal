@@ -78,7 +78,7 @@ const MainMenu: React.FC = () => {
       </Link> */}
       
       <div className='inline-flex items-center gap-2 mt-2 px-4 py-2 cursor-pointer w-fit rounded-full'>
-        <button onClick={() => setShowFeedBack(true)} className='bg-violet-500 px-4 py-2 rounded-lg text-lg'>
+        <button onClick={() => setShowFeedBack(true)} className='bg-primary text-white px-4 py-2 rounded-lg text-lg'>
           FeedBack
         </button>
         {showFeedBack && <FeedBackPopover onClose={onClose}/>}

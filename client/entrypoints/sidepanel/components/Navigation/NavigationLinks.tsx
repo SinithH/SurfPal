@@ -46,7 +46,7 @@ const NavigationLinks: React.FC<{ links: INavigationResponse }> = ({ links }) =>
             }
         })
         setCombinedLinks(combinedObjects);
-    }, [links.data.navigation, filteredLinksData, top10Data])
+    }, [links?.data?.navigation, filteredLinksData, top10Data])
 
     return (
         <div className="p-3">

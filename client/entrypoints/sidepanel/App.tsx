@@ -17,6 +17,7 @@ import { getNavigationLinks } from './services/navigation-service/getNavigation'
 import useNavigationStore from './context/navigation-store';
 import { Purpose } from '@/enum/purpose-enum';
 import FeedBackPopover from './components/FeedBack/FeedBackPopover';
+import INavigationResponse from '@/interfaces/navigation-resopnse.interface';
 
 const App: React.FC = () => {
   const { updateUser, updateSettings } = useStore();
@@ -56,12 +57,17 @@ const App: React.FC = () => {
   const [navigationLoading, setNavigationLoading] = useState<boolean>(true);
   const { contentUrl, data, setData } = useNavigationStore();
   browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+    let response 
     if (message.currentUrl !== contentUrl) {
       setNavigationLoading(true)
-      const response = await getNavigationLinks(message.textBody, message.currentUrl, data)
-      setData(message.currentUrl, response!)
+      response = await getNavigationLinks(message.textBody, message.currentUrl, data)
     }
-    setNavigationLoading(false)
+    if (message.currentUrl !== contentUrl && response && response !== 'wait') {
+      setData(message.currentUrl, response as INavigationResponse)
+    }
+    if (response !== 'wait') { 
+      setNavigationLoading(false)      
+    }
   })
   return (
     <div className='h-full'>

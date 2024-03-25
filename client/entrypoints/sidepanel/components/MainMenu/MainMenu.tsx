@@ -6,15 +6,13 @@ import summaryIcon from '@/assets/icons/summary-icon.png';
 import navigationIcon from '@/assets/icons/navigation-icon.svg';
 import imageRecIcon from '@/assets/icons/image-rec-icon.svg';
 import feedbackIcon from '@/assets/icons/feedback-icon.svg';
-import FeedBackPopover from '../FeedBack/FeedBackPopover';
 import { Link } from 'react-router-dom';
 import useStore from '../../context/store';
-import {Popover,PopoverHandler,PopoverContent,Button,Input,Typography,} from "@material-tailwind/react";
 
 const MainMenu: React.FC = () => {
 
   const [hover, setHover] = useState('');
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
   const {userSettings} = useStore();
   const handlePopoverClick = () => {
     setIsPopoverOpen(!isPopoverOpen); 
@@ -27,9 +25,14 @@ const MainMenu: React.FC = () => {
   };
 
   useEffect(() => {
-    setMode(userSettings?.theme || '');
-  }, [userSettings]);
-
+      if(userSettings && userSettings.theme == 'dark') {
+        setMode('bg-darkBg text-white');
+        setHover('hover:bg-darkTileHover')
+      }else{
+        setHover('hover:bg-slate-200');
+      }
+  }, [userSettings])
+  
   return (
     <div className={`${mode} dark:bg-darkBg dark:text-white grid p-4 max-w-screen-md mx-auto text-xl font-kanit h-full overflow-y-hidden`}>
 

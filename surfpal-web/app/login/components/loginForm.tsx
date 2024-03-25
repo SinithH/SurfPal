@@ -9,7 +9,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient} from '@supabase/auth-helpers-nextjs';
 import { Toaster, toast } from 'sonner';
-import useStore from '@/lib/store';
 
 
 const kanit = Kanit({
@@ -19,7 +18,6 @@ const kanit = Kanit({
 
 const LoginForm = () => {
 
-    const { theme } = useStore();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
@@ -93,15 +91,15 @@ const LoginForm = () => {
   return (
     <>
         <Toaster richColors position='top-center'/>
-        <Card placeholder={undefined} className={` ${theme} w-full sm:w-5/6 md:w-4/6 h-full px-16 py-10 dark:bg-black dark:text-white`}>
+        <Card placeholder={undefined} className='w-full md:w-2/6 h-full px-16 py-10'>
             <div className=''>
                 <Typography placeholder={undefined} className={`${kanit.className} text-4xl text-primaryPurple`}>Login</Typography>
                 <Typography placeholder={undefined} className='text-sm pt-4'>Don't have an account? <Link href={'/signUp'} className='font-medium underline'>Create Now</Link></Typography>
             </div>
             <div className='pt-10'>
                 <div className='grid gap-8'>
-                    <Input crossOrigin={undefined} type='email' label='E-mail' placeholder='example@gmail.com' color={theme === 'dark' ? 'white' : undefined} onChange={(e) => setEmail(e.target.value)} />
-                    <Input crossOrigin={undefined} type='password' label='Password' placeholder='@#*%' color={theme === 'dark' ? 'white' : undefined} onChange={(e) => setPassword(e.target.value)}/>
+                    <Input crossOrigin={undefined} type='email' label='E-mail' placeholder='example@gmail.com' onChange={(e) => setEmail(e.target.value)} />
+                    <Input crossOrigin={undefined} type='password' label='Password' placeholder='@#*%' onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className='inline-flex justify-between items-center w-full pt-8'>
                     <div className='inline-flex gap-1 justify-center'>

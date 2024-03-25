@@ -1,4 +1,4 @@
-import { INavigationResponse } from "../../context/navigation-store";
+import INavigationResponse from "@/interfaces/navigation-resopnse.interface";
 
 export async function getNavigationLinks(script: string, url: string, data: { [url: string]: INavigationResponse }) {
   if(data[url]) { 

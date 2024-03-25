@@ -21,6 +21,9 @@ export default function RootLayout({
   
   return (
     <html lang="en" className={`${theme} dark:bg-darkBg`}>
+      <head>
+        <title>SurfPal</title>
+      </head>
       <body className={poppins.className}>
         <Header />
         <main className="mt-24">

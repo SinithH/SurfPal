@@ -47,6 +47,10 @@ jobs:
       - name: List files
         run: ls
 
+      - name: Get tag message
+        id: tag_message
+        run: echo "::set-output name=message::$(git show -s --format=%s ${{ github.ref.name }})"  
+
       - name: Create Release
         id: create_release    
         uses: softprops/action-gh-release@v2.0.4
@@ -54,5 +58,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: client/**.zip
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ github.ref.name }}
+          body: ${{ steps.tag_message.outputs.message }}
           draft: false

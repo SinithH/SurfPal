@@ -3,7 +3,8 @@ name: create release
 on:
   push:
     tags:
-        - 'v*'
+      - "v*.*.*"
+
 env:
   VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
   NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
@@ -45,13 +46,12 @@ jobs:
         run: ls
 
       - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
+        id: create_release    
+        uses: softprops/action-gh-release@v2.0.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: |
+          files: | 
             *.zip
           tag_name: ${{ github.ref }}
           draft: false
-          prerelease: false

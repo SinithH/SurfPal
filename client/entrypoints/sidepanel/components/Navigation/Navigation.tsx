@@ -4,11 +4,11 @@ import Header from '../shared/Header';
 import ModuleNames from '../../constants/Modules';
 import Footer from '../shared/Footer';
 import NavigationLink from './NavigationLink';
-import useNavigationStore, { INavigationResponse } from '../../context/navigation-store';
 import NavigationSearch from './NavigationSearch';
 import NavigationLoading from './NavigationLoading';
 import NavigationLinks from './NavigationLinks';
 import { Purpose } from '@/enum/purpose-enum';
+import useNavigationStore from '../../context/navigation-store';
 
 const Navigation: React.FC<{ loading: boolean }> = ({ loading }) => {
   const { data, contentUrl } = useNavigationStore();

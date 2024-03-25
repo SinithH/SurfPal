@@ -60,12 +60,6 @@ const App: React.FC = () => {
       setNavigationLoading(true)
       const response = await getNavigationLinks(message.textBody, message.currentUrl, data)
       setData(message.currentUrl, response!)
-
-      const [tab] = await browser.tabs.query({ active: true, lastFocusedWindow: true });
-      await browser.tabs.sendMessage(tab.id!, {
-        purpose: Purpose.NAVIGATION_KEYBOARD_SHORTCUT,
-        links: response?.data.navigation.map((data) => data.url)
-      });
     }
     setNavigationLoading(false)
   })

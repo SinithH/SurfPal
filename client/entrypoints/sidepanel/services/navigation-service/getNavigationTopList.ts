@@ -7,7 +7,7 @@ export async function getTop10NavigationLinks(links: {
 }[], 
 url: string, 
 existData: {
-  [url: string]: ITop10NavigationAttribute;
+  [url: string]: ITop10NavigationAttribute[];
 }) {
   if (existData[url]) { 
     return existData[url]
@@ -44,9 +44,10 @@ async function divideLinksAndDescription(jsonString: string) {
   try {
     if (jsonString.includes('json')) {
       jsonString = jsonString.split('json')[1].split('```')[0];
-    } else {
+    } else if(jsonString.includes('JSON')) {
+      jsonString = jsonString.split('JSON')[1].split('```')[0];
     }
-    const jsonData: ITop10NavigationAttribute = JSON.parse(jsonString);
+    const jsonData: ITop10NavigationAttribute[] = JSON.parse(jsonString);
 
     return jsonData;
   } catch (error) {

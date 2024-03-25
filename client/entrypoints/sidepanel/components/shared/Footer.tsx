@@ -12,6 +12,7 @@ import { supabase } from "../../lib/helper/supabaseClient";
 import { getTop10NavigationLinks } from "../../services/navigation-service/getNavigationTopList";
 import useNavigationStore from "../../context/navigation-store";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { Purpose } from "@/enum/purpose-enum";
 
 interface FooterProps {
   module: string;
@@ -55,7 +56,13 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
   const handleGetNavigationTop10Links = async () => {
     const response =  await getTop10NavigationLinks(data[contentUrl].data.navigation, contentUrl, top10Data)
     if (response) {
-      setTop10LinksData(contentUrl, response!)
+      setTop10LinksData(contentUrl, response!)     
+
+      const [tab] = await browser.tabs.query({ active: true, lastFocusedWindow: true });
+      await browser.tabs.sendMessage(tab.id!, {
+        purpose: Purpose.NAVIGATION_KEYBOARD_SHORTCUT,
+        links: response?.map((data) => data.URL)
+      });
     }
   }
 

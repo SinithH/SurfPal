@@ -49,7 +49,7 @@ jobs:
 
       - name: Get tag message
         id: tag_message
-        run: echo "::set-output name=message::$(git show -s --format='%(contents)' ${{ github.ref.name }})"  
+        run: echo "::set-output name=message::$(git tag -l --format='%(contents)' ${{ github.ref.name }})"  
 
       - name: Create Release
         id: create_release    

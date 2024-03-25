@@ -26,6 +26,31 @@ const MyAccount: React.FC = () => {
 
   const initialSettingsRef = useRef(userSettings);
 
+  useEffect(() => {
+    async function getSettings() {
+      try {
+        if (user) {
+          const { data } = await supabase
+            .from('settings')
+            .select()
+            .eq('userid', currentUser?.id)
+            .single();
+
+          if (data) {
+            setTheme(data.theme);
+            setTTSSetting(data.texttospeech);
+            setFontSize(data.fontsize);
+            updateSettings(data);
+          }
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getSettings();
+  }, [])
   
   useEffect(() => {
     setUser(currentUser);

@@ -9,7 +9,7 @@ import useStore from "../../context/store";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { supabase } from "../../lib/helper/supabaseClient";
-import SignOutIcon from '@/public/icon/sign-out.svg'; 
+import SignOutIcon from './assets/sign-out.svg'; 
 
 interface FooterProps {
     module: string
@@ -60,9 +60,11 @@ const Footer: React.FC<FooterProps> = ({module}) => {
                 </button>
                 {module == ModuleNames.SUMMARIZATION && (
                 <div className="inline-flex gap-12">
-                    <button className="w-7 h-7 rounded">
-                        <img src={textToSpeechIcon} alt="User" />
-                    </button>
+                    {userSettings.texttospeech && (
+                      <button className="w-7 h-7 rounded">
+                          <img src={textToSpeechIcon} alt="User" />
+                      </button>
+                    )}
                     <button onClick={handleRegenerateClick} className="p-2 h-7 inline-flex gap-3 items-center rounded-lg bg-primary text-white">
                         <span>Regenerate</span>
                         <FontAwesomeIcon icon={faRotate} />

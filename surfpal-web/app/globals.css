@@ -6,8 +6,6 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  --dark-bg: 15, 23, 42;
-  --dark-tile-hover-bg: 21, 31, 54
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,10 +14,6 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}
-
-* {
-  @apply transition-colors duration-100;
 }
 
 body {

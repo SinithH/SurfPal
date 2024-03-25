@@ -1,4 +1,3 @@
-import useStore from '@/lib/store';
 import { Card, Switch, Typography } from '@material-tailwind/react';
 import { Kanit } from 'next/font/google';
 import React from 'react';
@@ -21,10 +20,8 @@ const ToggleSetting: React.FC<ToggleSettingProps> = ({ settingTopic, settingDesc
         setToggleResponse(newValue);
     };
 
-    const { theme } = useStore();
-
     return (
-        <Card placeholder={undefined} className={`${theme} w-full p-6 mr-8 my-7 grid grid-cols-6 justify-center dark:bg-carouselDarkBg dark:text-white`}>
+        <Card placeholder={undefined} className='w-full p-6 mr-8 my-7 grid grid-cols-6 justify-center'>
             <div className='col-span-5 pl-5'>
                 <Typography placeholder={undefined} className={`${kanit.className} text-xl font-normal`}>{settingTopic}</Typography>
                 <Typography placeholder={undefined}>{settingDesc}</Typography>
@@ -33,7 +30,7 @@ const ToggleSetting: React.FC<ToggleSettingProps> = ({ settingTopic, settingDesc
                 <Switch
                     id="custom-switch-component"
                     ripple={false}
-                    className="h-full w-full bg-gray-200 dark:bg-darkBg checked:bg-[#9E00E8]"
+                    className="h-full w-full bg-gray-200 checked:bg-[#9E00E8]"
                     containerProps={{
                         className: "w-11 h-6",
                     }}

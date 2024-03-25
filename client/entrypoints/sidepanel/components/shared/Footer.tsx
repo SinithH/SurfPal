@@ -12,7 +12,7 @@ import { supabase } from "../../lib/helper/supabaseClient";
 import { getTop10NavigationLinks } from "../../services/navigation-service/getNavigationTopList";
 import useNavigationStore from "../../context/navigation-store";
 import { Purpose } from "@/enum/purpose-enum";
-import SignOutIcon from '@/public/icon/sign-out.svg';
+import SignOutIcon from './assets/sign-out.svg';
 
 interface FooterProps {
   module: string;
@@ -81,9 +81,11 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
           </button>
           {module == ModuleNames.SUMMARIZATION && (
             <div className="inline-flex gap-12">
-              <button className="w-7 h-7 rounded">
-                <img src={textToSpeechIcon} alt="User" />
-              </button>
+              {userSettings.texttospeech && (
+                <button className="w-7 h-7 rounded">
+                    <img src={textToSpeechIcon} alt="User" />
+                </button>
+              )}
               <button onClick={handleRegenerateClick} className="p-2 h-7 inline-flex gap-3 items-center rounded-lg bg-primary text-white">
                 <span>Regenerate</span>
                 <FontAwesomeIcon icon={faRotate} />
@@ -100,6 +102,12 @@ const Footer: React.FC<FooterProps> = ({ module }) => {
                 <FontAwesomeIcon icon={faRotate} />
               </button>
             </div>)}
+            {module == ModuleNames.MY_ACCOUNT && currentUser && (
+              <button onClick={handleLogOut} className="inline-flex bg-transparent self-end text-lg text-red-500 font-kanit gap-2 items-center">
+                <img src={SignOutIcon} alt="sign out" className="h-5" />
+                <p>Log out</p>
+              </button>
+            )}
         </div>
       </div>
     </>

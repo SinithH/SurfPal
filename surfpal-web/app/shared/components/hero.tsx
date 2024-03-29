@@ -2,12 +2,10 @@
 
 import Link from "next/link"
 import React from "react"
-import Typewriter from 'typewriter-effect';
 import HeroBg from '@/public/assets/hero-bg.svg';
 import Image from "next/image";
 import { Kanit } from "next/font/google";
 import { Typography } from "@material-tailwind/react";
-import PuzzlePiece from '@/public/assets/puzzle-piece (1).svg'
 import SurfPalLogoGif from '@/public/assets/ezgif.com-animated-gif-maker (2).gif'
 import SurfPalLogo from '@/public/assets/varient-3.png'
 import useStore from "@/lib/store";
@@ -34,17 +32,6 @@ const Hero = () => {
                     </div>
                     <Typography className="text-5xl font-bold" placeholder={undefined}>Empowering Accessibility: See Beyond Sight</Typography>
                     <Typography className="text-3xl font-bold" placeholder={undefined}>Navigate, Summerize, Customize & Engage</Typography>
-                    {/* <h1 className="text-3xl font-bold text-white">
-                        <Typewriter
-                                options={{
-                                strings:[
-                                    "Extension for Your Hard Time",
-                                    "Just one Click"
-                                ],
-                                autoStart: true,
-                                loop: true
-                            }}/>
-                        </h1> */}
                 </div>
             </div>
             

@@ -21,6 +21,9 @@ import INavigationResponse from '@/interfaces/navigation-resopnse.interface';
 
 const App: React.FC = () => {
   const { updateUser, updateSettings } = useStore();
+  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+  const [navigationLoading, setNavigationLoading] = useState<boolean>(true);
+  const { contentUrl, data, setData } = useNavigationStore();
 
   useEffect(() => {
     async function getSession() {
@@ -44,31 +47,34 @@ const App: React.FC = () => {
     }
 
     getSession();
-    
+
     (async () => {
       const [tab] = await browser.tabs.query({ active: true, lastFocusedWindow: true });
-      if(tab){
+      if (tab) {
         await browser.tabs.sendMessage(tab.id!, { purpose: Purpose.RELOAD_TEXT });
       }
     })();
+
+    const messageListener = async (message: any, sender: any, sendResponse: any) => {
+      let response
+      if (message.currentUrl !== contentUrl) {
+        setNavigationLoading(true)
+        response = await getNavigationLinks(message.textBody, message.currentUrl, data)
+      }
+      if (message.currentUrl !== contentUrl && response && response !== 'wait') {
+        setData(message.currentUrl, response as INavigationResponse)
+      }
+      if (response !== 'wait') {
+        setNavigationLoading(false)
+      }
+    }
+    browser.runtime.onMessage.addListener(messageListener)
+
+    return () => {
+      browser.runtime.onMessage.removeListener(messageListener);
+    }
   }, [])
 
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-  const [navigationLoading, setNavigationLoading] = useState<boolean>(true);
-  const { contentUrl, data, setData } = useNavigationStore();
-  browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-    let response 
-    if (message.currentUrl !== contentUrl) {
-      setNavigationLoading(true)
-      response = await getNavigationLinks(message.textBody, message.currentUrl, data)
-    }
-    if (message.currentUrl !== contentUrl && response && response !== 'wait') {
-      setData(message.currentUrl, response as INavigationResponse)
-    }
-    if (response !== 'wait') { 
-      setNavigationLoading(false)      
-    }
-  })
   return (
     <div className='h-full'>
       <ToastContainer />
@@ -80,7 +86,7 @@ const App: React.FC = () => {
         <Route path="/my-account" element={<MyAccount />} />
         <Route path="/feedback" element={<FeedBackPopover onClose={function (): void {
           throw new Error('Function not implemented.');
-        } } />} />
+        }} />} />
       </Routes>
       <Outlet />
     </div>

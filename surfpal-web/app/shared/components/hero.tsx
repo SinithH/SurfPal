@@ -17,8 +17,6 @@ const kanit = Kanit({
 })
 
 const Hero = () => {
-    const { theme } = useStore();
-    
     return(
         <div className={`${kanit.className} ${theme} w-full h-svh dark:text-white dark:bg-darkBg`}>
             <Image src={HeroBg} alt={""} className="fixed top-0 left-0 w-full"></Image>
@@ -35,9 +33,9 @@ const Hero = () => {
                 </div>
             </div>
             
-            <div className="relative pt-5 pb-5 md:pt-8 md:pb-3 flex items-center justify-center">
+            <div className="relative pt-5 pb-5 md:pt-10 md:pb-8 flex items-center justify-center">
                 <Link className='text-white bg-primaryPurple py-5 px-6 rounded-full text-xl' href={""}>
-                    Download the Extension Now!
+                    Download
                 </Link>
             </div>
         </div>
